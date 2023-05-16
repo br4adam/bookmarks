@@ -1,0 +1,46 @@
+import { useState, FormEvent, useRef } from "react"
+import { useBookmarkStore } from "../stores/BookmarkStore"
+import { useAuthStore } from "../stores/AuthStore"
+import { Check } from "iconoir-react"
+import useClickOutside from "../hooks/useClickOutside"
+
+type Props = {
+  bookmark: Bookmark
+}
+
+const BookmarkTags = ({ bookmark }: Props) => {
+  const { fetch: getBookmarks, update: updateBookmark } = useBookmarkStore(state => ({ fetch: state.fetch, update: state.update }))
+  const { session } = useAuthStore(state => ({ session: state.session }))
+  const [ editable, setEditable ] = useState(false)
+  const [ newTags, setNewTags ] = useState(bookmark.tags.join(", "))
+  const userId = session?.user.id
+
+  const formRef = useRef<HTMLFormElement>(null)
+  useClickOutside(formRef, () => setEditable(false))
+
+  const handleUpdate = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!userId) return
+    const tagList: string[] = newTags.replace(/\s/g, "").toLowerCase().split(",").filter(tag => tag)
+    await updateBookmark(bookmark.id, tagList)
+    await getBookmarks(userId)
+    setEditable(false)
+  }
+
+  return (
+    <div className="flex flex-wrap gap-2 mb-2 w-fit" onClick={() => setEditable(true)}>
+    { !bookmark.tags.length && !editable && <p className="py-1 text-xs border-b border-transparent text-slate-500">add tags...</p> }
+    { bookmark && editable 
+      ? <form onSubmit={handleUpdate} ref={formRef} className="flex w-full gap-2">
+          <input type="text" value={newTags} onChange={(e) => setNewTags(e.target.value)} className="py-1 text-xs bg-transparent border-b rounded-sm border-slate-600 focus:border-slate-500 focus:outline-0" style={{ width: `${newTags.length}ch`, minWidth: "14ch" }} />
+          <button type="submit">
+            <Check className="transition-all cursor-pointer hover:text-green-300" width={16} />
+          </button>
+        </form>
+      : bookmark.tags.map(tag => <p key={tag} className="px-2 py-1 text-xs border-b border-transparent rounded-md bg-slate-700/30 text-slate-400">{tag}</p> )
+    }
+  </div>
+  )
+}
+
+export default BookmarkTags
