@@ -50,16 +50,16 @@ const Bookmark = ({ bookmark }: Props) => {
             <div className="flex gap-2 ml-auto">
               { confirm 
                 ? <Check onClick={() => handleDelete(bookmark.id)} className="transition-all cursor-pointer hover:text-green-300" width={16} />
-                : <BinMinus onClick={() => setConfirm(true)} className="cursor-pointer" width={16} />
+                : <BinMinus onClick={() => setConfirm(true)} className="cursor-pointer hover:text-slate-300" width={16} />
               }
               <a href={bookmark.url} target="_blank">
-                <OpenInBrowser width={16} />
+                <OpenInBrowser width={16} className="hover:text-slate-300" />
               </a>
             </div>
           </div>
-          <a href={bookmark.url} target="_blank" className="inline-block mb-2 text-xs truncate text-slate-500">{bookmark.url}</a>
+          <a href={bookmark.url} target="_blank" className="inline-block mb-2 text-sm truncate text-slate-500">{bookmark.url}</a>
           <BookmarkTags bookmark={bookmark} />
-          <p className="text-xs">{bookmark.description}</p>
+          <p className="text-sm">{bookmark.description}</p>
         </div>
       </div>
     </div>

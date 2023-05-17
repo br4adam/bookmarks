@@ -19,7 +19,7 @@ export const useAuthStore = create<AuthState>(set => ({
   login: async () => {
     try {
       set({ loading: true })
-      const { error } = await supabase.auth.signInWithOAuth({ provider: "github" })
+      const { error } = await supabase.auth.signInWithOAuth({ provider: "github", options: { redirectTo: window.location.origin } })
       if (error) throw error
       const { data: { session }} = await supabase.auth.getSession()
       set({ session: session })
