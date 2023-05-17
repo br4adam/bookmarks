@@ -15,7 +15,7 @@ const Error = () => {
   if (!error) return null
 
   return (
-    <div className="flex gap-2 px-4 py-2 text-sm border rounded-md bg-slate-900 border-slate-700">
+    <div className="flex gap-2 px-4 py-2 text-sm border rounded-md animate-bounce bg-slate-900 border-slate-700">
       <WarningTriangle width={16} />
       {error}
     </div>

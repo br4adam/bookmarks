@@ -40,12 +40,12 @@ const Bookmark = ({ bookmark }: Props) => {
   return (
     <div className="p-[1px] rounded-xl bg-gradient-to-b shadow-lg from-slate-700 to-slate-800 hover:to-slate-700/50">
       <div className="flex flex-col h-full gap-4 p-3 bg-slate-900 rounded-xl">
-        <div className="overflow-hidden rounded-md aspect-video bg-slate-800">
+        <div className="overflow-hidden rounded-md aspect-video bg-slate-800 bg-[url('fallback.png')] bg-cover">
           <img className="object-cover h-full m-auto" src={bookmark.image} alt={bookmark.title} onError={addImageFallback} />
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <img src={`https://www.google.com/s2/favicons?domain=${domain}&sz=${128}`} alt="favicon" className="w-4 rounded-full" />
+            <img src={`https://icon.horse/icon/${domain}`} alt={`${bookmark.title} icon`} className="w-4" />
             <p className="font-medium truncate">{bookmark.title}</p>
             <div className="flex gap-2 ml-auto">
               { confirm 

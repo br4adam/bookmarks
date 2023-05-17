@@ -28,16 +28,16 @@ const BookmarkTags = ({ bookmark }: Props) => {
   }
 
   return (
-    <div className="flex flex-wrap gap-2 mb-2 w-fit" onClick={() => setEditable(true)}>
-    { !bookmark.tags.length && !editable && <p className="py-1 text-xs border-b border-transparent text-slate-500">add tags...</p> }
+    <div className="flex flex-wrap gap-2 mb-2 font-mono text-xs" onClick={() => setEditable(true)}>
+    { !bookmark.tags.length && !editable && <p className="py-1 border-b border-transparent text-slate-500">add tags...</p> }
     { bookmark && editable 
       ? <form onSubmit={handleUpdate} ref={formRef} className="flex w-full gap-2">
-          <input type="text" value={newTags} onChange={(e) => setNewTags(e.target.value)} className="py-1 text-xs bg-transparent border-b rounded-sm border-slate-600 focus:border-slate-500 focus:outline-0" style={{ width: `${newTags.length}ch`, minWidth: "14ch" }} />
+          <input type="text" value={newTags} onChange={(e) => setNewTags(e.target.value)} className="max-w-full min-w-[16ch] py-1 bg-transparent border-b rounded-sm border-slate-600 focus:border-slate-500 focus:outline-0" style={{ width: `${newTags.length + 2}ch` }} />
           <button type="submit">
             <Check className="transition-all cursor-pointer hover:text-green-300" width={16} />
           </button>
         </form>
-      : bookmark.tags.map(tag => <p key={tag} className="px-2 py-1 text-xs border-b border-transparent rounded-md bg-slate-700/30 text-slate-400">{tag}</p> )
+      : bookmark.tags.map(tag => <p key={tag} className="px-2 py-1 border-b border-transparent rounded-md bg-slate-700/30 text-slate-400">{tag}</p> )
     }
   </div>
   )

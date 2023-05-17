@@ -6,7 +6,7 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-10 w-full py-2 border-b backdrop-blur-xl backdrop-brightness-90 bg-slate-900/50 border-slate-700">
-      <div className="flex items-center justify-between w-5/6 max-w-6xl mx-auto">
+      <div className="flex items-center justify-between w-11/12 max-w-6xl mx-auto md:w-10/12">
         { session 
           ? <div className="flex gap-2">
               <img className="w-6 rounded-full" src={session?.user.user_metadata.avatar_url} alt="" />
