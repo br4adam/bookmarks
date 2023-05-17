@@ -25,7 +25,7 @@ const Bookmarks = () => {
   return (
     <>
       <TagList />
-      <section ref={parent} className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <section ref={parent} className="grid w-full grid-cols-1 gap-4 h-fit md:grid-cols-2 xl:grid-cols-3">
         { bookmarks && filteredBookmarks.map(bookmark => <Bookmark key={bookmark.id} bookmark={bookmark} /> )}
       </section>
     </>
