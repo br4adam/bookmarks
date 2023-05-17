@@ -8,8 +8,8 @@ const Showcase = () => {
   return (
     <div className="flex flex-col items-center gap-8">
       <Button onClick={login} loading={loading}>Get Started Now</Button>
-      <div className="w-full p-[1px] rounded-[9px] bg-gradient-to-b from-slate-700 to-slate-950">
-        <img src={browser} className="" alt="bookmarks app mockup" />
+      <div className="w-full p-[1px] rounded-md sm:rounded-lg bg-gradient-to-b from-slate-700 to-slate-950">
+        <img src={browser} className="rounded-md sm:rounded-lg" alt="bookmarks app mockup" />
       </div>
     </div>
   )
