@@ -12,8 +12,8 @@ type Props = {
 const BookmarkTags = ({ bookmark }: Props) => {
   const { update: updateBookmark } = useBookmarkStore(state => ({ update: state.update }))
   const { session } = useAuthStore(state => ({ session: state.session }))
-  const [ editable, setEditable ] = useState(false)
-  const [ newTags, setNewTags ] = useState(bookmark.tags.join(", "))
+  const [ editable, setEditable ] = useState<boolean>(false)
+  const [ newTags, setNewTags ] = useState<string>(bookmark.tags.join(", "))
   const userId = session?.user.id
 
   const formRef = useRef<HTMLFormElement>(null)

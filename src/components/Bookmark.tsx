@@ -15,7 +15,7 @@ type Props = {
 const Bookmark = ({ bookmark }: Props) => {
   const { delete: deleteBookmark, loading } = useBookmarkStore(state => ({ delete: state.delete, loading: state.loading }))
   const { session } = useAuthStore(state => ({ session: state.session }))
-  const [ confirm, setConfirm ] = useState(false)
+  const [ confirm, setConfirm ] = useState<boolean>(false)
   const userId = session?.user.id
   const domain = clearUrl(bookmark.url)
 
@@ -48,7 +48,7 @@ const Bookmark = ({ bookmark }: Props) => {
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <img src={`https://icon.horse/icon/${domain}`} alt={`${bookmark.title} icon`} className="w-4" />
+            <img src={`https://icon.horse/icon/${domain}`} alt={`${bookmark.title} icon`} className="w-4 h-4" onError={addImageFallback} />
             <p className="font-medium truncate">{bookmark.title}</p>
             <div className="flex gap-2 ml-auto">
               { confirm 

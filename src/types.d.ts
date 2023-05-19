@@ -24,7 +24,7 @@ type Tag = {
 }
 
 type ResponseSuccess = {
-  data: any
+  data: Bookmark[]
   success: true
 }
 
@@ -33,4 +33,4 @@ type ResponseError = {
   success: false
 }
 
-type StoreResponse<T> = ResponseSuccess<T> | ResponseError
+type StoreResponse = ResponseSuccess | ResponseError
