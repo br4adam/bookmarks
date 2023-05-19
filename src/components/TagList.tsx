@@ -9,7 +9,7 @@ const TagList = () => {
 
   return (
     <div className="flex flex-wrap justify-center gap-2">
-        <p key="all-bookmarks" onClick={() => setSelectedTag("")} className={`cursor-pointer ${selectedTag === "" ? "underline underline-offset-4 decoration-1" : ""}`}>all
+        <p onClick={() => setSelectedTag("")} className={`cursor-pointer ${selectedTag === "" ? "underline underline-offset-4 decoration-1" : ""} hover:text-slate-300`}>all
           <span className="text-xs text-slate-500"> ({bookmarks.length})</span>
         </p>
       { tags && tags.map(tag => (
