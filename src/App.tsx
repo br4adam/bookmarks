@@ -4,10 +4,10 @@ import Header from "./components/Header"
 import Headline from "./components/Headline"
 import Showcase from "./components/Showcase"
 import AddBookmark from "./components/AddBookmark"
-import Error from "./components/Error"
 import TagList from "./components/TagList"
 import Bookmarks from "./components/Bookmarks"
 import ScrollToTop from "./components/ScrollToTop"
+import { Toaster } from "sonner"
 import { useAuthStore } from "./stores/AuthStore"
 import grid from "./assets/grid.svg"
 
@@ -29,12 +29,12 @@ const App = () => {
         { session
           ? <>
             <AddBookmark />
-            <Error />
             <TagList />
             <Bookmarks />
           </>
           : <Showcase />
         }
+        <Toaster richColors closeButton theme="dark" position="bottom-center" />
       </main>
     </div>
   )

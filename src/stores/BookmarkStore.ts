@@ -6,12 +6,10 @@ type BookmarkState = {
   bookmarks: Bookmark[]
   setBookmarks: (bookmarks: Bookmark[]) => void
   loading: boolean
-  error: string | null
-  clearError: () => void
-  fetch: (userId: string) => Promise<void>
-  add: (url: string, savedBy: string) => Promise<void>
-  delete: (bookmarkId: number) => Promise<void>
-  update: (bookmarkId: number, tags: string[]) => Promise<void>
+  fetch: (userId: string) => Promise<StoreResponse<Bookmark[]>>
+  add: (url: string, savedBy: string) => Promise<StoreResponse<Bookmark>>
+  delete: (bookmarkId: number) => Promise<StoreResponse<Bookmark>>
+  update: (bookmarkId: number, tags: string[]) => Promise<StoreResponse<Bookmark>>
   selectedTag: string
   setSelectedTag: (tag: string) => void
 }
@@ -20,8 +18,6 @@ export const useBookmarkStore = create<BookmarkState>(set => ({
   bookmarks: [],
   setBookmarks: (bookmarks) => set({ bookmarks }),
   loading: false,
-  error: null,
-  clearError: () => set({ error: null }),
   fetch: async (userId) => {
     try {
       set({ loading: true })
@@ -32,53 +28,69 @@ export const useBookmarkStore = create<BookmarkState>(set => ({
         .order("created_at", { ascending: false } )
       if (error) throw new Error(`Error fetching bookmarks: ${error.message}`)
       set({ bookmarks: data as Bookmark[] })
+      return { data, success: true }
     } catch (error) {
-      if (error instanceof Error) set({ error: error.message })
-      else set({ error: "Something went wrong." })
+      set({ bookmarks: [] })
+      if (error instanceof Error) return { data: error.message, success: false }
+      return { data: error, success: false }
     } finally {
       set({ loading: false })
     }
   },
   add: async (url, userId) => {
+    if (!url) return { data: "Please enter a URL!", success: false }
+    if (!/^(http|https):\/\//.test(url)) return { data: "Please include 'https://' before the URL!", success: false }
     try {
       set({ loading: true })
       const metadata = await getMetadata(url.toLowerCase())
-      if (!metadata) return set({ error: "Please enter a valid url." })
-      const { error } = await supabase
+      if (!metadata) return { data: "Please enter a valid URL!", success: false }
+      const { data, error } = await supabase
         .from("bookmarks")
         .insert([{ title: metadata.title, url: metadata.url, description: metadata.description, image: metadata.images[0], saved_by: userId, tags: [] }])
+        .select()
         if (error) throw new Error(`Error saving bookmark: ${error.message}`)
+        return { data, success: true }
     } catch (error) {
-      if (error instanceof Error) set({ error: error.message })
-      else set({ error: "Something went wrong." })
+      if (error instanceof Error) return { data: error.message, success: false }
+      return { data: error, success: false }
     } finally {
       set({ loading: false })
     }
   },
   delete: async (bookmarkId) => {
     try {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from("bookmarks")
         .delete()
         .eq("id", bookmarkId)
+        .select()
       if (error) throw new Error(`Error deleting bookmark: ${error.message}`)
+      set((state) => ({ bookmarks: state.bookmarks.filter(bookmark => bookmark.id !== bookmarkId ) }))
+      return { data, success: true }
     } catch (error) {
-      if (error instanceof Error) set({ error: error.message })
-      else set({ error: "Something went wrong." })
+      if (error instanceof Error) return { data: error.message, success: false }
+      return { data: error, success: false }
     } finally {
       set({ loading: false })
     }
   },
   update: async (bookmarkId, tags) => {
     try {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from("bookmarks")
         .update({ tags: tags })
         .eq("id", bookmarkId)
+        .select()
       if (error) throw new Error(`Error updating bookmark: ${error.message}`)
+      set((state) => ({
+        bookmarks: state.bookmarks.map(bookmark =>
+          bookmark.id === bookmarkId ? { ...bookmark, tags: tags } : bookmark
+        )
+      }))
+      return { data, success: true }
     } catch (error) {
-      if (error instanceof Error) set({ error: error.message })
-      else set({ error: "Something went wrong." })
+      if (error instanceof Error) return { data: error.message, success: false }
+      return { data: error, success: false }
     } finally {
       set({ loading: false })
     }

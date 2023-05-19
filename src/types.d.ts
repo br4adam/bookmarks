@@ -19,6 +19,18 @@ type Metadata = {
 }
 
 type Tag = {
-  name: string,
+  name: string
   count: number
 }
+
+type ResponseSuccess = {
+  data: any
+  success: true
+}
+
+type ResponseError = {
+  data: string
+  success: false
+}
+
+type StoreResponse<T> = ResponseSuccess<T> | ResponseError

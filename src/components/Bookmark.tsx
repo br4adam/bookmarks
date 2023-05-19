@@ -2,16 +2,18 @@ import { SyntheticEvent, useEffect, useState } from "react"
 import { OpenInBrowser, BinMinus, Check } from "iconoir-react"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
+import fallbackImage from "../assets/fallback.png"
 import clearUrl from "../utils/clearUrl"
 import BookmarkTags from "./BookmarkTags"
 import Skeleton from "./Skeleton"
+import { toast } from "sonner"
 
 type Props = {
   bookmark: Bookmark
 }
 
 const Bookmark = ({ bookmark }: Props) => {
-  const { bookmarks, setBookmarks, delete: deleteBookmark, loading } = useBookmarkStore(state => ({ bookmarks: state.bookmarks, setBookmarks: state.setBookmarks, delete: state.delete, loading: state.loading }))
+  const { delete: deleteBookmark, loading } = useBookmarkStore(state => ({ delete: state.delete, loading: state.loading }))
   const { session } = useAuthStore(state => ({ session: state.session }))
   const [ confirm, setConfirm ] = useState(false)
   const userId = session?.user.id
@@ -30,8 +32,9 @@ const Bookmark = ({ bookmark }: Props) => {
   
   const handleDelete = async (bookmarkId: number) => {
     if (!userId) return
-    await deleteBookmark(bookmarkId)
-    setBookmarks(bookmarks.filter(bookmark => bookmark.id !== bookmarkId))
+    const response = await deleteBookmark(bookmarkId)
+    if (!response.success) return toast.error(response.data)
+    toast.success("Bookmark deleted successfully!")
     setConfirm(false)
   }
 
@@ -40,8 +43,8 @@ const Bookmark = ({ bookmark }: Props) => {
   return (
     <div className="p-[1px] rounded-xl bg-gradient-to-b shadow-lg from-slate-700 to-slate-800 hover:to-slate-700/50">
       <div className="flex flex-col h-full gap-4 p-3 bg-slate-900 rounded-xl">
-        <div className="overflow-hidden rounded-md aspect-video bg-slate-800 bg-[url('fallback.png')] bg-cover">
-          <img className="object-cover h-full m-auto" src={bookmark.image} alt={bookmark.title} onError={addImageFallback} />
+        <div className="overflow-hidden rounded-md aspect-video bg-slate-800">
+          <img className="object-cover w-full h-full m-auto" src={bookmark.image ? bookmark.image : fallbackImage} alt={bookmark.title} onError={addImageFallback} />
         </div>
         <div>
           <div className="flex items-center gap-2">

@@ -6,7 +6,6 @@ type AuthState = {
   session: Session | null
   setSession: (session: Session | null) => void
   loading: boolean
-  error: string | null
   login: () => Promise<void>
   logout: () => Promise<void>
 }
@@ -15,17 +14,18 @@ export const useAuthStore = create<AuthState>(set => ({
   session: null,
   setSession: (session) => set({ session }),
   loading: false,
-  error: null,
   login: async () => {
     try {
       set({ loading: true })
-      const { error } = await supabase.auth.signInWithOAuth({ provider: "github", options: { redirectTo: window.location.origin } })
+      const { error } = await supabase.auth.signInWithOAuth({ 
+        provider: "github", 
+        options: { redirectTo: window.location.origin }
+      })
       if (error) throw error
       const { data: { session }} = await supabase.auth.getSession()
       set({ session: session })
     } catch (error) {
-      if (error instanceof Error) set({ error: error.message })
-      else set({ error: "Something went wrong." })
+      console.log(error)
     } finally {
       set({ loading: false })
     }
@@ -37,8 +37,7 @@ export const useAuthStore = create<AuthState>(set => ({
       if (error) throw error
       set({ session: null })
     } catch (error) {
-      if (error instanceof Error) set({ error: error.message })
-      else set({ error: "Something went wrong." })
+      console.log(error)
     } finally {
       set({ loading: false })
     }

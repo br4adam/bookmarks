@@ -3,13 +3,14 @@ import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
 import { Check } from "iconoir-react"
 import useClickOutside from "../hooks/useClickOutside"
+import { toast } from "sonner"
 
 type Props = {
   bookmark: Bookmark
 }
 
 const BookmarkTags = ({ bookmark }: Props) => {
-  const { fetch: getBookmarks, update: updateBookmark } = useBookmarkStore(state => ({ fetch: state.fetch, update: state.update }))
+  const { update: updateBookmark } = useBookmarkStore(state => ({ update: state.update }))
   const { session } = useAuthStore(state => ({ session: state.session }))
   const [ editable, setEditable ] = useState(false)
   const [ newTags, setNewTags ] = useState(bookmark.tags.join(", "))
@@ -22,8 +23,8 @@ const BookmarkTags = ({ bookmark }: Props) => {
     e.preventDefault()
     if (!userId) return
     const tagList: string[] = newTags.replace(/\s/g, "").toLowerCase().split(",").filter(tag => tag)
-    await updateBookmark(bookmark.id, tagList)
-    await getBookmarks(userId)
+    const response = await updateBookmark(bookmark.id, tagList)
+    if (!response.success) return toast.error(response.data)
     setEditable(false)
   }
 
@@ -37,7 +38,7 @@ const BookmarkTags = ({ bookmark }: Props) => {
             <Check className="transition-all cursor-pointer hover:text-green-300" width={16} />
           </button>
         </form>
-      : bookmark.tags.map(tag => <p key={tag} className="px-2 py-1 border-b border-transparent rounded-md bg-slate-700/30 text-slate-400">{tag}</p> )
+      : bookmark.tags.map(tag => <p key={tag} className="px-2 py-1 border-b border-transparent rounded-md bg-slate-700/50 text-slate-400">{tag}</p> )
     }
   </div>
   )

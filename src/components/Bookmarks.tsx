@@ -3,6 +3,7 @@ import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
 import Bookmark from "./Bookmark"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
+import { toast } from "sonner"
 
 const Bookmarks = () => {
   const { bookmarks, fetch: getBookmarks, selectedTag } = useBookmarkStore(state => ({ bookmarks: state.bookmarks, fetch: state.fetch, selectedTag: state.selectedTag }))
@@ -10,9 +11,14 @@ const Bookmarks = () => {
   const [ parent ] = useAutoAnimate({ duration: 200 })
   const userId = session?.user.id
 
-  useEffect(() => {
+  const loadBookmarks = async () => {
     if (!userId) return
-    getBookmarks(userId)
+    const response = await getBookmarks(userId)
+    if (!response.success) return toast.error(response.data)
+  }
+
+  useEffect(() => {
+    loadBookmarks()
   }, [])
 
   const filteredBookmarks = selectedTag ? bookmarks.filter(bookmark => bookmark.tags.includes(selectedTag)) : bookmarks
