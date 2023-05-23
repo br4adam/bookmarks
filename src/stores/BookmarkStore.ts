@@ -1,6 +1,7 @@
 import { create } from "zustand"
 import supabase from "../utils/supabase"
 import getMetadata from "../utils/getMetadata"
+import isValidUrl from "../utils/isValidUrl"
 
 type BookmarkState = {
   bookmarks: Bookmark[]
@@ -37,7 +38,7 @@ export const useBookmarkStore = create<BookmarkState>(set => ({
   },
   add: async (url, userId) => {
     if (!url) return { data: "Please enter a URL!", success: false }
-    if (!/^(http|https):\/\//.test(url)) return { data: "Please include 'https://' before the URL!", success: false }
+    if (!isValidUrl(url)) return { data: "Please include 'https://' before the URL!", success: false }
     try {
       set({ loading: true })
       const metadata = await getMetadata(url.toLowerCase())
