@@ -7,7 +7,7 @@ import { toast } from "sonner"
 
 const Bookmarks = () => {
   const { bookmarks, fetch: getBookmarks, selectedTag } = useBookmarkStore(state => ({ bookmarks: state.bookmarks, fetch: state.fetch, selectedTag: state.selectedTag }))
-  const { session } = useAuthStore(state => ({ session: state.session }))
+  const session = useAuthStore(state => state.session)
   const [ parent ] = useAutoAnimate({ duration: 200 })
   const userId = session?.user.id
 

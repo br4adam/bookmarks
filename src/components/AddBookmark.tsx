@@ -6,7 +6,7 @@ import { toast } from "sonner"
 
 const AddBookmark = () => {
   const { fetch: getBookmarks, add: createBookmark, loading } = useBookmarkStore(state => ({ fetch: state.fetch, add: state.add, loading: state.loading }))
-  const { session } = useAuthStore(state => ({ session: state.session }))
+  const session = useAuthStore(state => state.session)
   const [ url, setUrl ] = useState<string>("")
   const userId = session?.user.id
 

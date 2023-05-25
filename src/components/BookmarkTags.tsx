@@ -10,8 +10,8 @@ type Props = {
 }
 
 const BookmarkTags = ({ bookmark }: Props) => {
-  const { update: updateBookmark } = useBookmarkStore(state => ({ update: state.update }))
-  const { session } = useAuthStore(state => ({ session: state.session }))
+  const updateBookmark = useBookmarkStore(state => state.update)
+  const session = useAuthStore(state => state.session)
   const [ editable, setEditable ] = useState<boolean>(false)
   const [ newTags, setNewTags ] = useState<string>(bookmark.tags.join(", "))
   const userId = session?.user.id
@@ -33,7 +33,7 @@ const BookmarkTags = ({ bookmark }: Props) => {
     { !bookmark.tags.length && !editable && <p className="py-1 border-b border-transparent text-slate-500">add tags...</p> }
     { bookmark && editable 
       ? <form onSubmit={handleUpdate} ref={formRef} className="flex w-full gap-2">
-          <input type="text" value={newTags} onChange={(e) => setNewTags(e.target.value)} className="max-w-full min-w-[16ch] py-1 bg-transparent border-b rounded-sm border-slate-600 focus:border-slate-500 focus:outline-0" style={{ width: `${newTags.length + 2}ch` }} />
+          <input type="text" value={newTags} onChange={(e) => setNewTags(e.target.value)} className="max-w-full min-w-[16ch] py-1 bg-transparent border-b rounded-sm border-slate-600 focus:outline-none" style={{ width: `${newTags.length + 2}ch` }} />
           <button type="submit">
             <Check className="transition-all cursor-pointer hover:text-green-300" width={16} />
           </button>

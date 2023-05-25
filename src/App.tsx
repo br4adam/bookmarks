@@ -28,10 +28,10 @@ const App = () => {
         <ScrollToTop />
         { session
           ? <>
-            <AddBookmark />
-            <TagList />
-            <Bookmarks />
-          </>
+              <AddBookmark />
+              <TagList />
+              <Bookmarks />
+            </>
           : <Showcase />
         }
         <Toaster richColors closeButton theme="dark" position="bottom-center" />
