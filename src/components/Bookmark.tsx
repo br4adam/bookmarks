@@ -1,25 +1,21 @@
 import { SyntheticEvent, useEffect, useState, useRef } from "react"
-import { OpenInBrowser, BinMinus, Check } from "iconoir-react"
 import { useBookmarkStore } from "../stores/BookmarkStore"
-import { useAuthStore } from "../stores/AuthStore"
 import fallbackImage from "../assets/fallback.png"
 import clearUrl from "../utils/clearUrl"
 import BookmarkTags from "./BookmarkTags"
+import BookmarkDropdown from "./BookmarkDropdown"
 import Skeleton from "./Skeleton"
-import { toast } from "sonner"
 
 type Props = {
   bookmark: Bookmark
 }
 
 const Bookmark = ({ bookmark }: Props) => {
-  const { delete: deleteBookmark, loading } = useBookmarkStore(state => ({ delete: state.delete, loading: state.loading }))
-  const session = useAuthStore(state => state.session)
+  const { loading } = useBookmarkStore(state => ({ delete: state.delete, loading: state.loading }))
   const [ confirm, setConfirm ] = useState<boolean>(false)
   const [ opacity, setOpacity ] = useState<number>(0)
   const [ position, setPosition ] = useState<{x: number, y: number}>({ x: 0, y: 0 })
   const cardRef = useRef<HTMLDivElement>(null)
-  const userId = session?.user.id
   const domain = clearUrl(bookmark.url)
 
   useEffect(() => {
@@ -31,14 +27,6 @@ const Bookmark = ({ bookmark }: Props) => {
 
   const addImageFallback = (event: SyntheticEvent<HTMLImageElement, Event>) => {
     event.currentTarget.src = "./fallback.png"
-  }
-  
-  const handleDelete = async (bookmarkId: number) => {
-    if (!userId) return
-    const response = await deleteBookmark(bookmarkId)
-    if (!response.success) return toast.error(response.data)
-    toast.success("Bookmark deleted successfully!")
-    setConfirm(false)
   }
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -65,15 +53,7 @@ const Bookmark = ({ bookmark }: Props) => {
           <div className="flex items-center gap-2">
             <img src={`https://icon.horse/icon/${domain}`} alt={`${bookmark.title} icon`} className="w-4 h-4" onError={addImageFallback} />
             <p className="font-medium truncate">{bookmark.title}</p>
-            <div className="flex gap-2 ml-auto">
-              { confirm 
-                ? <Check onClick={() => handleDelete(bookmark.id)} className="transition-all cursor-pointer hover:text-green-300" width={16} />
-                : <BinMinus onClick={() => setConfirm(true)} className="cursor-pointer hover:text-slate-300" width={16} />
-              }
-              <a href={bookmark.url} target="_blank">
-                <OpenInBrowser width={16} className="hover:text-slate-300" />
-              </a>
-            </div>
+          <BookmarkDropdown bookmark={bookmark} />
           </div>
           <a href={bookmark.url} target="_blank" className="inline-block mb-2 text-sm truncate text-slate-500">{bookmark.url}</a>
           <BookmarkTags bookmark={bookmark} />

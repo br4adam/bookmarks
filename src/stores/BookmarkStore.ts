@@ -37,12 +37,12 @@ export const useBookmarkStore = create<BookmarkState>(set => ({
     }
   },
   add: async (url, userId) => {
-    if (!url) return { data: "Please enter a URL!", success: false }
+    if (!url) return { data: "Please insert a URL!", success: false }
     if (!isValidUrl(url)) return { data: "Please include 'https://' before the URL!", success: false }
     try {
       set({ loading: true })
       const metadata = await getMetadata(url.toLowerCase())
-      if (!metadata) return { data: "Please enter a valid URL!", success: false }
+      if (!metadata) return { data: "Please insert a valid URL!", success: false }
       const { data, error } = await supabase
         .from("bookmarks")
         .insert({ title: metadata.title, url: metadata.url, description: metadata.description, image: metadata.images[0], saved_by: userId, tags: [] })

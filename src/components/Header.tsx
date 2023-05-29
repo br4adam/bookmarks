@@ -7,7 +7,7 @@ const Header = () => {
   const completion = useScrollProgess()
 
   return (
-    <header className="sticky top-0 z-20 w-full py-2 border-b backdrop-blur-xl backdrop-brightness-90 bg-slate-900/50 border-slate-700">
+    <header className="sticky top-0 z-30 w-full py-2 border-b backdrop-blur-xl backdrop-brightness-90 bg-slate-900/40 border-slate-700">
       <div className="flex items-center justify-between w-11/12 max-w-6xl gap-2 mx-auto md:w-10/12">
         { session 
           ? <div className="flex gap-2">

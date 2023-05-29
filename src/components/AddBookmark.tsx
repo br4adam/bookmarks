@@ -22,7 +22,7 @@ const AddBookmark = () => {
 
   return (
     <form className="flex justify-center w-full gap-2" onSubmit={handleCreate}>
-      <input className="w-full max-w-sm px-4 py-2 border rounded-md bg-slate-900 border-slate-700 focus:border-slate-500 focus:outline-0" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://" />
+      <input className="w-full max-w-sm px-4 py-2 border rounded-md bg-slate-900 border-slate-700 focus:border-slate-500 focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://" />
       <Button type="submit" disabled={loading}>Add</Button>
     </form>
   )
