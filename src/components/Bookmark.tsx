@@ -11,7 +11,7 @@ type Props = {
 }
 
 const Bookmark = ({ bookmark }: Props) => {
-  const { loading } = useBookmarkStore(state => ({ delete: state.delete, loading: state.loading }))
+  const loading = useBookmarkStore(state => state.loading)
   const [ confirm, setConfirm ] = useState<boolean>(false)
   const [ opacity, setOpacity ] = useState<number>(0)
   const [ position, setPosition ] = useState<{x: number, y: number}>({ x: 0, y: 0 })
