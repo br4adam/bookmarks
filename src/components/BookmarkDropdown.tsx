@@ -25,7 +25,7 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
   return (
     <>
       <Menu as="div" className="relative ml-auto">
-        <Menu.Button className="px-3 py-1 text-sm font-medium transition-all duration-200 border rounded-md bg-slate-900/20 border-slate-700 hover:border-slate-500 ring-0">
+        <Menu.Button className="px-3 py-1 text-sm font-medium transition-all duration-200 border rounded-md outline-none bg-slate-900/20 border-slate-700 hover:border-slate-500">
           Options
         </Menu.Button>
         <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-100" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
