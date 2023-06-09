@@ -1,14 +1,16 @@
-import { FormEvent, useState } from "react"
+import { FormEvent, useState, useRef } from "react"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
 import Button from "./Button"
+import { PasteClipboard } from "iconoir-react"
 import { toast } from "sonner"
 
 const AddBookmark = () => {
   const { fetch: getBookmarks, add: createBookmark, loading } = useBookmarkStore(state => ({ fetch: state.fetch, add: state.add, loading: state.loading }))
   const session = useAuthStore(state => state.session)
-  const [ url, setUrl ] = useState<string>("")
   const userId = session?.user.id
+  const [ url, setUrl ] = useState<string>("")
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleCreate = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -20,9 +22,18 @@ const AddBookmark = () => {
     setUrl("")
   }
 
+  const handlePaste = async () => {
+    const clipboardText = await navigator.clipboard.readText()
+    setUrl(clipboardText)
+    inputRef.current?.focus()
+  }
+
   return (
     <form className="flex justify-center w-full gap-2" onSubmit={handleCreate}>
-      <input className="w-full max-w-sm px-4 py-2 border rounded-md bg-slate-900 border-slate-700 focus:border-slate-500 focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://" />
+      <div className="relative w-full max-w-sm">
+        <input ref={inputRef} className="w-full px-4 py-2 border rounded-md bg-slate-900 border-slate-700 focus:border-slate-500 focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://" />
+        <PasteClipboard className="absolute duration-200 cursor-pointer right-3 top-2 text-slate-700 hover:text-slate-400" width={18} onClick={handlePaste} />
+      </div>
       <Button type="submit" disabled={loading}>Add</Button>
     </form>
   )

@@ -9,8 +9,8 @@ const Showcase = () => {
   return (
     <div className="flex flex-col items-center gap-8">
       <Button onClick={login} loading={loading}>Get Started Now <ArrowRight width={16} /></Button>
-      <div className="w-full p-[1px] rounded-md sm:rounded-lg bg-gradient-to-b from-slate-700 to-slate-950 select-none">
-        <img src={browser} className="rounded-md sm:rounded-lg" alt="bookmarks app mockup" />
+      <div className="w-full select-none">
+        <img src={browser} alt="bookmarks app browser mockup" />
       </div>
     </div>
   )

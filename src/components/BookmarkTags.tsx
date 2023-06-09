@@ -33,7 +33,7 @@ const BookmarkTags = ({ bookmark }: Props) => {
     { !bookmark.tags.length && !editable && <p className="py-1 border-b border-transparent text-slate-500">add tags...</p> }
     { bookmark && editable 
       ? <form onSubmit={handleUpdate} ref={formRef} className="flex w-full gap-2">
-          <input type="text" value={newTags} onChange={(e) => setNewTags(e.target.value)} autoFocus className="max-w-full py-1 bg-transparent border-b rounded-sm border-slate-600 focus:outline-none" style={{ width: `${newTags.length + 1}ch` }} />
+          <input type="text" value={newTags} onChange={(e) => setNewTags(e.target.value)} autoFocus className="max-w-full py-1 bg-transparent border-b border-slate-600 focus:outline-none" style={{ width: `${newTags.length + 1}ch` }} />
           <button type="submit">
             <Check className="transition-all cursor-pointer text-slate-400 hover:text-slate-200" width={16} strokeWidth={1.75} />
           </button>
