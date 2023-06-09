@@ -21,7 +21,7 @@ const App = () => {
   }, [])
 
   return (
-    <div className="relative flex flex-col pb-12 text-slate-200 bg-slate-950 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-700/50 to-50% to-slate-950 bg-[length:1200px_800px] bg-top bg-no-repeat selection:bg-slate-500/30 antialiased">
+    <div className="relative flex flex-col pb-12 text-slate-200 bg-slate-950 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-700/50 to-50% to-slate-950 bg-[length:1400px_1000px] bg-top bg-no-repeat selection:bg-slate-500/30 antialiased">
       <Header />
       <main className="flex flex-col items-center md:w-5/6 w-11/12 max-w-6xl gap-8 mx-auto min-h-screen bg-[length:1200px_800px] bg-top bg-no-repeat" style={{ backgroundImage: `url(${grid})`}}>
         <Headline />

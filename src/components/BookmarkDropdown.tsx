@@ -17,7 +17,7 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
 
   const copyUrl = (url: string) => {
     copy(url)
-    toast("URL copied to clipboard!", {style: { backgroundColor: "#04060e" }})
+    toast("URL copied to clipboard!", {style: { backgroundColor: "#04060e", borderColor: "#334155" }})
   }
 
   const closeModal = () => setIsModalOpen(false)

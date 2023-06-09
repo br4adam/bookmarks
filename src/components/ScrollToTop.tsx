@@ -19,7 +19,7 @@ const ScrollToTop = () => {
   if (!isVisible) return null
 
   return (
-    <button onClick={scrollToTop} className="fixed z-20 flex items-center justify-center w-10 h-10 transition-all duration-300 rounded-full bottom-8 right-8 bg-slate-800 hover:bg-slate-700 hover:-translate-y-1" aria-label="scroll to top">
+    <button onClick={scrollToTop} className="fixed z-20 flex items-center justify-center w-10 h-10 transition-all duration-300 rounded-full bottom-8 right-8 bg-slate-800/80 hover:bg-slate-700/50 backdrop-blur-xl hover:-translate-y-1" aria-label="scroll to top">
       <ArrowUp width={16} />
     </button> 
   )

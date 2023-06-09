@@ -18,7 +18,7 @@ const Header = () => {
         }
         <Login />
       </div>
-      { session && <span className="absolute bottom-[-1px] w-full h-[1px] bg-slate-400 duration-500" style={{ transform: `translateX(${completion - 100}%)`}}></span> }
+      { session && <span className="absolute bottom-[-1px] w-full h-[1px] bg-slate-400 duration-300" style={{ transform: `translateX(${completion - 100}%)`}}></span> }
     </header>
   )
 }
