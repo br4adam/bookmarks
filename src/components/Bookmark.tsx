@@ -44,7 +44,7 @@ const Bookmark = ({ bookmark }: Props) => {
   return (
     <div className="p-[1px] rounded-xl bg-gradient-to-b shadow-lg from-slate-700 to-slate-800 hover:to-slate-700/50" ref={cardRef} onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <div className="relative flex flex-col h-full gap-4 p-3 bg-slate-900 rounded-xl">
-      <div className="absolute inset-0 transition-all duration-300 opacity-0 pointer-events-none rounded-xl" style={{ opacity, background: `radial-gradient(350px circle at ${position.x}px ${position.y}px, #312e6130, transparent)` }}>
+      <div className="absolute inset-0 transition-all duration-300 opacity-0 pointer-events-none rounded-xl" style={{ opacity, background: `radial-gradient(350px circle at ${position.x}px ${position.y}px, #312e6140, transparent)` }}>
       </div>
         <div className="z-10 overflow-hidden rounded-md aspect-video bg-slate-800">
           <img className="object-cover w-full h-full m-auto" src={bookmark.image ? bookmark.image : fallbackImage} alt={bookmark.title} onError={addImageFallback} />
@@ -55,7 +55,7 @@ const Bookmark = ({ bookmark }: Props) => {
             <p className="font-medium truncate">{bookmark.title}</p>
           <BookmarkDropdown bookmark={bookmark} />
           </div>
-          <a href={bookmark.url} target="_blank" className="inline-block mb-2 text-sm truncate text-slate-500">{bookmark.url}</a>
+          <a href={bookmark.url} target="_blank" className="inline-block max-w-full pr-24 mb-2 text-sm truncate text-slate-500">{bookmark.url}</a>
           <BookmarkTags bookmark={bookmark} />
           <p className="text-sm">{bookmark.description}</p>
         </div>
