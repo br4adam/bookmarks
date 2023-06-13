@@ -8,12 +8,12 @@ const TagList = () => {
   if (!bookmarks.length) return null
 
   return (
-    <div className="flex flex-wrap justify-center gap-2">
-        <p onClick={() => setSelectedTag("")} className={`cursor-pointer ${selectedTag === "" ? "underline underline-offset-4 decoration-1" : ""} hover:text-zinc-300`}>all
+    <div className="flex flex-wrap justify-center gap-2 text-sm">
+        <p onClick={() => setSelectedTag("")} className={`cursor-pointer bg-zinc-700/30 px-3 py-[2px] rounded-full border backdrop-blur-lg border-zinc-800 ${selectedTag === "" ? "bg-zinc-700/60" : ""} hover:bg-zinc-800 duration-200`}>all
           <span className="text-xs text-zinc-500"> ({bookmarks.length})</span>
         </p>
       { tags && tags.map(tag => (
-        <p key={tag.name} onClick={() => setSelectedTag(tag.name)} className={`cursor-pointer ${selectedTag === tag.name ? "underline underline-offset-4 decoration-1" : ""} hover:text-zinc-300`}>#{tag.name}
+        <p key={tag.name} onClick={() => setSelectedTag(tag.name)} className={`cursor-pointer bg-zinc-700/30 px-3 py-[2px] rounded-full border backdrop-blur-lg border-zinc-800 ${selectedTag === tag.name ? "bg-zinc-700/60" : ""} hover:bg-zinc-800 duration-200`}>{tag.name}
           <span className="text-xs text-zinc-500"> ({tag.count})</span>
         </p>
       ))}

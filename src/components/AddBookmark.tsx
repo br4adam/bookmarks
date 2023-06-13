@@ -6,7 +6,7 @@ import { PasteClipboard } from "iconoir-react"
 import { toast } from "sonner"
 
 const AddBookmark = () => {
-  const { fetch: getBookmarks, add: createBookmark, loading } = useBookmarkStore(state => ({ fetch: state.fetch, add: state.add, loading: state.loading }))
+  const { fetch: getBookmarks, add: createBookmark, loading, setSelectedTag } = useBookmarkStore(state => ({ fetch: state.fetch, add: state.add, loading: state.loading, setSelectedTag: state.setSelectedTag }))
   const session = useAuthStore(state => state.session)
   const userId = session?.user.id
   const [ url, setUrl ] = useState<string>("")
@@ -20,6 +20,7 @@ const AddBookmark = () => {
     toast.success("Bookmark added successfully!")
     getBookmarks(userId)
     setUrl("")
+    setSelectedTag("")
   }
 
   const handlePaste = async () => {

@@ -42,7 +42,7 @@ const Bookmark = ({ bookmark }: Props) => {
   if (loading) return <Skeleton />
 
   return (
-    <div className="p-[1px] rounded-xl bg-gradient-to-b shadow-lg from-zinc-700 to-zinc-800 hover:to-zinc-700/50" ref={cardRef} onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className="p-[1px] rounded-xl bg-gradient-to-b shadow-lg from-zinc-700/90 to-zinc-700/30 hover:to-zinc-700/60" ref={cardRef} onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <div className="relative flex flex-col h-full gap-4 p-3 bg-zinc-900 rounded-xl">
       <div className="absolute inset-0 transition-all duration-300 opacity-0 pointer-events-none rounded-xl" style={{ opacity, background: `radial-gradient(350px circle at ${position.x}px ${position.y}px, #ffffff10, transparent)` }}>
       </div>
