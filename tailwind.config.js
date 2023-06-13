@@ -6,13 +6,6 @@ export default {
   ],
   theme: {
     extend: {
-      "colors": {
-        "slate": {
-          800: "#121822",
-          900: "#090e1a",
-          950: "#04060e"
-        }
-      },
     },
   },
   plugins: [],

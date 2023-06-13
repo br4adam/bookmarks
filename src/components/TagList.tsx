@@ -9,12 +9,12 @@ const TagList = () => {
 
   return (
     <div className="flex flex-wrap justify-center gap-2">
-        <p onClick={() => setSelectedTag("")} className={`cursor-pointer ${selectedTag === "" ? "underline underline-offset-4 decoration-1" : ""} hover:text-slate-300`}>all
-          <span className="text-xs text-slate-500"> ({bookmarks.length})</span>
+        <p onClick={() => setSelectedTag("")} className={`cursor-pointer ${selectedTag === "" ? "underline underline-offset-4 decoration-1" : ""} hover:text-zinc-300`}>all
+          <span className="text-xs text-zinc-500"> ({bookmarks.length})</span>
         </p>
       { tags && tags.map(tag => (
-        <p key={tag.name} onClick={() => setSelectedTag(tag.name)} className={`cursor-pointer ${selectedTag === tag.name ? "underline underline-offset-4 decoration-1" : ""} hover:text-slate-300`}>#{tag.name}
-          <span className="text-xs text-slate-500"> ({tag.count})</span>
+        <p key={tag.name} onClick={() => setSelectedTag(tag.name)} className={`cursor-pointer ${selectedTag === tag.name ? "underline underline-offset-4 decoration-1" : ""} hover:text-zinc-300`}>#{tag.name}
+          <span className="text-xs text-zinc-500"> ({tag.count})</span>
         </p>
       ))}
     </div>

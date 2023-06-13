@@ -31,8 +31,8 @@ const AddBookmark = () => {
   return (
     <form className="flex justify-center w-full gap-2" onSubmit={handleCreate}>
       <div className="relative w-full max-w-sm">
-        <input ref={inputRef} className="w-full px-4 py-2 border rounded-md bg-slate-900 border-slate-700 focus:border-slate-500 focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://" />
-        <PasteClipboard className="absolute duration-200 cursor-pointer right-3 top-2 text-slate-700 hover:text-slate-400" width={18} onClick={handlePaste} />
+        <input ref={inputRef} className="w-full py-2 pl-4 pr-10 bg-transparent border rounded-md backdrop-blur-lg border-zinc-700 focus:border-zinc-500 focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://" />
+        <PasteClipboard className="absolute duration-200 cursor-pointer right-3 top-2 text-zinc-700 hover:text-zinc-400" width={18} onClick={handlePaste} />
       </div>
       <Button type="submit" disabled={loading}>Add</Button>
     </form>

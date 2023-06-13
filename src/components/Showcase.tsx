@@ -9,7 +9,7 @@ const Showcase = () => {
   return (
     <div className="flex flex-col items-center gap-8">
       <Button onClick={login} loading={loading}>Get Started Now <ArrowRight width={16} /></Button>
-      <div className="w-full select-none">
+      <div className="w-full select-none backdrop-blur-lg">
         <img src={browser} alt="bookmarks app browser mockup" />
       </div>
     </div>
