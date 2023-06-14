@@ -18,7 +18,7 @@ const Showcase = () => {
         <img src={browser} alt="bookmarks app browser mockup" />
       </div>
       <div className="flex gap-8 text-zinc-700">
-        { socialLinks.map(link => <a href={link.url} target="_blank" className="flex gap-1 duration-200 hover:text-zinc-500">{link.icon} {link.name}</a>)}
+        { socialLinks.map(link => <a key={link.name} href={link.url} target="_blank" className="flex gap-1 duration-200 hover:text-zinc-500">{link.icon} {link.name}</a>)}
       </div>
     </div>
   )
