@@ -1,4 +1,4 @@
-import { SyntheticEvent, useEffect, useState, useRef } from "react"
+import { SyntheticEvent, useState, useRef } from "react"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import fallbackImage from "../assets/fallback.png"
 import clearUrl from "../utils/clearUrl"
@@ -12,18 +12,10 @@ type Props = {
 
 const Bookmark = ({ bookmark }: Props) => {
   const loading = useBookmarkStore(state => state.loading)
-  const [ confirm, setConfirm ] = useState<boolean>(false)
   const [ opacity, setOpacity ] = useState<number>(0)
   const [ position, setPosition ] = useState<{x: number, y: number}>({ x: 0, y: 0 })
   const cardRef = useRef<HTMLDivElement>(null)
   const domain = clearUrl(bookmark.url)
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setConfirm(false)
-    }, 3000)
-    return () => clearTimeout(timeout)
-  }, [confirm])
 
   const addImageFallback = (event: SyntheticEvent<HTMLImageElement, Event>) => {
     event.currentTarget.src = "./fallback.png"
