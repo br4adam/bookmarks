@@ -34,7 +34,7 @@ const Bookmark = ({ bookmark }: Props) => {
   if (loading) return <Skeleton />
 
   return (
-    <div className="p-[1px] rounded-xl bg-gradient-to-b shadow-lg from-zinc-700/90 to-zinc-700/30 hover:to-zinc-700/60" ref={cardRef} onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <div className="p-[1px] rounded-xl bg-gradient-to-b shadow-lg from-zinc-700 to-zinc-700/50 hover:to-zinc-700/80" ref={cardRef} onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <div className="relative flex flex-col h-full gap-4 p-3 bg-zinc-900 rounded-xl">
       <div className="absolute inset-0 transition-all duration-300 opacity-0 pointer-events-none rounded-xl" style={{ opacity, background: `radial-gradient(350px circle at ${position.x}px ${position.y}px, #ffffff10, transparent)` }}>
       </div>
@@ -47,7 +47,7 @@ const Bookmark = ({ bookmark }: Props) => {
             <p className="font-medium truncate">{bookmark.title}</p>
           <BookmarkDropdown bookmark={bookmark} />
           </div>
-          <a href={bookmark.url} target="_blank" className="inline-block max-w-full pr-24 mb-2 text-sm truncate text-zinc-500">{bookmark.url}</a>
+          <a href={bookmark.url} target="_blank" className="inline-block max-w-[75%] mb-2 text-sm truncate outline-none text-zinc-500">{bookmark.url}</a>
           <BookmarkTags bookmark={bookmark} />
           <p className="text-sm">{bookmark.description}</p>
         </div>

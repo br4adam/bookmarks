@@ -13,11 +13,11 @@ const Showcase = () => {
 
   return (
     <div className="flex flex-col items-center gap-8">
-      <Button onClick={login} loading={loading}>Get Started Now <ArrowRight width={16} /></Button>
-      <div className="w-full select-none backdrop-blur-lg">
+      <Button onClick={login} loading={loading} className="animate-fade-up animate-duration-500">Get Started Now <ArrowRight width={16} /></Button>
+      <div className="w-full select-none backdrop-blur-lg animate-fade-up animate-delay-200 animate-duration-500">
         <img src={browser} alt="bookmarks app browser mockup" />
       </div>
-      <div className="flex gap-8 text-zinc-700">
+      <div className="flex gap-8 text-zinc-700 animate-fade-up animate-delay-500 animate-duration-500">
         { socialLinks.map(link => <a key={link.name} href={link.url} target="_blank" className="flex gap-1 duration-200 hover:text-zinc-500">{link.icon} {link.name}</a>)}
       </div>
     </div>

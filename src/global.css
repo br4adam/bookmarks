@@ -5,3 +5,102 @@
 :root { 
   color-scheme: dark;
 }
+
+[cmdk-root] {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 92%;
+  max-width: 680px;
+  background-color: #18181baa;
+  color: #e4e4e7;
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  border: 1px solid #3f3f46;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  z-index: 50;
+}
+
+[cmdk-overlay] {
+  position: fixed;
+  inset: 0;
+  background-color: #00000050;
+  backdrop-filter: brightness(50%);
+  -webkit-backdrop-filter: brightness(50%);
+  filter: blur(1px);
+  -webkit-filter: blur(1px);
+  z-index: 40;
+}
+
+[cmdk-input] {
+  width: 100%;
+  padding: 16px;
+  outline: none;
+  background: transparent;
+  border-bottom: 1px solid #3f3f46;
+}
+
+[cmdk-input]::placeholder {
+  color: #e4e4e750;
+}
+
+[cmdk-input]::selection {
+  background-color: #71717a33;
+}
+
+[cmdk-list] {
+  height: var(--cmdk-list-height);
+  max-height: 420px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scroll-padding-block-start: 8px;
+  scroll-padding-block-end: 8px;
+  padding: 0 8px;
+  margin: 8px 0;
+  transition: height 0.2s ease;
+}
+
+[cmdk-item] {
+  content-visibility: auto;
+  cursor: pointer;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  user-select: none;
+  will-change: background, color;
+  transition: all 0.2s ease;
+}
+
+[cmdk-item][data-selected="true"] {
+  background: #3f3f4680;
+}
+
+[cmdk-item][data-disabled="true"] {
+  color: #e4e4e750;
+  cursor: not-allowed;
+}
+
+[cmdk-item][data-selected="true"]:active {
+  transition-property: background;
+  background: #3f3f46cc;
+}
+
+[cmdk-item] + [cmdk-item] {
+  margin-top: 2px;
+}
+
+[cmdk-empty] {
+  font-size: 14px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: pre-wrap;
+}

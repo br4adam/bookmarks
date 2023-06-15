@@ -1,4 +1,5 @@
 import Login from "./Login"
+import CommandMenu from "./CommandMenu"
 import { useAuthStore } from "../stores/AuthStore"
 import useScrollProgess from "../hooks/useScrollProgess"
 
@@ -16,6 +17,7 @@ const Header = () => {
             </div>
           : <p className="font-bold">Bookmarks</p>
         }
+        { session && <CommandMenu /> }
         <Login />
       </div>
       { session && <span className="absolute bottom-[-1px] w-full h-[1px] bg-zinc-400 duration-300" style={{ transform: `translateX(${completion - 100}%)`}}></span> }

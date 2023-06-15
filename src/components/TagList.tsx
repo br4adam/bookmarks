@@ -8,7 +8,7 @@ const TagList = () => {
   if (!bookmarks.length) return null
 
   return (
-    <div className="flex flex-wrap justify-center gap-2 text-sm">
+    <div className="flex flex-wrap justify-center gap-2 text-sm animate-fade-up animate-duration-200">
         <p onClick={() => setSelectedTag("")} className={`cursor-pointer px-3 py-[2px] rounded-full border backdrop-blur-lg border-zinc-800 ${!selectedTag ? "bg-zinc-700/80" : "bg-zinc-700/30"} hover:bg-zinc-800 duration-200`}>all
           <span className="ml-1 text-xs text-zinc-500">{bookmarks.length}</span>
         </p>
