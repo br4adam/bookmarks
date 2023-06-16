@@ -30,8 +30,6 @@
   background-color: #00000050;
   backdrop-filter: brightness(50%);
   -webkit-backdrop-filter: brightness(50%);
-  filter: blur(1px);
-  -webkit-filter: blur(1px);
   z-index: 40;
 }
 
