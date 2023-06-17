@@ -1,11 +1,12 @@
-import { useState, useRef, ReactNode } from "react"
+import { useState, useRef, ReactNode, CSSProperties } from "react"
 
 type Props = {
   className?: string
+  style?: CSSProperties
   children: ReactNode
 }
 
-const CardSpotlight = ({ className = "", children }: Props) => {
+const CardSpotlight = ({ className = "", style = {}, children }: Props) => {
   const [ opacity, setOpacity ] = useState<number>(0)
   const [ position, setPosition ] = useState<{x: number, y: number}>({ x: 0, y: 0 })
   const cardRef = useRef<HTMLDivElement>(null)
@@ -21,8 +22,8 @@ const CardSpotlight = ({ className = "", children }: Props) => {
   const handleMouseLeave = () => setOpacity(0)
 
   return (
-    <div className={`p-[1px] rounded-xl bg-gradient-to-b shadow-lg from-zinc-700 to-zinc-700/50 hover:to-zinc-700/80 ${className}`} ref={cardRef} onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <div className="relative flex flex-col h-full gap-4 p-3 bg-zinc-900 rounded-xl">
+    <div className={`p-[1px] md:rounded-xl rounded-lg bg-gradient-to-b shadow-lg from-zinc-700 to-zinc-700/50 hover:to-zinc-700/80 ${className}`} ref={cardRef} onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <div className="relative flex flex-col h-full gap-4 p-3 bg-cover bg-zinc-900 rounded-[7px] md:rounded-[11px]" style={style}>
         <div className="absolute inset-0 transition-all duration-200 opacity-0 pointer-events-none rounded-xl" style={{ opacity, background: `radial-gradient(350px circle at ${position.x}px ${position.y}px, #ffffff10, transparent)` }}>
         </div>
         { children }
