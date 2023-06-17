@@ -7,7 +7,7 @@ const ScrollToTop = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" })
   
   const toggleVisibility = () => {
-    if (window.scrollY > 400) setIsVisible(true)
+    if (window.scrollY > 800) setIsVisible(true)
     else setIsVisible(false)
   }
 

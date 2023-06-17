@@ -32,21 +32,21 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
           <Menu.Items className="absolute p-[1px] right-0 w-40 mt-2 origin-top-right bg-zinc-200 rounded-md text-sm z-20 shadow-xl focus:outline-none">
           <Menu.Item>
               {({ active }) => (
-                <button onClick={() => openInNewTab(bookmark.url)} className={`${active ? "bg-zinc-800 text-zinc-200" : "text-zinc-900"} flex gap-1 w-full items-center rounded-md p-2`}>
+                <button onClick={() => openInNewTab(bookmark.url)} className={`${active ? "bg-zinc-800 text-zinc-200" : "text-zinc-900"} flex gap-1 w-full items-center rounded-[5px] p-2`}>
                   <OpenInBrowser width={16} strokeWidth={1.75} />Open in new tab
                 </button>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <button onClick={() => copyUrl(bookmark.url)} className={`${active ? "bg-zinc-800 text-zinc-200" : "text-zinc-900"} flex gap-1 w-full items-center rounded-md p-2`}>
+                <button onClick={() => copyUrl(bookmark.url)} className={`${active ? "bg-zinc-800 text-zinc-200" : "text-zinc-900"} flex gap-1 w-full items-center rounded-[5px] p-2`}>
                   <Copy width={16} strokeWidth={1.75} />Copy URL
                 </button>
               )}
             </Menu.Item>
             <Menu.Item>
               {({ active }) => (
-                <button onClick={() => setIsModalOpen(true)} className={`${active ? "bg-zinc-800 text-zinc-200" : "text-zinc-900"} flex gap-1 w-full items-center rounded-md p-2`}>
+                <button onClick={() => setIsModalOpen(true)} className={`${active ? "bg-zinc-800 text-zinc-200" : "text-zinc-900"} flex gap-1 w-full items-center rounded-[5px] p-2`}>
                   <Trash width={16} strokeWidth={1.75} />Delete
                 </button>
               )}

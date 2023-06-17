@@ -50,14 +50,13 @@
 }
 
 [cmdk-list] {
-  height: var(--cmdk-list-height);
-  max-height: 420px;
+  height: var(--cmdk-list-height) + 8px;
+  max-height: 430px;
   overflow: auto;
   overscroll-behavior: contain;
   scroll-padding-block-start: 8px;
   scroll-padding-block-end: 8px;
-  padding: 0 8px;
-  margin: 8px 0;
+  padding: 8px;
   transition: height 0.2s ease;
 }
 
@@ -94,11 +93,44 @@
   margin-top: 2px;
 }
 
-[cmdk-empty] {
+[cmdk-empty],
+[cmdk-loading] {
   font-size: 14px;
   height: 64px;
   display: flex;
   align-items: center;
   justify-content: center;
   white-space: pre-wrap;
+}
+
+[cmdk-footer] {
+  display: flex;
+  gap: 16px;
+  padding: 8px 16px;
+  border-top: 1px solid #3f3f46;
+  color: #71717a;
+  font-size: 12px;
+  user-select: none;
+}
+
+[cmdk-footer] div {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+[cmdk-footer] kbd {
+  background: #e5e5e510;
+  border-radius: 4px;
+  height: 20px;
+  font-size: 10px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+[cmdk-footer] kbd svg {
+  height: 12px;
+  width: 12px;
 }

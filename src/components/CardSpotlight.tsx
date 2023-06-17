@@ -22,12 +22,10 @@ const CardSpotlight = ({ className = "", style = {}, children }: Props) => {
   const handleMouseLeave = () => setOpacity(0)
 
   return (
-    <div className={`p-[1px] md:rounded-xl rounded-lg bg-gradient-to-b shadow-lg from-zinc-700 to-zinc-700/50 hover:to-zinc-700/80 ${className}`} ref={cardRef} onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <div className="relative flex flex-col h-full gap-4 p-3 bg-cover bg-zinc-900 rounded-[7px] md:rounded-[11px]" style={style}>
-        <div className="absolute inset-0 transition-all duration-200 opacity-0 pointer-events-none rounded-xl" style={{ opacity, background: `radial-gradient(350px circle at ${position.x}px ${position.y}px, #ffffff10, transparent)` }}>
-        </div>
-        { children }
+    <div className={`rounded-lg relative p-3 flex flex-col gap-4 shadow-lg bg-zinc-900 border border-zinc-700 bg-cover ${className}`} style={style} ref={cardRef} onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <div className="absolute inset-0 transition-all duration-200 rounded-lg opacity-0 pointer-events-none" style={{ opacity, background: `radial-gradient(350px circle at ${position.x}px ${position.y}px, #ffffff10, transparent)` }}>
       </div>
+      { children }
     </div>
   )
 }
