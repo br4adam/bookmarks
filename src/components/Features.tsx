@@ -13,12 +13,12 @@ const Features = () => {
           <span className="absolute bottom-4 left-4">All your bookmarks in one place</span>
         </CardSpotlight>
         <div className="flex gap-4">
-          <CardSpotlight className="w-1/2 animate-fade-up animate-delay-700 animate-duration-500" style={{ backgroundImage: `url(${bg03})`}}>
+          <CardSpotlight className="w-1/2 aspect-square animate-fade-up animate-delay-700 animate-duration-500" style={{ backgroundImage: `url(${bg03})`}}>
             <span className="absolute bottom-4 left-4">Easy tagging</span>
           </CardSpotlight>
           <CardSpotlight className="w-1/2 aspect-square animate-fade-up animate-delay-[900ms] animate-duration-500" style={{ backgroundImage: `url(${bg04})`}}>
             <div className="absolute flex gap-2 bottom-4 left-4">
-              <span>Project on GitHub</span>
+              <span>GitHub</span>
               <a href="https://github.com/br4adam/bookmarks" target="_blank">
                 <ArrowTr width={16} />
               </a>
