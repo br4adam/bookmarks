@@ -42,7 +42,7 @@
 }
 
 [cmdk-input]::placeholder {
-  color: #e4e4e750;
+  color: #71717a50;
 }
 
 [cmdk-input]::selection {
@@ -80,13 +80,23 @@
 }
 
 [cmdk-item][data-disabled="true"] {
-  color: #e4e4e750;
+  background-color: transparent;
+  color: #71717a;
   cursor: not-allowed;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: pre-wrap;
 }
 
 [cmdk-item][data-selected="true"]:active {
   transition-property: background;
   background: #3f3f46cc;
+}
+
+[cmdk-item][data-disabled="true"]:active {
+  background: transparent;
 }
 
 [cmdk-item] + [cmdk-item] {
@@ -105,18 +115,13 @@
 
 [cmdk-footer] {
   display: flex;
-  gap: 16px;
+  gap: 4px;
+  align-items: center;
   padding: 8px 16px;
   border-top: 1px solid #3f3f46;
   color: #71717a;
   font-size: 12px;
   user-select: none;
-}
-
-[cmdk-footer] div {
-  display: flex;
-  align-items: center;
-  gap: 4px;
 }
 
 [cmdk-footer] kbd {
@@ -130,7 +135,11 @@
   justify-content: center;
 }
 
-[cmdk-footer] kbd svg {
+[cmdk-footer] span:not(:last-of-type) {
+  margin-right: 8px;
+}
+
+[cmdk-footer] svg {
   height: 12px;
   width: 12px;
 }

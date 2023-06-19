@@ -15,7 +15,7 @@ const Header = () => {
               <img className="w-6 rounded-full" src={session.user.user_metadata.avatar_url} alt="" />
               <p className="truncate">Hello {session.user.user_metadata.name}!</p>
             </div>
-          : <p className="font-bold">Bookmarks</p>
+          : <p className="font-semibold">Bookmarks</p>
         }
         { session && <CommandMenu /> }
         <Login />
