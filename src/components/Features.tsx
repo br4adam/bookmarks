@@ -10,23 +10,21 @@ const Features = () => {
   return (
     <section className="flex flex-col w-full gap-4 select-none sm:flex-row">
       <div className="flex flex-col gap-4 sm:w-2/3">
-        <CardSpotlight className="aspect-[2/1] animate-fade-up animate-delay-500 animate-duration-500" style={{ backgroundImage: `url(${bg01})`}}>
+        <CardSpotlight className="sm:aspect-[2/1] aspect-square animate-fade-up animate-delay-500 animate-duration-500" style={{ backgroundImage: `url(${bg01})`}}>
           <Title>All your bookmarks in one place</Title>
         </CardSpotlight>
-        <div className="flex gap-4">
-          <CardSpotlight className="w-1/2 aspect-square animate-fade-up animate-delay-700 animate-duration-500" style={{ backgroundImage: `url(${bg03})`}}>
+        <div className="flex flex-col gap-4 sm:flex-row">
+          <CardSpotlight className="w-full aspect-square animate-fade-up animate-delay-700 animate-duration-500" style={{ backgroundImage: `url(${bg03})`}}>
             <Title>Easy tagging</Title>
           </CardSpotlight>
-          <CardSpotlight className="w-1/2 aspect-square animate-fade-up animate-delay-[900ms] animate-duration-500" style={{ backgroundImage: `url(${bg04})`}}>
+          <CardSpotlight className="w-full aspect-square animate-fade-up animate-delay-[900ms] animate-duration-500" style={{ backgroundImage: `url(${bg04})`}}>
             <Title>GitHub
-              <a href="https://github.com/br4adam/bookmarks" target="_blank">
-                <ArrowTr width={16} />
-              </a>
+              <a href="https://github.com/br4adam/bookmarks" target="_blank"><ArrowTr width={16} /></a>
             </Title>
           </CardSpotlight>
         </div>
       </div>
-      <CardSpotlight className="sm:w-1/3 aspect-[1/2] sm:aspect-auto animate-fade-up animate-delay-[1100ms] animate-duration-500" style={{ backgroundImage: `url(${bg02})`}}>
+      <CardSpotlight className="sm:w-1/3 aspect-square bg-bottom sm:aspect-auto animate-fade-up animate-delay-[1100ms] animate-duration-500" style={{ backgroundImage: `url(${bg02})`}}>
         <Title>Superfast search</Title>
       </CardSpotlight>
     </section>

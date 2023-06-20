@@ -2,6 +2,7 @@ import Login from "./Login"
 import CommandMenu from "./CommandMenu"
 import { useAuthStore } from "../stores/AuthStore"
 import useScrollProgess from "../hooks/useScrollProgess"
+import defaultProfilePicture from "../assets/profilepic.png"
 
 const Header = () => {
   const session = useAuthStore(state => state.session)
@@ -12,13 +13,13 @@ const Header = () => {
       <div className="flex items-center justify-between w-11/12 max-w-6xl gap-2 mx-auto md:w-10/12">
         { session 
           ? <div className="flex gap-2">
-              <img className="w-6 rounded-full" src={session.user.user_metadata.avatar_url} alt="" />
+              <img className="w-6 rounded-full" src={session.user.user_metadata.avatar_url || defaultProfilePicture} alt="profile picture" />
               <p className="truncate">Hello {session.user.user_metadata.name}!</p>
             </div>
           : <p className="font-semibold">Bookmarks</p>
         }
         { session && <CommandMenu /> }
-        <Login />
+        <Login>Login</Login>
       </div>
       { session && <span className="absolute bottom-[-1px] w-full h-[1px] bg-zinc-400 duration-300" style={{ transform: `translateX(${completion - 100}%)`}}></span> }
     </header>

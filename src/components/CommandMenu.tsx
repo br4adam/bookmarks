@@ -32,13 +32,13 @@ const CommandMenu = () => {
           { loading && <Command.Loading>Loading...</Command.Loading> }
           { !bookmarks.length && <Command.Item data-disabled={true}>You have no saved bookmarks.</Command.Item> }
           <Command.Empty>No results found.</Command.Empty>
-            { bookmarks.map(bookmark => (
-              <Command.Item key={bookmark.id} value={`${bookmark.title} ${bookmark.url} ${bookmark.tags.join(" ")}`} onSelect={() => window.open(bookmark.url, "_blank")}>
-                <img src={`https://icon.horse/icon/${clearUrl(bookmark.url)}`} alt={`${bookmark.title} icon`} className="w-4 h-4" onError={addImageFallback} />
-                <span className="truncate">{bookmark.title}</span>
-                <span className="text-xs truncate text-zinc-500">{bookmark.url}</span>
-              </Command.Item>
-            ))}
+          { bookmarks.map(bookmark => (
+            <Command.Item key={bookmark.id} value={`${bookmark.title} ${bookmark.url} ${bookmark.tags.join(" ")}`} onSelect={() => window.open(bookmark.url, "_blank")}>
+              <img src={`https://icon.horse/icon/${clearUrl(bookmark.url)}`} alt={`${bookmark.title} icon`} className="w-4 h-4" onError={addImageFallback} />
+              <span className="truncate">{bookmark.title}</span>
+              <span className="text-xs truncate text-zinc-500">{bookmark.url}</span>
+            </Command.Item>
+          ))}
         </Command.List>
         <CommandFooter />
       </Command.Dialog>
