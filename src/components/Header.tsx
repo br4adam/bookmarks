@@ -14,9 +14,9 @@ const Header = () => {
         { session 
           ? <div className="flex gap-2">
               <img className="w-6 rounded-full" src={session.user.user_metadata.avatar_url || defaultProfilePicture} alt="profile picture" />
-              <p className="truncate">Hello {session.user.user_metadata.name}!</p>
+              <p className="truncate">Hello {session.user.user_metadata.name || session.user.user_metadata.email.split("@")[0]}!</p>
             </div>
-          : <p className="font-semibold">Bookmarks</p>
+          : <p className="font-bold">Bookmarks</p>
         }
         { session && <CommandMenu /> }
         <Login>Login</Login>

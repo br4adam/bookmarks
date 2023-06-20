@@ -3,7 +3,7 @@ const createTagList = (bookmarks: Bookmark[]): Tag[] => {
     current.tags.forEach(tag => {
       const index = total.findIndex(x => x.name === tag)
       if (index !== -1) total[index].count++
-      else total.push({ name: tag, count: 1})
+      else total.push({ name: tag, count: 1 })
     })
     return total
   }, [])
