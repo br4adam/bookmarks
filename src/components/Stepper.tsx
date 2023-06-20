@@ -3,7 +3,7 @@ import { BookmarkEmpty, FilterList, Search } from "iconoir-react"
 
 const Stepper = () => {
   return (
-    <section className="w-full -mt-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] sm:bg-[length:800px_400px] bg-[length:400px_200px] bg-no-repeat bg-top from-zinc-900 to-60% to-transparent animate-fade animate-delay-200">
+    <section className="w-full -mt-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] sm:bg-[length:800px_400px] bg-[length:400px_200px] bg-no-repeat bg-top from-zinc-400/10 to-60% to-transparent animate-fade animate-delay-200">
       <div className="flex flex-col items-center pt-16 pb-12 sm:pt-20 sm:pb-16 animate-fade-up animate-delay-500 animate-duration-500">
         <p className="mb-4 text-xs font-semibold tracking-widest uppercase text-zinc-500">How it works</p>
         <h2 className="max-w-md text-3xl font-bold text-center text-transparent mb-14 from-zinc-400 via-zinc-200 to-zinc-400 bg-gradient-to-r bg-clip-text lg:max-w-full">Manage your bookmarks with just 3 easy steps</h2>
