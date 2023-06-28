@@ -29,7 +29,7 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
           Options
         </Menu.Button>
         <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-100" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
-          <Menu.Items className="absolute p-[1px] right-0 w-40 mt-2 origin-top-right bg-zinc-200 rounded-md text-sm z-20 shadow-xl focus:outline-none">
+          <Menu.Items className="absolute p-[1px] right-0 w-40 mt-2 origin-top-right bg-zinc-200 rounded-md text-sm z-20 shadow-xl focus:outline-non will-change-transform">
           <Menu.Item>
               {({ active }) => (
                 <button onClick={() => openInNewTab(bookmark.url)} className={`${active ? "bg-zinc-800 text-zinc-200" : "text-zinc-900"} flex gap-1 w-full items-center rounded-[5px] p-2`}>

@@ -1,6 +1,7 @@
 type Bookmark = {
   id: number
   title: string
+  domain: string
   url: string
   description: string
   image: string

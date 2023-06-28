@@ -38,7 +38,7 @@ const BookmarkTags = ({ bookmark }: Props) => {
             <Check className="transition-all cursor-pointer text-zinc-400 hover:text-zinc-200" width={16} strokeWidth={1.75} />
           </button>
         </form>
-      : bookmark.tags.map(tag => <span key={tag} className="px-2 py-1 border-b border-transparent rounded-md bg-zinc-700/50 text-zinc-400">{tag}</span> )
+      : bookmark.tags.map(tag => <span key={tag} className="px-2 py-1 truncate border-b border-transparent rounded-md bg-zinc-700/50 text-zinc-400">{tag}</span> )
     }
   </div>
   )

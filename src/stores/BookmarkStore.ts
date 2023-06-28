@@ -2,7 +2,6 @@ import { create } from "zustand"
 import supabase from "../utils/supabase"
 import getMetadata from "../utils/getMetadata"
 import isValidUrl from "../utils/isValidUrl"
-import clearUrl from "../utils/clearUrl"
 
 type BookmarkState = {
   bookmarks: Bookmark[]
@@ -42,12 +41,11 @@ export const useBookmarkStore = create<BookmarkState>(set => ({
     if (!isValidUrl(url)) return { data: "Please include 'https://' in the URL!", success: false }
     try {
       set({ loading: true })
-      const metadata = await getMetadata(url.toLowerCase())
+      const metadata = await getMetadata(url)
       if (!metadata) return { data: "Please insert a valid URL!", success: false }
-      const title = !metadata.title ? clearUrl(metadata.url) : metadata.title
       const { data, error } = await supabase
         .from("bookmarks")
-        .insert({ title, url: metadata.url, description: metadata.description, image: metadata.images[0], saved_by: userId, tags: [] })
+        .insert({ title: metadata.title || metadata.domain, domain: metadata.domain, url: metadata.url, description: metadata.description, image: metadata.images[0], saved_by: userId, tags: [] })
         .select()
         .returns<Bookmark[]>()
       if (error) throw new Error(`Error saving bookmark: ${error.message}`)

@@ -1,7 +1,6 @@
 import { SyntheticEvent } from "react"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import fallbackImage from "../assets/fallback.png"
-import clearUrl from "../utils/clearUrl"
 import BookmarkTags from "./BookmarkTags"
 import BookmarkDropdown from "./BookmarkDropdown"
 import Skeleton from "./Skeleton"
@@ -13,7 +12,6 @@ type Props = {
 
 const Bookmark = ({ bookmark }: Props) => {
   const loading = useBookmarkStore(state => state.loading)
-  const domain = clearUrl(bookmark.url)
 
   const addImageFallback = (event: SyntheticEvent<HTMLImageElement, Event>) => {
     event.currentTarget.src = "./fallback.png"
@@ -28,7 +26,7 @@ const Bookmark = ({ bookmark }: Props) => {
       </div>
       <div>
         <div className="flex items-center gap-2">
-          <img src={`https://icon.horse/icon/${domain}`} alt={`${bookmark.title} icon`} className="w-4 h-4" onError={addImageFallback} />
+          <img src={`https://icon.horse/icon/${bookmark.domain}`} alt={`${bookmark.title} icon`} className="w-4 h-4" onError={addImageFallback} />
           <p className="font-medium truncate">{bookmark.title}</p>
         <BookmarkDropdown bookmark={bookmark} />
         </div>
