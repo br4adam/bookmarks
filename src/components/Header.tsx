@@ -11,13 +11,8 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-30 w-full py-2 border-b backdrop-blur-xl backdrop-saturate-150 bg-zinc-900/40 border-zinc-700">
       <div className="flex items-center justify-between w-11/12 max-w-6xl gap-2 mx-auto md:w-10/12">
-        { session 
-          ? <div className="flex gap-2">
-              <img className="w-6 rounded-full" src={session.user.user_metadata.avatar_url || defaultProfilePicture} alt="profile picture" />
-              <p className="truncate">Hello {session.user.user_metadata.name || session.user.user_metadata.email.split("@")[0]}!</p>
-            </div>
-          : <p className="font-bold">Bookmarks</p>
-        }
+        { session && <img className="w-6 rounded-full" src={session.user.user_metadata.avatar_url || defaultProfilePicture} alt="profile picture" /> }
+        <p className="font-bold">Bookmarks</p>
         { session && <CommandMenu /> }
         <Login>Login</Login>
       </div>
