@@ -1,5 +1,6 @@
 import { SyntheticEvent } from "react"
 import { useBookmarkStore } from "../stores/BookmarkStore"
+import { Pin } from "iconoir-react"
 import fallbackImage from "../assets/fallback.png"
 import BookmarkTags from "./BookmarkTags"
 import BookmarkDropdown from "./BookmarkDropdown"
@@ -21,8 +22,9 @@ const Bookmark = ({ bookmark }: Props) => {
 
   return (
     <CardSpotlight>
-      <div className="z-10 overflow-hidden rounded-md aspect-video bg-zinc-800">
-        <img className="object-cover w-full h-full m-auto" src={bookmark.image ? bookmark.image : fallbackImage} alt={bookmark.title} onError={addImageFallback} />
+      <div className="z-10 relative overflow-hidden rounded-md aspect-video bg-zinc-800">
+        <img className="object-cover w-full h-full m-auto" src={bookmark.image ? bookmark.image : fallbackImage} alt={bookmark.title} loading="lazy" onError={addImageFallback} />
+        { bookmark.pinned && <PinBadge /> }
       </div>
       <div>
         <div className="flex items-center gap-2">
@@ -35,6 +37,14 @@ const Bookmark = ({ bookmark }: Props) => {
         <p className="text-sm">{bookmark.description}</p>
       </div>
     </CardSpotlight>
+  )
+}
+
+const PinBadge = () => {
+  return (
+    <div className="absolute top-2 right-2 w-6 h-6 flex items-center justify-center rounded-full bg-zinc-800">
+      <Pin width={16} />
+    </div>
   )
 }
 

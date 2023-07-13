@@ -8,6 +8,7 @@ type Bookmark = {
   created_at: string
   saved_by: string
   tags: string[]
+  pinned: boolean
 }
 
 type Metadata = {

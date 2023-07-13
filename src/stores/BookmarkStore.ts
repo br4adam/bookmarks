@@ -9,7 +9,7 @@ type BookmarkState = {
   fetch: (userId: string) => Promise<StoreResponse>
   add: (url: string, savedBy: string) => Promise<StoreResponse>
   delete: (bookmarkId: number) => Promise<StoreResponse>
-  update: (bookmarkId: number, tags: string[]) => Promise<StoreResponse>
+  update: (bookmarkId: number, updatedBookmark: Bookmark) => Promise<StoreResponse>
   selectedTag: string
   setSelectedTag: (tag: string) => void
 }
@@ -24,7 +24,8 @@ export const useBookmarkStore = create<BookmarkState>(set => ({
         .from("bookmarks")
         .select("*")
         .eq("saved_by", userId)
-        .order("created_at", { ascending: false } )
+        .order("pinned", { ascending: false })
+        .order("created_at", { ascending: false })
         .returns<Bookmark[]>()
       if (error) throw new Error(`Error fetching bookmarks: ${error.message}`)
       set({ bookmarks: data })
@@ -77,17 +78,17 @@ export const useBookmarkStore = create<BookmarkState>(set => ({
       set({ loading: false })
     }
   },
-  update: async (bookmarkId, tags) => {
+  update: async (bookmarkId, updatedBookmark) => {
     try {
       const { data, error } = await supabase
         .from("bookmarks")
-        .update({ tags: tags })
+        .update(updatedBookmark)
         .eq("id", bookmarkId)
         .select()
         .returns<Bookmark[]>()
       if (error) throw new Error(`Error updating bookmark: ${error.message}`)
       set((state) => ({
-        bookmarks: state.bookmarks.map(bookmark => bookmark.id === bookmarkId ? { ...bookmark, tags: tags } : bookmark)
+        bookmarks: state.bookmarks.map(bookmark => bookmark.id === bookmarkId ? updatedBookmark : bookmark)
       }))
       return { data, success: true }
     } catch (error) {
