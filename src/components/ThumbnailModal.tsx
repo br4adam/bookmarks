@@ -22,7 +22,7 @@ const ThumbnailModal = ({ isThumbnailModalOpen, closeThumbnailModal, bookmark }:
   const changeThumbnail = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!userId) return
-    if (!isValidUrl(imageUrl)) return toast.error("Please add a vali image URL!")
+    if (!isValidUrl(imageUrl)) return toast.error("Please insert a valid image URL!")
     const response = await updateBookmark(bookmark.id, { ...bookmark, image: imageUrl })
     if (!response.success) return toast.error(response.data)
     toast.success("Thumbnail changed successfully!")
