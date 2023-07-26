@@ -23,8 +23,8 @@ const Features = () => {
               <Title>Easy tagging</Title>
             </CardSpotlight>
             <CardSpotlight className="w-full aspect-square animate-fade-up animate-delay-[1300ms] animate-duration-500" style={{ backgroundImage: `url(${bg04})`}}>
-              <Title>GitHub
-                <a href="https://github.com/br4adam/bookmarks" target="_blank"><ArrowTr width={16} /></a>
+              <Title>
+                <a href="https://github.com/br4adam/bookmarks" target="_blank" className="flex gap-1">GitHub <ArrowTr width={16} /></a>
               </Title>
             </CardSpotlight>
           </div>
