@@ -21,7 +21,7 @@ const ProfileCard = ({ isProfileCardOpen, closeProfileCard, session }: Props) =>
 
   const name = session.user?.email
   const registrationDate = session.user.created_at
-  const daysSinceRegistration = dayjs().diff(registrationDate, "days")
+  const daysSinceFirstLogin = dayjs().diff(registrationDate, "days")
   const totalBookmarksCount = bookmarks.length
   const totalTagsCount = bookmarks.reduce((total, bookmark) => total + bookmark.tags.length, 0)
 
@@ -42,7 +42,7 @@ const ProfileCard = ({ isProfileCardOpen, closeProfileCard, session }: Props) =>
                   <Dialog.Title as="h3" className="text-lg font-semibold w-full truncate">{name}</Dialog.Title>
                   <p className="text-sm text-zinc-500"><Balancer>Thank you for choosing kmarks.boo to be part of your online journey. Happy bookmarking!</Balancer></p>
                   <div className="flex w-full mt-6 mb-4">
-                    <Stat data={daysSinceRegistration} description="days" />
+                    <Stat data={daysSinceFirstLogin} description="days" />
                     <Stat data={totalBookmarksCount} description="bookmarks" />
                     <Stat data={totalTagsCount} description="tags" />
                   </div>

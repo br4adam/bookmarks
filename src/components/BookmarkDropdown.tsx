@@ -1,9 +1,10 @@
 import { Fragment, useState, ReactNode } from "react"
 import { Menu, Transition } from "@headlessui/react"
-import { OpenInBrowser, BinMinus, Copy, Pin, MediaImage } from "iconoir-react"
+import { OpenInBrowser, BinMinus, Copy, Pin, MediaImage, RefreshDouble } from "iconoir-react"
 import { toast } from "sonner"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
+import getMetadata from "../utils/getMetadata"
 import useClipboard from "../hooks/useClipboard"
 import DeleteModal from "./DeleteModal"
 import ThumbnailModal from "./ThumbnailModal"
@@ -34,6 +35,15 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
     toast("URL copied to clipboard!", {style: { backgroundColor: "#18181b", borderColor: "#3f3f46" }})
   }
 
+  const refreshMetadata = async (url: string) => {
+    const newMetadata = await getMetadata(url)
+    if (!newMetadata || !userId) return toast.error("Failed to retrieve new metadata.")
+    const response = await updateBookmark(bookmark.id, { ...bookmark, title: newMetadata.title || newMetadata.domain, description: newMetadata.description, image: newMetadata.images[0] })
+    if (!response.success) return toast.error(response.data)
+    toast.success("Bookmark refreshed successfully!")
+    getBookmarks(userId)
+  }
+
   const closeDeleteModal = () => setIsDeleteModalOpen(false)
   const closeThumbnailModal = () => setIsThumbnailModalOpen(false)
 
@@ -53,6 +63,9 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
             </MenuItem>
             <MenuItem onClick={pinBookmark}>
               <Pin width={16} />{ bookmark.pinned ? "Unpin" : "Pin to top" }
+            </MenuItem>
+            <MenuItem onClick={() => refreshMetadata(bookmark.url)}>
+              <RefreshDouble width={16} />Refresh metadata
             </MenuItem>
             <MenuItem onClick={() => setIsThumbnailModalOpen(true)}>
               <MediaImage width={16} />Change thumbnail
