@@ -60,7 +60,6 @@ export const useBookmarkStore = create<BookmarkState>(set => ({
   },
   delete: async (bookmarkId) => {
     try {
-      set({ loading: true })
       const { data, error } = await supabase
         .from("bookmarks")
         .delete()
@@ -75,13 +74,10 @@ export const useBookmarkStore = create<BookmarkState>(set => ({
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Something went wrong."
       return { data: errorMessage, success: false }
-    } finally {
-      set({ loading: false })
     }
   },
   update: async (bookmarkId, updatedBookmark) => {
     try {
-      set({ loading: true })
       const { data, error } = await supabase
         .from("bookmarks")
         .update(updatedBookmark)
@@ -96,8 +92,6 @@ export const useBookmarkStore = create<BookmarkState>(set => ({
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "Something went wrong."
       return { data: errorMessage, success: false }
-    } finally {
-      set({ loading: false })
     }
   },
   selectedTag: "",
