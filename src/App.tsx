@@ -3,7 +3,7 @@ import supabase from "./utils/supabase"
 import Header from "./components/Header"
 import Headline from "./components/Headline"
 import Showcase from "./components/Showcase"
-import AddBookmark from "./components/AddBookmark"
+import AddBookmarkForm from "./components/AddBookmarkForm"
 import TagList from "./components/TagList"
 import Bookmarks from "./components/Bookmarks"
 import ScrollToTop from "./components/ScrollToTop"
@@ -25,15 +25,15 @@ const App = () => {
       <Header />
       <main className="flex flex-col items-center md:w-5/6 w-11/12 max-w-6xl gap-8 mx-auto min-h-screen bg-[length:1200px_800px] bg-top bg-no-repeat" style={{ backgroundImage: `url(${grid})`}}>
         <Headline />
-        <ScrollToTop />
         { session
           ? <>
-              <AddBookmark />
+              <AddBookmarkForm />
               <TagList />
               <Bookmarks />
             </>
           : <Showcase />
         }
+        <ScrollToTop />
         <Toaster richColors closeButton theme="dark" position="bottom-center" />
       </main>
     </div>

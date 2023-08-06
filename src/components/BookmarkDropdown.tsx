@@ -38,7 +38,9 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
   const refreshMetadata = async (url: string) => {
     const newMetadata = await getMetadata(url)
     if (!newMetadata || !userId) return toast.error("Failed to retrieve new metadata.")
-    const response = await updateBookmark(bookmark.id, { ...bookmark, title: newMetadata.title || newMetadata.domain, description: newMetadata.description, image: newMetadata.images[0] })
+    const { title, domain, description, images } = newMetadata
+    if (bookmark.title === title && bookmark.description === description && bookmark.image === images[0]) return toast("No new data found.", {style: { backgroundColor: "#18181b", borderColor: "#3f3f46" }})
+    const response = await updateBookmark(bookmark.id, { ...bookmark, title: title || domain, description, image: newMetadata.images[0] })
     if (!response.success) return toast.error(response.data)
     toast.success("Bookmark refreshed successfully!")
     getBookmarks(userId)
@@ -71,7 +73,7 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
               <MediaImage width={16} />Change thumbnail
             </MenuItem>
             <MenuItem onClick={() => setIsDeleteModalOpen(true)}>
-              <BinMinus width={16} />Delete
+              <BinMinus width={16} className="text-red-600" /><span className="text-red-600">Delete</span>
             </MenuItem>
           </Menu.Items>
         </Transition>

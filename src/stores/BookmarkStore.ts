@@ -60,6 +60,7 @@ export const useBookmarkStore = create<BookmarkState>(set => ({
   },
   delete: async (bookmarkId) => {
     try {
+      set({ loading: true })
       const { data, error } = await supabase
         .from("bookmarks")
         .delete()
@@ -80,6 +81,7 @@ export const useBookmarkStore = create<BookmarkState>(set => ({
   },
   update: async (bookmarkId, updatedBookmark) => {
     try {
+      set({ loading: true })
       const { data, error } = await supabase
         .from("bookmarks")
         .update(updatedBookmark)

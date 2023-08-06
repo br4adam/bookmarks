@@ -5,7 +5,7 @@ import Button from "./Button"
 import { PasteClipboard } from "iconoir-react"
 import { toast } from "sonner"
 
-const AddBookmark = () => {
+const AddBookmarkForm = () => {
   const { fetch: getBookmarks, add: createBookmark, loading, setSelectedTag } = useBookmarkStore(state => ({ fetch: state.fetch, add: state.add, loading: state.loading, setSelectedTag: state.setSelectedTag }))
   const session = useAuthStore(state => state.session)
   const userId = session?.user.id
@@ -40,4 +40,4 @@ const AddBookmark = () => {
   )
 }
 
-export default AddBookmark
+export default AddBookmarkForm
