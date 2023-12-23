@@ -7,7 +7,7 @@ const Skeleton = () => {
       <SkeletonItem className="h-10"/>
       <SkeletonItem className="h-6"/>
       <SkeletonItem className="h-8"/>
-    </CardSpotlight>  
+    </CardSpotlight>
   )
 }
 

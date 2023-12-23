@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -19,6 +19,7 @@
     "react": "^18.2.0",
     "react-countup": "^6.4.2",
     "react-dom": "^18.2.0",
+    "react-markdown": "^9.0.1",
     "react-wrap-balancer": "^1.0.0",
     "sonner": "^0.6.2",
     "tailwindcss-animated": "^1.0.1",
