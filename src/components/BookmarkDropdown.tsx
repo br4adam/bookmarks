@@ -1,6 +1,6 @@
 import { Fragment, useState, ReactNode } from "react"
 import { Menu, Transition } from "@headlessui/react"
-import { OpenInBrowser, BinMinus, Copy, Pin, MediaImage, RefreshDouble } from "iconoir-react"
+import { OpenInBrowser, BinMinusIn, Copy, Pin, MediaImage, RefreshDouble } from "iconoir-react"
 import { toast } from "sonner"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
@@ -27,6 +27,8 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
     if (!userId) return
     const response = await updateBookmark(bookmark.id, { ...bookmark, pinned: !bookmark.pinned })
     if (!response.success) return toast.error(response.data)
+    if (response.data[0].pinned) toast("Bookmark pinned to the top!", {style: { backgroundColor: "#18181b", borderColor: "#3f3f46" }})
+    else toast("Bookmark unpinned!", {style: { backgroundColor: "#18181b", borderColor: "#3f3f46" }})
     getBookmarks(userId)
   }
 
@@ -56,7 +58,7 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
           Options
         </Menu.Button>
         <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-100" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
-          <Menu.Items className="absolute p-[1px] right-0 w-44 mt-2 origin-top-right bg-zinc-200 rounded-md text-sm z-20 shadow-xl focus:outline-non will-change-transform">
+          <Menu.Items className="absolute p-[1px] right-0 w-44 mt-2 origin-top-right bg-zinc-200 rounded-md text-sm z-30 shadow-xl focus:outline-non will-change-transform">
             <MenuItem onClick={() => openInNewTab(bookmark.url)}>
               <OpenInBrowser width={16} />Open in new tab
             </MenuItem>
@@ -73,7 +75,7 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
               <MediaImage width={16} />Change thumbnail
             </MenuItem>
             <MenuItem onClick={() => setIsDeleteModalOpen(true)}>
-              <BinMinus width={16} className="text-red-600" /><span className="text-red-600">Delete</span>
+              <BinMinusIn width={16} className="text-red-600" /><span className="text-red-600">Delete</span>
             </MenuItem>
           </Menu.Items>
         </Transition>

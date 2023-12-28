@@ -4,7 +4,7 @@ import bg01 from "../assets/bg01.webp"
 import bg02 from "../assets/bg02.webp"
 import bg03 from "../assets/bg03.webp"
 import bg04 from "../assets/bg04.webp"
-import { ArrowTr } from "iconoir-react"
+import { OpenNewWindow } from "iconoir-react"
 
 const Features = () => {
   return (
@@ -24,7 +24,7 @@ const Features = () => {
             </CardSpotlight>
             <CardSpotlight className="w-full aspect-square animate-fade-up animate-delay-[1300ms] animate-duration-500" style={{ backgroundImage: `url(${bg04})`}}>
               <Title>
-                <a href="https://github.com/br4adam/bookmarks" target="_blank" className="flex gap-1">GitHub <ArrowTr width={16} /></a>
+                <a href="https://github.com/br4adam/bookmarks" target="_blank" className="flex gap-1">GitHub <OpenNewWindow width={16} /></a>
               </Title>
             </CardSpotlight>
           </div>

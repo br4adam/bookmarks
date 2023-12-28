@@ -2,7 +2,7 @@ import { Fragment, ReactNode, useState, FormEvent } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import { useAuthStore } from "../stores/AuthStore"
 import Button from "./Button"
-import { GitHub, Sparks } from "iconoir-react"
+import { Github, Sparks } from "iconoir-react"
 import { toast } from "sonner"
 
 type Props = {
@@ -56,7 +56,7 @@ const Login = ({ children, className }: Props) => {
                     <span className="mx-2 my-1 text-sm text-zinc-500">OR</span>
                     <span className="flex-grow h-[1px] bg-zinc-500" aria-hidden="true"></span>
                   </div>
-                  <Button onClick={loginWithGithub} className="justify-center w-full bg-zinc-900 text-zinc-200 hover:bg-zinc-800"><GitHub width={18} strokeWidth={1.75} />Continue with GitHub</Button>
+                  <Button onClick={loginWithGithub} className="justify-center w-full bg-zinc-900 text-zinc-200 hover:bg-zinc-800"><Github width={18} strokeWidth={1.75} />Continue with GitHub</Button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
