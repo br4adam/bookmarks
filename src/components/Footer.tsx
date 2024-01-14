@@ -12,7 +12,7 @@ const Footer = () => {
     <footer className="flex items-center justify-start h-10 mb-8 w-11/12 max-w-6xl gap-4 mx-auto md:w-10/12 md:justify-end animate-fade-up animate-delay-[1700ms] animate-duration-500">
       <span>kmarks.boo</span>
       <span className="text-zinc-700">|</span>
-      <button className="cursor-pointer" onClick={() => setIsPrivacyPolicyOpen(prev => !prev)}>Privacy Policy</button>
+      <button className="cursor-pointer" onClick={() => setIsPrivacyPolicyOpen(prev => !prev)}>Privacy</button>
       { isPrivacyPolicyOpen && <PrivacyPolicy isPrivacyPolicyOpen={isPrivacyPolicyOpen} closePrivacyPolicy={closePrivacyPolicy} /> }
     </footer>
   )
