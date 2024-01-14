@@ -3,7 +3,7 @@ import { useState, useRef, ReactNode, CSSProperties } from "react"
 type Props = {
   className?: string
   style?: CSSProperties
-  children: ReactNode
+  children?: ReactNode
 }
 
 const CardSpotlight = ({ className = "", style = {}, children }: Props) => {

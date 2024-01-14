@@ -11,11 +11,13 @@ const TagList = () => {
   if (!bookmarks.length) return null
 
   return (
-    <div ref={parent} className="flex flex-wrap justify-center gap-2 text-sm h-fit animate-fade-up animate-duration-200">
-      <Tag onClick={() => setSelectedTag("")} count={bookmarks.length} isSelected={!selectedTag}>all</Tag>
-      { tags && tags.map(tag => (
-        <Tag key={tag.name} onClick={() => setSelectedTag(tag.name)} count={tag.count} isSelected={selectedTag === tag.name}>{tag.name}</Tag>
-      ))}
+    <div className="w-full overflow-hidden relative animate-fade-up animate-duration-200">
+      <div ref={parent} className="flex overflow-x-scroll min-w-full snap-x no-scrollbar justify-start md:justify-center md:flex-wrap gap-2 h-fit">
+        <Tag onClick={() => setSelectedTag("")} count={bookmarks.length} isSelected={!selectedTag}>all</Tag>
+        { tags && tags.map(tag => (
+          <Tag key={tag.name} onClick={() => setSelectedTag(tag.name)} count={tag.count} isSelected={selectedTag === tag.name}>{tag.name}</Tag>
+        ))}
+      </div>
     </div>
   )
 }
@@ -29,9 +31,9 @@ type TagProps = {
 
 const Tag = ({ onClick, count, isSelected, children }: TagProps) => {
   return (
-    <p onClick={onClick} className={`cursor-pointer h-fit px-3 py-[2px] rounded-full border backdrop-blur-lg border-zinc-800 ${isSelected ? "bg-zinc-800/75 text-zinc-200" : "text-zinc-200/70"} hover:text-zinc-200 duration-200`}>
+    <p onClick={onClick} className={`cursor-pointer h-fit px-3 py-[2px] text-sm rounded-full border backdrop-blur-lg border-zinc-800 snap-start ${isSelected ? "bg-zinc-200 text-zinc-900" : "text-zinc-200"} hover:border-zinc-700 duration-200`}>
       {children}
-      <span className={`ml-1 text-xs ${isSelected ? "text-zinc-500" : "text-zinc-600"}`}>{count}</span>
+      <span className={`ml-1 text-xs ${isSelected ? "text-zinc-500" : "text-zinc-500"}`}>{count}</span>
     </p>
   )
 }

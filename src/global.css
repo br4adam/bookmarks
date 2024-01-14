@@ -6,6 +6,17 @@
   color-scheme: dark;
 }
 
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
 [cmdk-root] {
   position: fixed;
   top: 100px;

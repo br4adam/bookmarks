@@ -24,7 +24,7 @@ const CommandMenu = () => {
 
   return (
     <>
-      <Button onClick={() => setOpen((open) => !open)} className="ml-auto" disabled={open} >⌘K</Button>
+      <Button onClick={() => setOpen((open) => !open)} className="ml-auto" disabled={open}>⌘K</Button>
       <Command.Dialog open={open} onOpenChange={setOpen} label="Command Menu">
         <Command.Input placeholder="Search by title, url or tag" />
         <Command.List>
