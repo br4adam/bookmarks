@@ -1,24 +1,22 @@
-import { useEffect, useState } from "react"
+import { useCallback, useState } from "react"
 
-const useClipboard = (): { copiedText: string, copy: (text: string) => void, copied: boolean } => {
-  const [ copied, setCopied ] = useState<boolean>(false)
-  const [ copiedText, setCopiedText ] = useState<string>("")
+const useClipboard = (duration = 2000) => {
+  const [ copied, setCopied ] = useState(false)
+  const [ error, setError ] = useState<Error | null>(null)
 
-  const copy = (text: string): void => {
-    if (!navigator.clipboard) return
-    navigator.clipboard.writeText(text)
-    setCopied(true)
-    setCopiedText(text)
-  }
+  const copyToClipboard = useCallback(
+    async (text: string) => {
+      try {
+        await navigator.clipboard.writeText(text)
+        setCopied(true)
+        setError(null)
+        setTimeout(() => setCopied(false), duration)
+      } catch (error) {
+        setError(error instanceof Error ? error : new Error("Failed to copy url!"))
+      }
+    }, [duration])
 
-  useEffect(() => {
-    if (copied) {
-      const timeoutId = setTimeout(() => setCopied(false), 2000)
-      return () => clearTimeout(timeoutId)
-    }
-  }, [copied])
-
-  return { copiedText, copy, copied }
+  return { copied, error, copyToClipboard }
 }
 
 export default useClipboard

@@ -1,6 +1,6 @@
 import { Fragment, useState, ReactNode } from "react"
 import { Menu, Transition } from "@headlessui/react"
-import { OpenInBrowser, BinMinusIn, Copy, Pin, MediaImage, RefreshDouble } from "iconoir-react"
+import { OpenInBrowser, BinMinusIn, Copy, Pin, MediaImage, RefreshDouble, Check } from "iconoir-react"
 import { toast } from "sonner"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
@@ -15,11 +15,13 @@ type Props = {
 
 const BookmarkDropdown = ({ bookmark }: Props) => {
   const { fetch: getBookmarks, update: updateBookmark } = useBookmarkStore(state => ({ fetch: state.fetch, update: state.update }))
-  const { copy } = useClipboard()
+  const { copyToClipboard, error, copied } = useClipboard()
   const session = useAuthStore(state => state.session)
   const userId = session?.user.id
   const [ isDeleteModalOpen, setIsDeleteModalOpen ] = useState<boolean>(false)
   const [ isThumbnailModalOpen, setIsThumbnailModalOpen ] = useState<boolean>(false)
+
+  const defaultToastStyle = {style: { backgroundColor: "#18181b", borderColor: "#3f3f46" }}
 
   const openInNewTab = (url: string) => window.open(url, "_blank")
 
@@ -27,21 +29,22 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
     if (!userId) return
     const response = await updateBookmark(bookmark.id, { ...bookmark, pinned: !bookmark.pinned })
     if (!response.success) return toast.error(response.data)
-    if (response.data[0].pinned) toast("Bookmark pinned to the top!", {style: { backgroundColor: "#18181b", borderColor: "#3f3f46" }})
-    else toast("Bookmark unpinned!", {style: { backgroundColor: "#18181b", borderColor: "#3f3f46" }})
+    if (response.data[0].pinned) toast("Bookmark pinned to the top!", defaultToastStyle)
+    else toast("Bookmark unpinned!", defaultToastStyle)
     getBookmarks(userId)
   }
 
   const copyUrl = (url: string) => {
-    copy(url)
-    toast("URL copied to clipboard!", {style: { backgroundColor: "#18181b", borderColor: "#3f3f46" }})
+    copyToClipboard(url)
+    if (error) return toast.error(error.message)
+    toast("URL copied to clipboard!", defaultToastStyle)
   }
 
   const refreshMetadata = async (url: string) => {
     const newMetadata = await getMetadata(url)
     if (!newMetadata || !userId) return toast.error("Failed to retrieve new metadata.")
     const { title, domain, description, images } = newMetadata
-    if (bookmark.title === title && bookmark.description === description && bookmark.image === images[0]) return toast("No new data found.", {style: { backgroundColor: "#18181b", borderColor: "#3f3f46" }})
+    if (bookmark.title === title && bookmark.description === description && bookmark.image === images[0]) return toast("No new data found.", defaultToastStyle)
     const response = await updateBookmark(bookmark.id, { ...bookmark, title: title || domain, description, image: newMetadata.images[0] })
     if (!response.success) return toast.error(response.data)
     toast.success("Bookmark refreshed successfully!")
@@ -63,7 +66,7 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
               <OpenInBrowser width={16} />Open in new tab
             </MenuItem>
             <MenuItem onClick={() => copyUrl(bookmark.url)}>
-              <Copy width={16} />Copy URL
+              { copied ? <Check width={16} /> : <Copy width={16} /> } Copy URL
             </MenuItem>
             <MenuItem onClick={pinBookmark}>
               <Pin width={16} />{ bookmark.pinned ? "Unpin" : "Pin to top" }

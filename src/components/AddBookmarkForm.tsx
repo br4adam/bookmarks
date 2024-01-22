@@ -14,10 +14,11 @@ const AddBookmarkForm = () => {
 
   const handleCreate = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const toastId = toast.loading("Loading...")
     if (!userId) return
     const response = await createBookmark(url, userId)
-    if (!response.success) return toast.error(response.data)
-    toast.success("Bookmark added successfully!")
+    if (!response.success) return toast.error(response.data, { id: toastId })
+    toast.success("Bookmark added successfully!", { id: toastId })
     getBookmarks(userId)
     setUrl("")
     setSelectedTag("")
