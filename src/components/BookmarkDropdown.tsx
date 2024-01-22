@@ -1,6 +1,6 @@
 import { Fragment, useState, ReactNode } from "react"
 import { Menu, Transition } from "@headlessui/react"
-import { OpenInBrowser, BinMinusIn, Copy, Pin, MediaImage, RefreshDouble, Check } from "iconoir-react"
+import { OpenInBrowser, BinMinusIn, Copy, Pin, PinSlash, MediaImage, RefreshDouble, Check } from "iconoir-react"
 import { toast } from "sonner"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
@@ -69,7 +69,7 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
               { copied ? <Check width={16} /> : <Copy width={16} /> } Copy URL
             </MenuItem>
             <MenuItem onClick={pinBookmark}>
-              <Pin width={16} />{ bookmark.pinned ? "Unpin" : "Pin to top" }
+            { bookmark.pinned ? <PinSlash width={16} /> : <Pin width={16} /> } { bookmark.pinned ? "Unpin" : "Pin to top" }
             </MenuItem>
             <MenuItem onClick={() => refreshMetadata(bookmark.url)}>
               <RefreshDouble width={16} />Refresh metadata

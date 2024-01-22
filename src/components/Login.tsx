@@ -33,7 +33,7 @@ const Login = ({ children, className }: Props) => {
   return (
     <>
       <Button onClick={openModal} loading={loading} className={className}>
-        { children }
+        {children}
       </Button>
       <Transition appear show={isModalOpen} as={Fragment}>
       <Dialog as="div" className="relative z-30 antialiased" onClose={closeModal}>

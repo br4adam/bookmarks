@@ -52,8 +52,7 @@ export const useBookmarkStore = create<BookmarkState>(set => ({
       if (error) throw new Error(`Error saving bookmark: ${error.message}`)
       return { data, success: true }
     } catch (error) {
-      const errorMessage = error instanceof Error ? error.message : "Something went wrong."
-      return { data: errorMessage, success: false }
+      return { data: "Failed to retrieve data for the entered URL.", success: false }
     } finally {
       set({ loading: false })
     }
