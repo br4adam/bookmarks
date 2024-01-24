@@ -9,7 +9,7 @@ const Footer = () => {
   const closePrivacyPolicy = () => setIsPrivacyPolicyOpen(false)
 
   return (
-    <footer className="flex items-center justify-start h-10 mb-8 w-11/12 max-w-6xl gap-4 mx-auto md:w-10/12 md:justify-end animate-fade-up animate-delay-[1700ms] animate-duration-500">
+    <footer className="flex items-center justify-start text-sm h-10 mb-8 w-11/12 max-w-6xl gap-4 mx-auto md:w-10/12 md:justify-end animate-fade-up animate-delay-[1700ms] animate-duration-500">
       <span>kmarks.boo</span>
       <span className="text-zinc-700">|</span>
       <button className="cursor-pointer" onClick={() => setIsPrivacyPolicyOpen(prev => !prev)}>Privacy</button>
@@ -42,7 +42,7 @@ const PrivacyPolicy = ({ isPrivacyPolicyOpen, closePrivacyPolicy }: PrivacyPolic
                 <Dialog.Panel className="w-full max-w-3xl p-6 overflow-hidden flex flex-col gap-4 justify-center items-center transition-all transform rounded-lg border border-zinc-800 bg-zinc-950/50 backdrop-blur-2xl backdrop-saturate-150 text-zinc-200 selection:bg-zinc-500/20">
                   <button className="absolute top-2 right-2 text-zinc-600 hover:text-zinc-200 outline-none duration-200 animate-fade" onClick={closePrivacyPolicy}><Xmark /></button>
                   <Dialog.Title as="h3" className="text-lg font-semibold w-full truncate">Privacy Policy</Dialog.Title>
-                  <div className="max-h-[65vh] overflow-auto text-left flex flex-col gap-4">
+                  <div className="max-h-[65dvh] overflow-auto text-left flex flex-col gap-4">
                     <ReactMarkdown children={privacyPolicyText} />
                   </div>
                 </Dialog.Panel>

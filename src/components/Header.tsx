@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-30 w-full py-2 border-b backdrop-blur-xl backdrop-saturate-150 bg-zinc-900/40 border-zinc-700">
       <div className="flex items-center w-11/12 max-w-6xl gap-2 mx-auto md:w-10/12">
-        <img className={`w-6 h-6 rounded-full ${session && "cursor-pointer"}`} src={session ? session.user.user_metadata.avatar_url || defaultProfilePicture : logo} alt="profile picture" onClick={() => setIsProfileCardOpen(prev => !prev)} /> 
+        <img className={`size-6 rounded-full ${session && "cursor-pointer"}`} src={session ? session.user.user_metadata.avatar_url || defaultProfilePicture : logo} alt="profile picture" onClick={() => setIsProfileCardOpen(prev => !prev)} /> 
         <p className="font-bold">Bookmarks</p>
         <nav className="ml-auto flex gap-2">
           { session && <CommandMenu /> }

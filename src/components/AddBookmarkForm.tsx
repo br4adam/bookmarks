@@ -33,7 +33,7 @@ const AddBookmarkForm = () => {
   return (
     <form className="flex justify-center w-full gap-2 mt-8" onSubmit={handleCreate}>
       <div className="relative w-full max-w-sm">
-        <input ref={inputRef} className="w-full py-2 pl-4 pr-10 bg-transparent border rounded-md backdrop-blur-lg border-zinc-700 focus:border-zinc-500 focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://" />
+        <input ref={inputRef} className="w-full text-sm py-2 pl-3 pr-9 bg-transparent border rounded-md backdrop-blur-lg border-zinc-700 focus:border-zinc-500 focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://" />
         <PasteClipboard className="absolute duration-200 cursor-pointer right-3 top-2 text-zinc-700 hover:text-zinc-400" width={18} onClick={handlePaste} />
       </div>
       <Button type="submit" disabled={loading}>Add</Button>

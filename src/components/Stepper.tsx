@@ -30,12 +30,12 @@ const ListItem = ({ icon, title, description, withDivider = true }: ListItemProp
   return (
     <li className="relative flex sm:flex-col sm:items-center sm:text-center group">
       { withDivider && <span className="absolute left-5 top-12 h-[calc(100%-24px)] w-px sm:h-px sm:top-5 sm:left-[calc(50%+30px)] sm:w-[calc(100%-30px)] bg-zinc-700" aria-hidden="true"></span> }
-      <div className="flex items-center justify-center w-10 h-10 duration-200 border rounded-lg aspect-square bg-zinc-900 border-zinc-700 text-zinc-200 group-hover:scale-110 will-change-transform">
+      <div className="flex items-center justify-center size-10 duration-200 border rounded-lg aspect-square bg-zinc-900 border-zinc-700 text-zinc-200 group-hover:scale-110 will-change-transform">
         {icon}
       </div>
       <div className="flex flex-col gap-2 mt-1 ml-6 sm:ml-0 sm:mt-6">
         <p className="text-lg font-medium text-zinc-200">{title}</p>
-        <p className="text-zinc-500 sm:max-w-xs">{description}</p>
+        <p className="text-zinc-500 text-pretty sm:max-w-xs">{description}</p>
       </div>
     </li>
   )

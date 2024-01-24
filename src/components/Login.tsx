@@ -48,7 +48,7 @@ const Login = ({ children, className }: Props) => {
                 <p className="mt-2 text-sm text-zinc-500">Sign in via Magic Link with your email or continue with your GitHub account.</p>
                 <div className="flex flex-col items-center gap-2 mt-4 text-zinc-900">
                   <form className="flex flex-col items-center w-full gap-2" onSubmit={handleLogin}>
-                    <input className="w-full px-4 py-2 mt-1 bg-transparent border rounded-md border-zinc-700 focus:border-zinc-500 focus:outline-none" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" name="email" autoComplete="on" autoFocus />
+                    <input className="w-full text-sm px-3 py-2 mt-1 bg-transparent border rounded-md border-zinc-700 focus:border-zinc-500 focus:outline-none" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" name="email" autoComplete="on" autoFocus />
                     <Button type="submit" className="justify-center w-full bg-zinc-900 text-zinc-200 hover:bg-zinc-800"><Sparks width={18} strokeWidth={1.75} />Send Magic Link</Button>
                   </form>
                   <div className="flex items-center w-full tex">
