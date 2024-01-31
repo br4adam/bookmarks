@@ -11,10 +11,10 @@ const Bookmarks = () => {
   const userId = session?.user.id
 
   const loadBookmarks = async () => {
-    const toastId = toast.loading("Your bookmarks are on the way!")
+    const toastId = toast.loading("Your bookmarks are on the way!", { closeButton: false })
     if (!userId) return
     const response = await getBookmarks(userId)
-    if (!response.success) return toast.error(response.data, { id: toastId })
+    if (!response.success) return toast.error(response.data, { id: toastId, closeButton: true })
     toast.dismiss(toastId)
   }
 

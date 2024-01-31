@@ -21,7 +21,7 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
   const [ isDeleteModalOpen, setIsDeleteModalOpen ] = useState<boolean>(false)
   const [ isThumbnailModalOpen, setIsThumbnailModalOpen ] = useState<boolean>(false)
 
-  const defaultToastStyle = {style: { backgroundColor: "#18181b", borderColor: "#3f3f46" }}
+  const defaultToastStyle = { classNames: { toast: "!bg-zinc-900 !text-zinc-200", closeButton: "!bg-zinc-200 !text-zinc-900" }}
 
   const openInNewTab = (url: string) => window.open(url, "_blank")
 
@@ -41,13 +41,14 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
   }
 
   const refreshMetadata = async (url: string) => {
+    const toastId = toast.loading("Searching for new metadata...", { closeButton: false, ...defaultToastStyle })
     const newMetadata = await getMetadata(url)
-    if (!newMetadata || !userId) return toast.error("Failed to retrieve new metadata.")
+    if (!newMetadata || !userId) return toast.error("Failed to retrieve new metadata.", { id: toastId, closeButton: true })
     const { title, domain, description, images } = newMetadata
-    if (bookmark.title === title && bookmark.description === description && bookmark.image === images[0]) return toast("No new data found.", defaultToastStyle)
+    if (bookmark.title === title && bookmark.description === description && bookmark.image === images[0]) return toast.info("No new metadata found.", { id: toastId, closeButton: true, ...defaultToastStyle })
     const response = await updateBookmark(bookmark.id, { ...bookmark, title: title || domain, description, image: newMetadata.images[0] })
     if (!response.success) return toast.error(response.data)
-    toast.success("Bookmark refreshed successfully!")
+    toast.success("Bookmark refreshed successfully!", { id: toastId, closeButton: true })
     getBookmarks(userId)
   }
 

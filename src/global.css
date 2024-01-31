@@ -17,6 +17,17 @@
   }
 }
 
+[data-sonner-toast] [data-close-button] {
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+[data-sonner-toast]:hover [data-close-button],
+[data-sonner-toast]:focus [data-close-button],
+[data-sonner-toast]:focus-within [data-close-button] {
+  opacity: 1;
+}
+
 [cmdk-root] {
   position: fixed;
   top: 100px;
