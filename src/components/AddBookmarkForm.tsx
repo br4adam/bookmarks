@@ -4,6 +4,7 @@ import { useAuthStore } from "../stores/AuthStore"
 import Button from "./Button"
 import { PasteClipboard } from "iconoir-react"
 import { toast } from "sonner"
+import { defaultToastStyle, successToastStyle, errorToastStyle } from "../utils/toastStyles"
 
 const AddBookmarkForm = () => {
   const { fetch: getBookmarks, add: createBookmark, loading, setSelectedTag } = useBookmarkStore(state => ({ fetch: state.fetch, add: state.add, loading: state.loading, setSelectedTag: state.setSelectedTag }))
@@ -14,11 +15,11 @@ const AddBookmarkForm = () => {
 
   const handleCreate = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const toastId = toast.loading("Loading...", { closeButton: false })
+    const toastId = toast.loading("Loading...", { closeButton: false, ...defaultToastStyle })
     if (!userId) return
     const response = await createBookmark(url, userId)
-    if (!response.success) return toast.error(response.data, { id: toastId, closeButton: true })
-    toast.success("Bookmark added successfully!", { id: toastId, closeButton: true })
+    if (!response.success) return toast.error(response.data, { id: toastId, closeButton: true, ...errorToastStyle })
+    toast.success("Bookmark added successfully!", { id: toastId, closeButton: true, ...successToastStyle })
     getBookmarks(userId)
     setUrl("")
     setSelectedTag("")

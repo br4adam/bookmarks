@@ -2,6 +2,7 @@ import { Fragment, useState, ReactNode } from "react"
 import { Menu, Transition } from "@headlessui/react"
 import { OpenInBrowser, BinMinusIn, Copy, Pin, PinSlash, MediaImage, RefreshDouble, Check } from "iconoir-react"
 import { toast } from "sonner"
+import { defaultToastStyle, successToastStyle, errorToastStyle } from "../utils/toastStyles"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
 import getMetadata from "../utils/getMetadata"
@@ -21,14 +22,12 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
   const [ isDeleteModalOpen, setIsDeleteModalOpen ] = useState<boolean>(false)
   const [ isThumbnailModalOpen, setIsThumbnailModalOpen ] = useState<boolean>(false)
 
-  const defaultToastStyle = { classNames: { toast: "!bg-zinc-900 !text-zinc-200", closeButton: "!bg-zinc-200 !text-zinc-900" }}
-
   const openInNewTab = (url: string) => window.open(url, "_blank")
 
   const pinBookmark = async () => {
     if (!userId) return
     const response = await updateBookmark(bookmark.id, { ...bookmark, pinned: !bookmark.pinned })
-    if (!response.success) return toast.error(response.data)
+    if (!response.success) return toast.error(response.data, errorToastStyle)
     if (response.data[0].pinned) toast("Bookmark pinned to the top!", defaultToastStyle)
     else toast("Bookmark unpinned!", defaultToastStyle)
     getBookmarks(userId)
@@ -36,19 +35,19 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
 
   const copyUrl = (url: string) => {
     copyToClipboard(url)
-    if (error) return toast.error(error.message)
+    if (error) return toast.error(error.message, errorToastStyle)
     toast("URL copied to clipboard!", defaultToastStyle)
   }
 
   const refreshMetadata = async (url: string) => {
     const toastId = toast.loading("Searching for new metadata...", { closeButton: false, ...defaultToastStyle })
     const newMetadata = await getMetadata(url)
-    if (!newMetadata || !userId) return toast.error("Failed to retrieve new metadata.", { id: toastId, closeButton: true })
+    if (!newMetadata || !userId) return toast.error("Failed to retrieve new metadata.", { id: toastId, closeButton: true, ...errorToastStyle })
     const { title, domain, description, images } = newMetadata
     if (bookmark.title === title && bookmark.description === description && bookmark.image === images[0]) return toast.info("No new metadata found.", { id: toastId, closeButton: true, ...defaultToastStyle })
     const response = await updateBookmark(bookmark.id, { ...bookmark, title: title || domain, description, image: newMetadata.images[0] })
-    if (!response.success) return toast.error(response.data)
-    toast.success("Bookmark refreshed successfully!", { id: toastId, closeButton: true })
+    if (!response.success) return toast.error(response.data, errorToastStyle)
+    toast.success("Bookmark refreshed successfully!", { id: toastId, closeButton: true, ...successToastStyle })
     getBookmarks(userId)
   }
 

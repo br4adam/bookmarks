@@ -4,6 +4,7 @@ import { useAuthStore } from "../stores/AuthStore"
 import Button from "./Button"
 import { Github, Sparks } from "iconoir-react"
 import { toast } from "sonner"
+import { errorToastStyle, successToastStyle } from "../utils/toastStyles"
 
 type Props = {
   className?: string
@@ -21,9 +22,9 @@ const Login = ({ children, className }: Props) => {
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!emailRegex.test(email)) return toast.error("Please add a valid email address!")
+    if (!emailRegex.test(email)) return toast.error("Please add a valid email address!", errorToastStyle)
     loginWithOtp(email)
-    toast.success(`Please check your email! We've sent the login link to ${email}.`)
+    toast.success(`Please check your email! We've sent the login link to ${email}.`, successToastStyle)
     setEmail("")
     closeModal()
   }

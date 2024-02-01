@@ -4,6 +4,7 @@ import { useAuthStore } from "../stores/AuthStore"
 import { Check, Xmark } from "iconoir-react"
 import useClickOutside from "../hooks/useClickOutside"
 import { toast } from "sonner"
+import { errorToastStyle } from "../utils/toastStyles"
 
 type Props = {
   bookmark: Bookmark
@@ -20,26 +21,21 @@ const BookmarkTagsNew = ({ bookmark }: Props) => {
   const tagListRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const resetInput = () => {
-    setEditable(false)
-    setInputValue("")
-  }
-
-  useClickOutside(tagListRef, () => resetInput())
-
   const updateTags = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!userId) return
-    const tagList: string[] = newTags.filter(tag => tag)
+    if (inputValue.trim().length > 0) setNewTags([...new Set([ ...newTags, inputValue.replace(/[\s,]/g, "").toLowerCase()])])
+    const tagList = newTags.filter(tag => tag)
+    setEditable(false)
+    setInputValue("")
     const response = await updateBookmark(bookmark.id, { ...bookmark, tags: tagList })
-    if (!response.success) return toast.error(response.data)
-    resetInput()
+    if (!response.success) return toast.error(response.data, errorToastStyle)
   }
 
   const onKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.code === "Comma" || e.code === "Space") {
       if (inputValue.trim().length === 0) return
-      setNewTags([...new Set([ ...newTags, inputValue.replace(/[\s,]/g, "")])])
+      setNewTags([...new Set([ ...newTags, inputValue.replace(/[\s,]/g, "").toLowerCase()].filter(tag => tag))])
       setInputValue("")
     }
   }
@@ -49,6 +45,12 @@ const BookmarkTagsNew = ({ bookmark }: Props) => {
     setNewTags(remainingTags)
     inputRef.current?.focus()
   }
+
+  useClickOutside(tagListRef, () => { 
+    setEditable(false)
+    setInputValue("")
+    setNewTags(bookmark.tags)
+  })
 
   return (
     <div onClick={() => setEditable(true)} ref={tagListRef} className="flex flex-wrap gap-2 mb-2 font-mono text-xs">

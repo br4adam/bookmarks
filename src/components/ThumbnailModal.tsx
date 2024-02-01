@@ -6,6 +6,7 @@ import { useAuthStore } from "../stores/AuthStore"
 import { toast } from "sonner"
 import isValidUrl from "../utils/isValidUrl"
 import Button from "./Button"
+import { successToastStyle, errorToastStyle } from "../utils/toastStyles"
 
 type Props = {
   isThumbnailModalOpen: boolean
@@ -22,10 +23,10 @@ const ThumbnailModal = ({ isThumbnailModalOpen, closeThumbnailModal, bookmark }:
   const changeThumbnail = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!userId) return
-    if (!isValidUrl(imageUrl)) return toast.error("Please insert a valid image URL!")
+    if (!isValidUrl(imageUrl)) return toast.error("Please insert a valid image URL!", errorToastStyle)
     const response = await updateBookmark(bookmark.id, { ...bookmark, image: imageUrl })
-    if (!response.success) return toast.error(response.data)
-    toast.success("Thumbnail changed successfully!")
+    if (!response.success) return toast.error(response.data, errorToastStyle)
+    toast.success("Thumbnail changed successfully!", successToastStyle)
     getBookmarks(userId)
     setImageUrl("")
   }
