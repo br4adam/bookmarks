@@ -52,7 +52,7 @@ const BookmarkTagsNew = ({ bookmark }: Props) => {
   }
 
   const deleteTag = (index: number) => {
-    setNewTags(prev => prev.filter((tag, i) => i !== index))
+    setNewTags(prev => prev.filter((_, i) => i !== index))
     inputRef.current?.focus()
   }
 
