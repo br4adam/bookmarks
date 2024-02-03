@@ -7,14 +7,20 @@ import { toast } from "sonner"
 import { defaultToastStyle, successToastStyle, errorToastStyle } from "../utils/toastStyles"
 
 const AddBookmarkForm = () => {
-  const { fetch: getBookmarks, add: createBookmark, loading, setSelectedTag } = useBookmarkStore(state => ({ fetch: state.fetch, add: state.add, loading: state.loading, setSelectedTag: state.setSelectedTag }))
+  const { fetch: getBookmarks, add: createBookmark, bookmarks, loading, setSelectedTag } = useBookmarkStore(state => ({ fetch: state.fetch, add: state.add, bookmarks: state.bookmarks, loading: state.loading, setSelectedTag: state.setSelectedTag }))
   const session = useAuthStore(state => state.session)
   const userId = session?.user.id
   const [ url, setUrl ] = useState<string>("")
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleCreate = async (e: FormEvent<HTMLFormElement>) => {
+  const checkBookmarkExists = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    const isBookmarkExist = bookmarks.some(bookmark => bookmark.url === url)
+    if (isBookmarkExist) return toast.message("This website is already in your collection.", { action: {label: "Save", onClick: () => handleCreate()}, description: "Are you sure you want to save it again?", ...defaultToastStyle })
+    handleCreate()
+  }
+
+  const handleCreate = async () => {
     const toastId = toast.loading("Loading...", { closeButton: false, ...defaultToastStyle })
     if (!userId) return
     const response = await createBookmark(url, userId)
@@ -32,7 +38,7 @@ const AddBookmarkForm = () => {
   }
 
   return (
-    <form className="flex justify-center w-full gap-2 mt-8" onSubmit={handleCreate}>
+    <form className="flex justify-center w-full gap-2 mt-8" onSubmit={checkBookmarkExists}>
       <div className="relative w-full max-w-sm">
         <input ref={inputRef} className="w-full text-sm py-2 pl-3 pr-9 bg-transparent border rounded-md backdrop-blur-lg border-zinc-700 focus:border-zinc-500 focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://" />
         <PasteClipboard className="absolute duration-200 cursor-pointer right-3 top-2 text-zinc-700 hover:text-zinc-400" width={18} onClick={handlePaste} />

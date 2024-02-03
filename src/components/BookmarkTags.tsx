@@ -32,11 +32,11 @@ const BookmarkTagsNew = ({ bookmark }: Props) => {
   }
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const trimmedInput = inputValue.trim()
+    const trimmedInput = inputValue.trim().toLowerCase()
 
     if ((e.key === "," || e.key === "Enter") && trimmedInput.length && !newTags.includes(trimmedInput)) {
       e.preventDefault()
-      setNewTags(prev => [ ...prev, trimmedInput.toLowerCase() ])
+      setNewTags(prev => [ ...prev, trimmedInput ])
       setInputValue("")
     }
 
@@ -61,6 +61,7 @@ const BookmarkTagsNew = ({ bookmark }: Props) => {
   useClickOutside(tagListRef, () => { 
     setEditable(false)
     setInputValue("")
+    setNewTags(bookmark.tags)
   })
 
   return (
