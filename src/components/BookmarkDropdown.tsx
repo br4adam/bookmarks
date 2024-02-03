@@ -46,7 +46,7 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
     const { title, domain, description, images } = newMetadata
     if (bookmark.title === title && bookmark.description === description && bookmark.image === images[0]) return toast.info("No new metadata found.", { id: toastId, closeButton: true, ...defaultToastStyle })
     const response = await updateBookmark(bookmark.id, { ...bookmark, title: title || domain, description, image: newMetadata.images[0] })
-    if (!response.success) return toast.error(response.data, errorToastStyle)
+    if (!response.success) return toast.error(response.data, { id: toastId, closeButton: true, ...errorToastStyle })
     toast.success("Bookmark refreshed successfully!", { id: toastId, closeButton: true, ...successToastStyle })
     getBookmarks(userId)
   }
