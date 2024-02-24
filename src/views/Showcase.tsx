@@ -1,8 +1,8 @@
-import CardSpotlight from "./CardSpotlight"
-import Login from "./Login"
-import Headline from "./Headline"
-import Features from "./Features"
-import Stepper from "./Stepper"
+import CardSpotlight from "../components/CardSpotlight"
+import Login from "../components/Login"
+import Headline from "../components/Headline"
+import Features from "../components/Features"
+import Stepper from "../components/Stepper"
 import browser from "../assets/browser.webp"
 import { ArrowRight } from "iconoir-react"
 

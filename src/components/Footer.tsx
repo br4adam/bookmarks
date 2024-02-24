@@ -9,10 +9,12 @@ const Footer = () => {
   const closePrivacyPolicy = () => setIsPrivacyPolicyOpen(false)
 
   return (
-    <footer className="flex items-center justify-start text-sm h-10 mb-8 w-11/12 max-w-6xl gap-4 mx-auto md:w-10/12 md:justify-end animate-fade-up animate-delay-[1700ms] animate-duration-500">
-      <span>kmarks.boo</span>
-      <span className="text-zinc-700">|</span>
-      <button className="cursor-pointer" onClick={() => setIsPrivacyPolicyOpen(prev => !prev)}>Privacy</button>
+    <footer className="flex flex-col sm:items-center justify-start text-sm sm:h-10 mb-8 mt-auto w-11/12 max-w-6xl gap-4 mx-auto sm:flex-row md:w-10/12 md:justify-end [&>*]:w-fit animate-fade-up animate-delay-[1700ms] animate-duration-500">
+      <a href="https://kmarks.boo" className="font-bold">kmarks.boo</a>
+      <span className="text-zinc-700 hidden sm:block">|</span>
+      <button className="cursor-pointer" onClick={() => setIsPrivacyPolicyOpen(prev => !prev)}>Privacy Policy</button>
+      <span className="text-zinc-700 hidden sm:block">|</span>
+      <a href="https://github.com/br4adam/bookmarks/issues/new" target="_blank">Report a bug</a>
       { isPrivacyPolicyOpen && <PrivacyPolicy isPrivacyPolicyOpen={isPrivacyPolicyOpen} closePrivacyPolicy={closePrivacyPolicy} /> }
     </footer>
   )

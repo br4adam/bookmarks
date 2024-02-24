@@ -6,7 +6,7 @@ import EmptyState from "./EmptyState"
 import { toast } from "sonner"
 import { defaultToastStyle, errorToastStyle } from "../utils/toastStyles"
 
-const Bookmarks = () => {
+const BookmarkList = () => {
   const { bookmarks, fetch: getBookmarks, loading, selectedTag } = useBookmarkStore(state => ({ bookmarks: state.bookmarks, fetch: state.fetch, loading: state.loading, selectedTag: state.selectedTag }))
   const session = useAuthStore(state => state.session)
   const userId = session?.user.id
@@ -34,4 +34,4 @@ const Bookmarks = () => {
   )
 }
 
-export default Bookmarks
+export default BookmarkList
