@@ -33,7 +33,7 @@ const CommandMenu = () => {
           <Command.Empty>No results found.</Command.Empty>
           { bookmarks.map(bookmark => (
             <Command.Item key={bookmark.id} value={`${bookmark.title} ${bookmark.url} ${bookmark.tags.join(" ")}`} onSelect={() => window.open(bookmark.url, "_blank")}>
-              <img src={`https://icon.horse/icon/${bookmark.domain}`} alt={`${bookmark.title} icon`} className="w-4 h-4" onError={addImageFallback} />
+              <img src={`https://icon.horse/icon/${bookmark.domain}`} alt={`${bookmark.title} icon`} className="size-4" onError={addImageFallback} />
               <span className="truncate">{bookmark.title}</span>
               <span className="text-xs truncate text-zinc-500">{bookmark.url}</span>
             </Command.Item>
