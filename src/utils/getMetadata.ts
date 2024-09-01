@@ -1,8 +1,16 @@
-const jsonLinkKey = import.meta.env.VITE_JSONLINK_KEY
+const supabaseEfUrl = import.meta.env.VITE_SUPABASE_EF_URL
+const supabaseEfAnonKey = import.meta.env.VITE_SUPABASE_EF_ANON_KEY
 
 const getMetadata = async (url: string): Promise<Metadata | null> => {
   try {
-    const response = await fetch(`https://jsonlink.io/api/extract?url=${url}&api_key=${jsonLinkKey}`)
+    const response = await fetch(supabaseEfUrl, {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${supabaseEfAnonKey}`,
+        "Content-Type": "text/plain",
+      },
+      body: url,
+    })
     if (!response.ok) return null
     const data = await response.json()
     return data
