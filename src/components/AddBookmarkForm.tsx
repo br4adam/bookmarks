@@ -17,7 +17,7 @@ const AddBookmarkForm = () => {
     e.preventDefault()
     if (inputRef.current) inputRef.current.blur()
     const isBookmarkExist = bookmarks.some(bookmark => bookmark.url === url)
-    if (isBookmarkExist) return toast.message("This website is already in your collection.", { action: {label: "Save", onClick: () => handleCreate()}, description: "Are you sure you want to save it again?", ...defaultToastStyle })
+    if (isBookmarkExist) return toast.message("This website is already in your collection.", { action: {label: "Save", onClick: () => handleCreate()}, description: "Are you sure you want to save it again?", duration: 10000, ...defaultToastStyle })
     handleCreate()
   }
 

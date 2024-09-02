@@ -31,7 +31,7 @@ type TagProps = {
 
 const Tag = ({ onClick, count, isSelected, children }: TagProps) => {
   return (
-    <span onClick={onClick} className={`cursor-pointer h-fit px-3 py-[2px] text-sm rounded-full border backdrop-blur-lg border-zinc-800 snap-start ${isSelected ? "bg-zinc-200 text-zinc-900" : "text-zinc-200"} hover:border-zinc-700 duration-200`}>
+    <span onClick={onClick} className={`cursor-pointer h-fit px-3 py-[2px] text-sm text-nowrap rounded-full border backdrop-blur-lg border-zinc-800 snap-start ${isSelected ? "bg-zinc-200 text-zinc-900" : "text-zinc-200"} hover:border-zinc-700 duration-200`}>
       {children}
       <span className={`ml-1 text-xs ${isSelected ? "text-zinc-500" : "text-zinc-500"}`}>{count}</span>
     </span>
