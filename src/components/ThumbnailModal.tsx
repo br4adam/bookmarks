@@ -29,6 +29,7 @@ const ThumbnailModal = ({ isThumbnailModalOpen, closeThumbnailModal, bookmark }:
     toast.success("Thumbnail changed successfully!", successToastStyle)
     getBookmarks(userId)
     setImageUrl("")
+    closeThumbnailModal()
   }
 
   return (

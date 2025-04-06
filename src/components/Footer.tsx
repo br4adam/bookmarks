@@ -1,18 +1,29 @@
 import { useState, useEffect, Fragment } from "react"
 import { Dialog, Transition } from "@headlessui/react"
+import { useModalStore } from "../stores/ModalStore"
 import { Xmark } from "iconoir-react"
 import ReactMarkdown from "react-markdown"
 import PrivacyFile from "../assets/privacy.md"
 
 const Footer = () => {
+  const setModalOpen = useModalStore(state => state.setModalOpen)
   const [ isPrivacyPolicyOpen, setIsPrivacyPolicyOpen ] = useState<boolean>(false)
-  const closePrivacyPolicy = () => setIsPrivacyPolicyOpen(false)
+
+  const openPrivacyPolicy = () => {
+    setIsPrivacyPolicyOpen(true)
+    setModalOpen(true)
+  }
+
+  const closePrivacyPolicy = () => {
+    setIsPrivacyPolicyOpen(false)
+    setModalOpen(false)
+  }
 
   return (
-    <footer className="flex flex-col sm:items-center justify-start text-sm sm:h-10 mb-8 mt-auto w-11/12 max-w-6xl gap-4 mx-auto sm:flex-row md:w-10/12 md:justify-end [&>*]:w-fit animate-fade-up animate-delay-[1700ms] animate-duration-500">
+    <footer className="flex flex-col sm:items-center justify-start text-sm mb-20 mt-auto w-11/12 max-w-6xl gap-4 mx-auto sm:flex-row md:w-10/12 md:justify-end [&>*]:w-fit animate-fade-up animate-delay-[1700ms] animate-duration-500">
       <a href="https://kmarks.boo" className="font-bold">kmarks.boo</a>
       <span className="text-zinc-700 hidden sm:block">|</span>
-      <button className="cursor-pointer" onClick={() => setIsPrivacyPolicyOpen(prev => !prev)}>Privacy Policy</button>
+      <button className="cursor-pointer" onClick={() => openPrivacyPolicy()}>Privacy Policy</button>
       <span className="text-zinc-700 hidden sm:block">|</span>
       <a href="https://github.com/br4adam/bookmarks/issues/new" target="_blank">Report a bug</a>
       { isPrivacyPolicyOpen && <PrivacyPolicy isPrivacyPolicyOpen={isPrivacyPolicyOpen} closePrivacyPolicy={closePrivacyPolicy} /> }

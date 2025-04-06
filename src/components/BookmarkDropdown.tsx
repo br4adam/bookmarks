@@ -5,6 +5,7 @@ import { toast } from "sonner"
 import { defaultToastStyle, successToastStyle, errorToastStyle } from "../utils/toastStyles"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
+import { useModalStore } from "../stores/ModalStore"
 import getMetadata from "../utils/getMetadata"
 import useClipboard from "../hooks/useClipboard"
 import DeleteModal from "./DeleteModal"
@@ -16,6 +17,7 @@ type Props = {
 
 const BookmarkDropdown = ({ bookmark }: Props) => {
   const { fetch: getBookmarks, update: updateBookmark } = useBookmarkStore(state => ({ fetch: state.fetch, update: state.update }))
+  const setModalOpen = useModalStore(state => state.setModalOpen)
   const { copyToClipboard, error, copied } = useClipboard()
   const session = useAuthStore(state => state.session)
   const userId = session?.user.id
@@ -51,8 +53,25 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
     getBookmarks(userId)
   }
 
-  const closeDeleteModal = () => setIsDeleteModalOpen(false)
-  const closeThumbnailModal = () => setIsThumbnailModalOpen(false)
+  const openThumbnailModal = () => {
+    setIsThumbnailModalOpen(true)
+    setModalOpen(true)
+  }
+
+  const closeThumbnailModal = () => {
+    setIsThumbnailModalOpen(false)
+    setModalOpen(false)
+  }
+
+  const openDeleteModal = () => {
+    setIsDeleteModalOpen(true)
+    setModalOpen(true)
+  }
+
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false)
+    setModalOpen(false)
+  }
 
   return (
     <>
@@ -74,10 +93,10 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
             <MenuItem onClick={() => refreshMetadata(bookmark.url)}>
               <RefreshDouble width={16} />Refresh metadata
             </MenuItem>
-            <MenuItem onClick={() => setIsThumbnailModalOpen(true)}>
+            <MenuItem onClick={() => openThumbnailModal()}>
               <MediaImage width={16} />Change thumbnail
             </MenuItem>
-            <MenuItem onClick={() => setIsDeleteModalOpen(true)}>
+            <MenuItem onClick={() => openDeleteModal()}>
               <BinMinusIn width={16} className="text-red-600" /><span className="text-red-600">Delete</span>
             </MenuItem>
           </Menu.Items>
