@@ -10,17 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@formkit/auto-animate": "^1.0.0-beta.6",
     "@headlessui/react": "^1.7.14",
     "@supabase/supabase-js": "^2.21.0",
     "cmdk": "^0.2.0",
     "dayjs": "^1.11.9",
-    "iconoir-react": "^7.2.0",
+    "iconoir-react": "^7.10.1",
     "react": "^18.2.0",
     "react-countup": "^6.4.2",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
-    "sonner": "^1.5.0",
+    "sonner": "^2.0.3",
     "tailwindcss-animated": "^1.0.1",
     "zustand": "^4.3.8"
   },

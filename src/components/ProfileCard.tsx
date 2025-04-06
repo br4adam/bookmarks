@@ -33,7 +33,7 @@ const ProfileCard = ({ isProfileCardOpen, closeProfileCard, session }: Props) =>
           <div className="fixed inset-0">
             <div className="flex items-center justify-center min-h-full p-4 text-center">
               <Transition.Child as={Fragment} enter="ease-out duration-200" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
-                <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden flex flex-col gap-4 justify-center items-center transition-all transform rounded-lg border border-zinc-800 bg-zinc-950/50 backdrop-blur-2xl backdrop-saturate-150 text-zinc-200 selection:bg-zinc-500/20 animate-rotate-y animate-duration-700">
+                <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden flex flex-col gap-4 justify-center items-center transition-all transform rounded-lg border border-zinc-800 bg-zinc-950/50 backdrop-blur-2xl backdrop-saturate-150 text-zinc-200 selection:bg-zinc-500/20 animate-duration-300">
                   <div className="absolute size-full bg-[radial-gradient(#71717a,transparent_1px)] [background-size:12px_12px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000000_70%,transparent_100%)] pointer-events-none"></div>
                   <button className="absolute top-2 right-2 text-zinc-600 hover:text-zinc-200 outline-none duration-200 animate-fade" onClick={closeProfileCard}><Xmark /></button>
                   <img src={logo} className="size-24 z-10 my-8 select-none" alt="Bookmarks logo" />
@@ -62,7 +62,7 @@ type StatProps = {
 const Stat = ({ data, description }: StatProps) => {
   return (
     <div className="flex flex-col w-1/3">
-      <CountUp className="text-2xl font-semibold" end={data} duration={5} />
+      <CountUp className="text-2xl font-semibold" end={data} duration={4} />
       <span className="text-sm text-zinc-500">{description}</span>
     </div>
   )

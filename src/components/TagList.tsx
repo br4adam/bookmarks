@@ -1,18 +1,16 @@
 import { ReactNode } from "react"
 import { useBookmarkStore } from "../stores/BookmarkStore"
-import { useAutoAnimate } from "@formkit/auto-animate/react"
 import createTagList from "../utils/createTagList"
 
 const TagList = () => {
   const { bookmarks, selectedTag, setSelectedTag } = useBookmarkStore(state => ({ bookmarks: state.bookmarks, selectedTag: state.selectedTag, setSelectedTag: state.setSelectedTag }))
   const tags = createTagList(bookmarks)
-  const [ parent ] = useAutoAnimate({ duration: 200 })
 
   if (!bookmarks.length) return null
 
   return (
-    <div className="w-full overflow-hidden relative animate-fade-up animate-duration-200">
-      <div ref={parent} className="flex overflow-x-scroll min-w-full snap-x no-scrollbar justify-start md:justify-center md:flex-wrap gap-2 h-fit">
+    <div className="w-full overflow-hidden relative mt-8 animate-fade-up animate-duration-200">
+      <div className="flex overflow-x-scroll min-w-full snap-x no-scrollbar justify-start md:justify-center md:flex-wrap gap-2 h-fit">
         <Tag onClick={() => setSelectedTag("")} count={bookmarks.length} isSelected={!selectedTag}>all</Tag>
         { tags && tags.map(tag => (
           <Tag key={tag.name} onClick={() => setSelectedTag(tag.name)} count={tag.count} isSelected={selectedTag === tag.name}>{tag.name}</Tag>

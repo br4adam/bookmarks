@@ -22,6 +22,7 @@ const DeleteModal = ({ isDeleteModalOpen, closeDeleteModal, bookmark }: Props) =
     const response = await deleteBookmark(bookmarkId)
     if (!response.success) return toast.error(response.data, errorToastStyle)
     toast.success("Bookmark deleted successfully!", successToastStyle)
+    closeDeleteModal()
   }
 
   return (

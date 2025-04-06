@@ -3,7 +3,7 @@ import CardSpotlight from "./CardSpotlight"
 
 const EmptyState = () => {
   return (
-    <CardSpotlight className="w-full h-96">
+    <CardSpotlight className="w-full h-96 mt-8">
       <div className="flex flex-col gap-1 items-center justify-center h-full">
         <Bookmark width="56px" height="56px" strokeWidth={0.75} />
         <p className="mt-4 font-medium">No saved bookmarks</p>

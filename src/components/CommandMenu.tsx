@@ -1,11 +1,13 @@
 import { useState, useEffect, SyntheticEvent } from "react"
 import { Command } from "cmdk"
 import { useBookmarkStore } from "../stores/BookmarkStore"
+import { useModalStore } from "../stores/ModalStore"
 import Button from "./Button"
 
 const CommandMenu = () => {
   const [ open, setOpen ] = useState<boolean>(false)
   const { bookmarks, loading } = useBookmarkStore(state => ({ bookmarks: state.bookmarks, loading: state.loading }))
+  const setModalOpen = useModalStore(state => state.setModalOpen)
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -22,10 +24,15 @@ const CommandMenu = () => {
     event.currentTarget.src = "./fallback.png"
   }
 
+  const openCommandMenu = () => {
+    setOpen((open) => !open)
+    setModalOpen(true)
+  }
+
   return (
     <>
-      <Button onClick={() => setOpen((open) => !open)} className="ml-auto" disabled={open}>⌘K</Button>
-      <Command.Dialog open={open} onOpenChange={setOpen} label="Command Menu">
+      <Button onClick={() => openCommandMenu()} className="ml-auto" disabled={open}>⌘K</Button>
+      <Command.Dialog open={open} onOpenChange={(isOpen) => {setOpen(isOpen); setModalOpen(isOpen)}} label="Command Menu">
         <Command.Input placeholder="Search by title, url or tag" />
         <Command.List>
           { loading && <Command.Loading>Loading...</Command.Loading> }
