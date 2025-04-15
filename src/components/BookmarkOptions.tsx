@@ -15,7 +15,7 @@ type Props = {
   bookmark: Bookmark
 }
 
-const BookmarkDropdown = ({ bookmark }: Props) => {
+const BookmarkOptions = ({ bookmark }: Props) => {
   const { fetch: getBookmarks, update: updateBookmark } = useBookmarkStore(state => ({ fetch: state.fetch, update: state.update }))
   const setModalOpen = useModalStore(state => state.setModalOpen)
   const { copyToClipboard, error, copied } = useClipboard()
@@ -75,7 +75,7 @@ const BookmarkDropdown = ({ bookmark }: Props) => {
 
   return (
     <>
-      <Menu as="div" className="relative ml-auto">
+      <Menu as="div" className="relative ml-auto z-50">
         <Menu.Button className="px-3 py-1 text-sm font-medium transition-all duration-200 border rounded-md outline-none bg-zinc-900/20 border-zinc-700 hover:border-zinc-500 focus:border-zinc-500">
           Options
         </Menu.Button>
@@ -125,4 +125,4 @@ const MenuItem = ({ onClick, children }: MenuItemProps) => {
   )
 }
 
-export default BookmarkDropdown
+export default BookmarkOptions
