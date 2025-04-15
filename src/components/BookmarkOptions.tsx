@@ -75,12 +75,12 @@ const BookmarkOptions = ({ bookmark }: Props) => {
 
   return (
     <>
-      <Menu as="div" className="relative ml-auto z-50">
+      <Menu as="div" className="relative ml-auto">
         <Menu.Button className="px-3 py-1 text-sm font-medium transition-all duration-200 border rounded-md outline-none bg-zinc-900/20 border-zinc-700 hover:border-zinc-500 focus:border-zinc-500">
           Options
         </Menu.Button>
         <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-100" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
-          <Menu.Items className="absolute p-[1px] right-0 w-44 mt-2 origin-top-right bg-zinc-200 rounded-md text-sm z-30 shadow-xl focus:outline-non will-change-transform">
+          <Menu.Items className="absolute z-50 p-[1px] right-0 w-44 mt-2 origin-top-right bg-zinc-200 rounded-md text-sm z-30 shadow-xl focus:outline-non will-change-transform">
             <MenuItem onClick={() => openInNewTab(bookmark.url)}>
               <OpenInBrowser width={16} />Open in new tab
             </MenuItem>

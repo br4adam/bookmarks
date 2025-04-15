@@ -13,7 +13,7 @@ const AddBookmark = () => {
   const session = useAuthStore(state => state.session)
   const userId = session?.user.id
   const [ url, setUrl ] = useState<string>("")
-  const [isPasteSuccess, setIsPasteSuccess] = useState(false)
+  const [ isPasteSuccess, setIsPasteSuccess ] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const checkBookmarkExists = async (e: FormEvent<HTMLFormElement>) => {
@@ -27,11 +27,13 @@ const AddBookmark = () => {
   const handleCreate = async () => {
     const toastId = toast.loading("Loading...", { closeButton: false, ...defaultToastStyle })
     if (!userId) return
-    inputRef.current?.focus()
     const trimmedUrl = url.trim()
     const encodedUrl = encodeURI(trimmedUrl)
     const response = await createBookmark(encodedUrl, userId)
-    if (!response.success) return toast.error(response.data, { id: toastId, closeButton: true, ...errorToastStyle })
+    if (!response.success) {
+      inputRef.current?.focus()
+      return toast.error(response.data, { id: toastId, closeButton: true, ...errorToastStyle })
+    }
     toast.success("Bookmark added successfully!", { id: toastId, closeButton: true, ...successToastStyle })
     getBookmarks(userId)
     window.scrollTo({ top: 0, behavior: "smooth" })
@@ -52,10 +54,10 @@ const AddBookmark = () => {
     <div className={`fixed transition-all duration-300 left-0 right-0 p-2 z-50 border border-zinc-700 w-[calc(100%-24px)] sm:w-[448px] mx-auto bg-zinc-900 rounded-md flex flex-col gap-2 ${ isAnyModalOpen ? "-bottom-16" : "bottom-4" }`}>
       <form className="flex justify-center w-full gap-2" onSubmit={checkBookmarkExists}>
         <input ref={inputRef} className="w-full text-sm py-2 px-1 bg-transparent focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Add url..." />
-        <Button className="px-2" onClick={handlePaste} type="button">
+        <Button className="px-3" onClick={handlePaste} type="button">
           { isPasteSuccess ? ( <ClipboardCheck className="w-4 h-4" /> ) : ( <PasteClipboard className="w-4 h-4" /> ) }
         </Button>
-        <Button type="submit" disabled={loading}>
+        <Button type="submit" className="px-3" disabled={loading}>
           <ArrowUpRight className="w-4 h-4" />
         </Button>
       </form>

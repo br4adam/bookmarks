@@ -20,6 +20,7 @@
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
     "sonner": "^2.0.3",
+    "tailwind-merge": "^3.2.0",
     "tailwindcss-animated": "^1.0.1",
     "zustand": "^4.3.8"
   },
