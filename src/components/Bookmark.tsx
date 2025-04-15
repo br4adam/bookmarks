@@ -3,7 +3,7 @@ import { useBookmarkStore } from "../stores/BookmarkStore"
 import { Pin } from "iconoir-react"
 import fallbackImage from "../assets/fallback.png"
 import BookmarkTags from "./BookmarkTags"
-import BookmarkDropdown from "./BookmarkDropdown"
+import BookmarkOptions from "./BookmarkOptions"
 import Skeleton from "./Skeleton"
 import CardSpotlight from "./CardSpotlight"
 
@@ -30,7 +30,7 @@ const Bookmark = ({ bookmark }: Props) => {
         <div className="flex items-center gap-2">
           <img src={`https://icon.horse/icon/${bookmark.domain}`} alt={`${bookmark.title} icon`} className="size-4" onError={addImageFallback} />
           <p className="font-medium truncate">{bookmark.title}</p>
-        <BookmarkDropdown bookmark={bookmark} />
+        <BookmarkOptions bookmark={bookmark} />
         </div>
         <a href={bookmark.url} target="_blank" className="inline-block max-w-[75%] mb-2 text-sm truncate outline-none text-zinc-500">{bookmark.url}</a>
         <BookmarkTags bookmark={bookmark} />
