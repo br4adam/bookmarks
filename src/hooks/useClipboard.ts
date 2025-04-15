@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react"
 
 const useClipboard = (duration = 2000) => {
-  const [ copied, setCopied ] = useState(false)
+  const [ copied, setCopied ] = useState<boolean>(false)
   const [ error, setError ] = useState<Error | null>(null)
 
   const copyToClipboard = useCallback(
