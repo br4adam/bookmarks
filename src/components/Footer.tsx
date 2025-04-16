@@ -20,7 +20,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="flex flex-col sm:items-center justify-start text-sm mb-20 mt-auto w-11/12 max-w-6xl gap-4 mx-auto sm:flex-row md:w-10/12 md:justify-end [&>*]:w-fit animate-fade-up animate-delay-[1700ms] animate-duration-500">
+    <footer className="flex flex-col sm:items-center justify-start text-sm mb-12 mt-auto w-11/12 max-w-6xl gap-4 mx-auto sm:flex-row md:w-10/12 md:justify-end [&>*]:w-fit animate-fade-up animate-delay-[1700ms] animate-duration-500">
       <a href="https://kmarks.boo" className="font-bold">kmarks.boo</a>
       <span className="text-zinc-700 hidden sm:block">|</span>
       <button className="cursor-pointer" onClick={() => openPrivacyPolicy()}>Privacy Policy</button>
