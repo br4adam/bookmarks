@@ -3,6 +3,9 @@ import supabase from "../utils/supabase"
 import getMetadata from "../utils/getMetadata"
 import isValidUrl from "../utils/isValidUrl"
 
+type Order = "asc" | "desc"
+type TimePeriod = "all" | "month" | "week"
+
 type BookmarkState = {
   bookmarks: Bookmark[]
   loading: boolean
@@ -12,6 +15,10 @@ type BookmarkState = {
   update: (bookmarkId: number, updatedBookmark: Bookmark) => Promise<StoreResponse>
   selectedTag: string
   setSelectedTag: (tag: string) => void
+  order: Order
+  setOrder: (order: Order) => void
+  timePeriod: TimePeriod
+  setTimePeriod: (period: TimePeriod) => void
 }
 
 export const useBookmarkStore = create<BookmarkState>(set => ({
@@ -93,6 +100,10 @@ export const useBookmarkStore = create<BookmarkState>(set => ({
       return { data: errorMessage, success: false }
     }
   },
-  selectedTag: "",
-  setSelectedTag: (tag) => set({ selectedTag: tag })
+  selectedTag: "all",
+  setSelectedTag: (tag) => set({ selectedTag: tag }),
+  order: "desc",
+  setOrder: (order) => set({ order: order }),
+  timePeriod: "all",
+  setTimePeriod: (period) => set({ timePeriod: period }),
 }))
