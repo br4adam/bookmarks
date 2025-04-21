@@ -9,6 +9,7 @@ import { useModalStore } from "../stores/ModalStore"
 import { Session } from "@supabase/supabase-js"
 import getMetadata from "../utils/getMetadata"
 import generateTags from "../utils/generateTags"
+import getAvailableTags from "../utils/getAvailableTags"
 import useClipboard from "../hooks/useClipboard"
 import DeleteModal from "./DeleteModal"
 import ThumbnailModal from "./ThumbnailModal"
@@ -18,7 +19,7 @@ type Props = {
 }
 
 const BookmarkOptions = ({ bookmark }: Props) => {
-  const { fetch: getBookmarks, update: updateBookmark } = useBookmarkStore(state => ({ fetch: state.fetch, update: state.update }))
+  const { fetch: getBookmarks, update: updateBookmark, bookmarks } = useBookmarkStore(state => ({ fetch: state.fetch, update: state.update, bookmarks: state.bookmarks }))
   const setModalOpen = useModalStore(state => state.setModalOpen)
   const { copyToClipboard, error, copied } = useClipboard()
   const session = useAuthStore(state => state.session)
@@ -56,9 +57,10 @@ const BookmarkOptions = ({ bookmark }: Props) => {
   const generateBookmarkTags = async (bookmark: Bookmark, session: Session) => {
     if (!userId) return
     const toastId = toast.loading("Crafting the perfect tags for you...", { closeButton: false, ...defaultToastStyle })
-    const tags = await generateTags(`${bookmark.url} ${bookmark.title} ${bookmark.description}`, session)
-    if (!tags) return toast.error("Failed to generate tags. Please try again later.", { id: toastId, closeButton: true, ...errorToastStyle })
-    const updatedBookmark = { ...bookmark, tags }
+		const availableTags = getAvailableTags(bookmarks)
+    const newTags = await generateTags(`${bookmark.url} ${bookmark.title} ${bookmark.description}`, availableTags, session)
+    if (!newTags) return toast.error("Failed to generate tags. Please try again later.", { id: toastId, closeButton: true, ...errorToastStyle })
+    const updatedBookmark = { ...bookmark, tags: newTags }
     const response = await updateBookmark(bookmark.id, updatedBookmark)
     if (!response.success) return toast.error(response.data, { id: toastId, closeButton: true, ...errorToastStyle })
     toast.success("Tags generated successfully!", { id: toastId, closeButton: true, ...successToastStyle })
