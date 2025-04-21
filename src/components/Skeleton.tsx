@@ -2,18 +2,17 @@ import CardSpotlight from "./CardSpotlight"
 
 const Skeleton = () => {
   return (
-    <CardSpotlight>
-      <SkeletonItem className="aspect-video"/>
-      <SkeletonItem className="h-10"/>
-      <SkeletonItem className="h-6"/>
-      <SkeletonItem className="h-8"/>
+    <CardSpotlight className="min-h-80">
+      <SkeletonItem className="aspect-[1.91/1]"/>
+      <SkeletonItem className="h-12"/>
+      <SkeletonItem className="flex-1"/>
     </CardSpotlight>
   )
 }
 
 const SkeletonItem = ({ className }: { className: string }) => {
   return (
-    <div className={`rounded-md bg-zinc-700/30 animate-pulse ${className}`}></div>
+    <div className={`rounded-md bg-zinc-700/20 animate-pulse ${className}`}></div>
   )
 }
 

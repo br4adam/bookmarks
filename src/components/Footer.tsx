@@ -40,7 +40,7 @@ const PrivacyPolicy = ({ isPrivacyPolicyOpen, closePrivacyPolicy }: PrivacyPolic
   const [ privacyPolicyText, setPrivacyPolicyText ] = useState("")
 
   useEffect(() => {
-   fetch(PrivacyFile).then(res => res.text()).then(text => setPrivacyPolicyText(text))
+    fetch(PrivacyFile).then(res => res.text()).then(text => setPrivacyPolicyText(text))
   })
 
   return (

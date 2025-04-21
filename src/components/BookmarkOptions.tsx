@@ -64,7 +64,6 @@ const BookmarkOptions = ({ bookmark }: Props) => {
     const response = await updateBookmark(bookmark.id, updatedBookmark)
     if (!response.success) return toast.error(response.data, { id: toastId, closeButton: true, ...errorToastStyle })
     toast.success("Tags generated successfully!", { id: toastId, closeButton: true, ...successToastStyle })
-    getBookmarks(userId)
   }
 
   const openThumbnailModal = () => {
