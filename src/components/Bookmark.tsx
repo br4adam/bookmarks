@@ -21,12 +21,12 @@ const Bookmark = ({ bookmark }: Props) => {
   if (loading) return <Skeleton />
 
   return (
-    <CardSpotlight>
-      <div className="z-10 relative overflow-hidden rounded-md aspect-video bg-zinc-800">
+    <CardSpotlight className="p-0">
+      <div className="z-10 relative aspect-[1.91/1] bg-zinc-800 rounded-t-[7px] overflow-hidden">
         <img className="object-cover size-full m-auto" src={bookmark.image ? bookmark.image : fallbackImage} alt={bookmark.title} loading="lazy" onError={addImageFallback} />
         { bookmark.pinned && <PinBadge /> }
       </div>
-      <div>
+      <div className="px-3 pb-3">
         <div className="flex items-center gap-2">
           <img src={`https://icon.horse/icon/${bookmark.domain}`} alt={`${bookmark.title} icon`} className="size-4" onError={addImageFallback} />
           <p className="font-medium truncate">{bookmark.title}</p>

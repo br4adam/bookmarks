@@ -1,12 +1,14 @@
 import { Fragment, useState, ReactNode } from "react"
 import { Menu, Transition } from "@headlessui/react"
-import { OpenInBrowser, BinMinusIn, Copy, Pin, PinSlash, MediaImage, RefreshDouble, Check } from "iconoir-react"
+import { BinMinusIn, Copy, Pin, PinSlash, MediaImage, RefreshDouble, Check, Sparks } from "iconoir-react"
 import { toast } from "sonner"
 import { defaultToastStyle, successToastStyle, errorToastStyle } from "../utils/toastStyles"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
 import { useModalStore } from "../stores/ModalStore"
+import { Session } from "@supabase/supabase-js"
 import getMetadata from "../utils/getMetadata"
+import generateTags from "../utils/generateTags"
 import useClipboard from "../hooks/useClipboard"
 import DeleteModal from "./DeleteModal"
 import ThumbnailModal from "./ThumbnailModal"
@@ -23,8 +25,6 @@ const BookmarkOptions = ({ bookmark }: Props) => {
   const userId = session?.user.id
   const [ isDeleteModalOpen, setIsDeleteModalOpen ] = useState<boolean>(false)
   const [ isThumbnailModalOpen, setIsThumbnailModalOpen ] = useState<boolean>(false)
-
-  const openInNewTab = (url: string) => window.open(url, "_blank")
 
   const pinBookmark = async () => {
     if (!userId) return
@@ -50,6 +50,18 @@ const BookmarkOptions = ({ bookmark }: Props) => {
     const response = await updateBookmark(bookmark.id, { ...bookmark, title: title || domain, description, image: newMetadata.images[0] })
     if (!response.success) return toast.error(response.data, { id: toastId, closeButton: true, ...errorToastStyle })
     toast.success("Bookmark refreshed successfully!", { id: toastId, closeButton: true, ...successToastStyle })
+    getBookmarks(userId)
+  }
+
+  const generateBookmarkTags = async (bookmark: Bookmark, session: Session) => {
+    if (!userId) return
+    const toastId = toast.loading("Crafting the perfect tags for you...", { closeButton: false, ...defaultToastStyle })
+    const tags = await generateTags(`${bookmark.url} ${bookmark.title} ${bookmark.description}`, session)
+    if (!tags) return toast.error("Failed to generate tags. Please try again later.", { id: toastId, closeButton: true, ...errorToastStyle })
+    const updatedBookmark = { ...bookmark, tags }
+    const response = await updateBookmark(bookmark.id, updatedBookmark)
+    if (!response.success) return toast.error(response.data, { id: toastId, closeButton: true, ...errorToastStyle })
+    toast.success("Tags generated successfully!", { id: toastId, closeButton: true, ...successToastStyle })
     getBookmarks(userId)
   }
 
@@ -80,10 +92,7 @@ const BookmarkOptions = ({ bookmark }: Props) => {
           Options
         </Menu.Button>
         <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-100" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
-          <Menu.Items className="absolute z-50 p-[1px] right-0 w-44 mt-2 origin-top-right bg-zinc-200 rounded-md text-sm z-30 shadow-xl focus:outline-non will-change-transform">
-            <MenuItem onClick={() => openInNewTab(bookmark.url)}>
-              <OpenInBrowser width={16} />Open in new tab
-            </MenuItem>
+          <Menu.Items className="absolute z-50 p-[1px] right-0 w-44 mt-2 origin-top-right bg-zinc-200 rounded-md text-sm shadow-xl focus:outline-non will-change-transform">
             <MenuItem onClick={() => copyUrl(bookmark.url)}>
               { copied ? <Check width={16} /> : <Copy width={16} /> } Copy URL
             </MenuItem>
@@ -92,6 +101,9 @@ const BookmarkOptions = ({ bookmark }: Props) => {
             </MenuItem>
             <MenuItem onClick={() => refreshMetadata(bookmark.url)}>
               <RefreshDouble width={16} />Refresh metadata
+            </MenuItem>
+            <MenuItem onClick={() => session && generateBookmarkTags(bookmark, session)} isColorful>
+              <Sparks width={16} />Generate tags
             </MenuItem>
             <MenuItem onClick={() => openThumbnailModal()}>
               <MediaImage width={16} />Change thumbnail
@@ -111,17 +123,20 @@ const BookmarkOptions = ({ bookmark }: Props) => {
 type MenuItemProps = {
   onClick: React.MouseEventHandler<HTMLButtonElement>
   children: ReactNode
+  isColorful?: boolean
 }
 
-const MenuItem = ({ onClick, children }: MenuItemProps) => {
+const MenuItem = ({ onClick, children, isColorful }: MenuItemProps) => {
+  const colorfulBg = "bg-gradient-to-r from-indigo-800 via-indigo-600 to-purple-500"
+
   return (
     <Menu.Item>
-    {({ active }) => (
-      <button onClick={onClick} className={`${active ? "bg-zinc-800 text-zinc-200" : "text-zinc-900"} flex gap-2 w-full items-center rounded-[5px] p-2`}>
-        {children}
-      </button>
-    )}
-  </Menu.Item>
+      {({ active }) => (
+        <button onClick={onClick} className={`${active ? (isColorful ? colorfulBg : "bg-zinc-800 text-zinc-200") : "text-zinc-900"} flex gap-2 w-full items-center rounded-[5px] p-2`}>
+          {children}
+        </button>
+      )}
+    </Menu.Item>
   )
 }
 

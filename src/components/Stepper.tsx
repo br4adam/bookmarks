@@ -11,7 +11,7 @@ const Stepper = () => {
       </div>
         <ul className="grid w-full grid-cols-1 gap-8 sm:grid-cols-3">
           <ListItem icon={<Bookmark width={18} />} title="Add websites" description="Just paste or type the URL of the website you want to save, and your bookmark will be instantly stored." />
-          <ListItem icon={<FilterList width={18} />} title="Tag bookmarks" description="Add custom tags to each bookmark, making it a breeze to find and access your most treasured pages." />
+          <ListItem icon={<FilterList width={18} />} title="Tag bookmarks" description="Generate smart tags with AI, making it a breeze to find and access your most treasured pages." />
           <ListItem icon={<Search width={18} />} title="Filter and search" description="Easily filter your bookmarks by tags or experience lightning-fast searching with the command menu." withDivider={false}  />
         </ul>
       </div>
