@@ -59,7 +59,7 @@ const AddBookmark = () => {
   const filterButtonStyle = "flex gap-1 text-xs items-center text-zinc-500 outline-none hover:text-zinc-300 focus:text-zinc-300 transition-all duration-200"
 
   return (
-    <div className={`fixed transition-all duration-300 left-0 right-0 p-2 z-50 border border-zinc-700 w-[calc(100%-24px)] sm:w-[390px] mx-auto backdrop-blur-xl bg-zinc-900/50 rounded-md flex flex-col gap-2 ${ isAnyModalOpen ? "-bottom-20" : "bottom-4" }`}>
+    <div className={`fixed transition-all duration-300 left-0 right-0 p-2 z-50 border border-zinc-700 w-[calc(100%-24px)] sm:w-[390px] mx-auto backdrop-blur-xl backdrop-saturate-200 bg-zinc-950/50 rounded-md flex flex-col gap-2 ${ isAnyModalOpen ? "-bottom-20" : "bottom-4" }`}>
       <form className="flex justify-center w-full gap-1" onSubmit={checkBookmarkExists}>
         <input ref={inputRef} className="w-full text-sm py-2 px-1 bg-transparent placeholder:text-zinc-400 focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Paste a link..." />
         <Button className={inputButtonStyle} onClick={handlePaste} disabled={loading} type="button" title="Paste a link">

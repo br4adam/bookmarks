@@ -1,9 +1,9 @@
-const supabaseEfUrl = import.meta.env.VITE_SUPABASE_EF_URL
+const supabaseGetMetadataUrl = import.meta.env.VITE_SUPABASE_META_URL
 const supabaseEfAnonKey = import.meta.env.VITE_SUPABASE_EF_ANON_KEY
 
 const getMetadata = async (url: string): Promise<Metadata | null> => {
   try {
-    const response = await fetch(supabaseEfUrl, {
+    const response = await fetch(supabaseGetMetadataUrl, {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${supabaseEfAnonKey}`,

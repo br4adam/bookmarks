@@ -20,7 +20,7 @@ const Features = () => {
           </CardSpotlight>
           <div className="flex flex-col gap-4 sm:flex-row">
             <CardSpotlight className="w-full aspect-square animate-fade-up animate-delay-[1100ms] animate-duration-500" style={{ backgroundImage: `url(${bg03})`}}>
-              <Title>Easy tagging</Title>
+              <Title>AI assisted tagging</Title>
             </CardSpotlight>
             <CardSpotlight className="w-full aspect-square animate-fade-up animate-delay-[1300ms] animate-duration-500" style={{ backgroundImage: `url(${bg04})`}}>
               <Title>
