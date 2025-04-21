@@ -8,7 +8,7 @@ type Props = {
 } & DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
 const Button = ({ className = "", loading = false, children, ...props}: Props) => {
-  const baseClasses = "px-4 py-2 text-sm font-medium flex items-center gap-2 backdrop-blur-lg rounded-md duration-200 border border-zinc-700 hover:border-zinc-500 focus:border-zinc-500 disabled:cursor-not-allowed disabled:opacity-50 outline-none"
+  const baseClasses = "px-4 py-2 text-sm flex items-center gap-2 backdrop-blur-lg rounded-md duration-200 border border-zinc-700 hover:border-zinc-500 focus:border-zinc-500 disabled:cursor-not-allowed disabled:opacity-50 outline-none"
   
   return (
     <button className={twMerge(baseClasses, className)} disabled={loading} {...props}>

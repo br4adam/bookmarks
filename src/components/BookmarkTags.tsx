@@ -1,4 +1,4 @@
-import { useState, FormEvent, useRef } from "react"
+import { useState, FormEvent, useRef, useEffect } from "react"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
 import { Check, Xmark } from "iconoir-react"
@@ -63,6 +63,10 @@ const BookmarkTags = ({ bookmark }: Props) => {
     setInputValue("")
     setNewTags(bookmark.tags)
   })
+
+  useEffect(() => {
+    setNewTags(bookmark.tags)
+  }, [bookmark.tags])
 
   return (
     <div onClick={() => setEditable(true)} ref={tagListRef} className="flex flex-wrap gap-2 mb-2 text-xs">
