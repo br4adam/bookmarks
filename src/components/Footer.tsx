@@ -20,7 +20,7 @@ const Footer = () => {
   }
 
   return (
-    <footer className="flex flex-col sm:items-center justify-start text-sm mb-12 mt-auto w-11/12 max-w-6xl gap-4 mx-auto sm:flex-row md:w-10/12 md:justify-end [&>*]:w-fit animate-fade-up animate-delay-[1700ms] animate-duration-500">
+    <footer className="flex flex-col sm:items-center justify-start text-sm mb-12 mt-auto w-full px-4 max-w-6xl gap-4 mx-auto sm:flex-row md:w-10/12 md:justify-end [&>*]:w-fit">
       <a href="https://kmarks.boo" className="font-bold">kmarks.boo</a>
       <span className="text-zinc-700 hidden sm:block">|</span>
       <button className="cursor-pointer" onClick={() => openPrivacyPolicy()}>Privacy Policy</button>
@@ -52,8 +52,8 @@ const PrivacyPolicy = ({ isPrivacyPolicyOpen, closePrivacyPolicy }: PrivacyPolic
           <div className="fixed inset-0">
             <div className="flex items-center justify-center min-h-full p-4 text-center">
               <Transition.Child as={Fragment} enter="ease-out duration-200" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
-                <Dialog.Panel className="w-full max-w-3xl p-6 overflow-hidden flex flex-col gap-4 justify-center items-center transition-all transform rounded-lg border border-zinc-800 bg-zinc-950/50 backdrop-blur-2xl backdrop-saturate-150 text-zinc-200 selection:bg-zinc-500/20">
-                  <button className="absolute top-2 right-2 text-zinc-600 hover:text-zinc-200 outline-none duration-200 animate-fade" onClick={closePrivacyPolicy}><Xmark /></button>
+                <Dialog.Panel className="w-full max-w-3xl p-6 overflow-hidden flex flex-col gap-4 justify-center items-center transition-all transform rounded-xl border border-zinc-800 bg-zinc-950 text-zinc-200 selection:bg-zinc-500/20">
+                  <button className="absolute top-2 right-2 text-zinc-600 hover:text-zinc-200 outline-none" onClick={closePrivacyPolicy}><Xmark /></button>
                   <Dialog.Title as="h3" className="text-lg font-semibold w-full truncate">Privacy Policy</Dialog.Title>
                   <div className="max-h-[65dvh] overflow-auto text-left flex flex-col gap-4">
                     <ReactMarkdown children={privacyPolicyText} />

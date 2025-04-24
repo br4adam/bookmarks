@@ -41,14 +41,14 @@ const ThumbnailModal = ({ isThumbnailModalOpen, closeThumbnailModal, bookmark }:
         <div className="fixed inset-0">
           <div className="flex items-center justify-center min-h-full p-4 text-center">
             <Transition.Child as={Fragment} enter="ease-out duration-200" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
-              <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform rounded-lg bg-zinc-200 selection:bg-zinc-500/20">
-                <Dialog.Title as="h3" className="text-lg font-semibold text-zinc-900">Change thumbnail</Dialog.Title>
+              <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform rounded-xl bg-zinc-200 selection:bg-zinc-500/20">
+                <Dialog.Title as="h3" className="text-lg font-semibold text-zinc-950">Change thumbnail</Dialog.Title>
                 <p className="mt-2 text-sm text-zinc-500">{`You are going to change the thumbnail of '${bookmark.title}' bookmark. Just paste the image URL and save the changes.`}</p>
                 <form onSubmit={changeThumbnail}>
-                  <input className="w-full text-sm py-2 px-3 mt-4 bg-transparent border rounded-md border-zinc-700 focus:border-zinc-500 focus:outline-none caret-zinc-900 text-zinc-900" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} type="text" placeholder="https://" />
+                  <input className="w-full text-sm py-2 px-3 mt-4 bg-transparent border rounded-md border-zinc-700 focus:border-zinc-500 focus:outline-none caret-zinc-950 text-zinc-950" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} type="text" placeholder="https://" />
                   <div className="flex gap-2 mt-4 text-zinc-200">
-                    <Button type="submit" className="bg-zinc-900 hover:bg-zinc-800">Save changes</Button>
-                    <Button onClick={closeThumbnailModal} className="bg-transparent text-zinc-900 hover:bg-zinc-300">Cancel</Button>
+                    <Button type="submit" className="bg-zinc-950 hover:bg-zinc-900">Save changes</Button>
+                    <Button onClick={closeThumbnailModal} className="bg-transparent text-zinc-950 hover:bg-zinc-300">Cancel</Button>
                   </div>
                 </form>
               </Dialog.Panel>

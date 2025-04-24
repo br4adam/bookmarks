@@ -27,8 +27,8 @@ const Header = () => {
   const clampedCompletion = Math.min(completion, 100)
 
   return (
-    <header className="sticky top-0 z-30 w-full py-2 border-b backdrop-blur-xl backdrop-saturate-200 bg-zinc-950/60 border-zinc-700">
-      <div className="flex items-center w-11/12 max-w-6xl gap-2 mx-auto md:w-10/12">
+    <header className="sticky top-0 z-30 w-full py-2 border-b bg-zinc-950 border-zinc-700">
+      <div className="flex items-center w-full px-4 max-w-6xl gap-2 mx-auto md:w-10/12">
         <img className={`size-6 rounded-full ${session && "cursor-pointer"}`} src={session ? session.user.user_metadata.avatar_url || defaultProfilePicture : logo} alt="profile picture" onClick={() => openProfileCard()} /> 
         <p className="font-bold">Bookmarks</p>
         <nav className="ml-auto flex gap-2">

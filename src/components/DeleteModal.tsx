@@ -34,12 +34,12 @@ const DeleteModal = ({ isDeleteModalOpen, closeDeleteModal, bookmark }: Props) =
         <div className="fixed inset-0">
           <div className="flex items-center justify-center min-h-full p-4 text-center">
             <Transition.Child as={Fragment} enter="ease-out duration-200" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
-              <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform rounded-lg bg-zinc-200 selection:bg-zinc-500/20">
-                <Dialog.Title as="h3" className="text-lg font-semibold text-zinc-900">Delete bookmark</Dialog.Title>
+              <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform rounded-xl bg-zinc-200 selection:bg-zinc-500/20">
+                <Dialog.Title as="h3" className="text-lg font-semibold text-zinc-950">Delete bookmark</Dialog.Title>
                 <p className="mt-2 text-sm text-zinc-500">{`You are going to delete '${bookmark.title}' bookmark. Are you sure?`}</p>
                 <div className="flex gap-2 mt-4 text-zinc-200">
-                  <Button onClick={() => handleDelete(bookmark.id)} className="bg-zinc-900 hover:bg-zinc-800">Yes, delete!</Button>
-                  <Button onClick={closeDeleteModal} className="bg-transparent text-zinc-900 hover:bg-zinc-300">No, keep it!</Button>
+                  <Button onClick={() => handleDelete(bookmark.id)} className="bg-zinc-950 hover:bg-zinc-900">Yes, delete!</Button>
+                  <Button onClick={closeDeleteModal} className="bg-transparent text-zinc-950 hover:bg-zinc-300">No, keep it!</Button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

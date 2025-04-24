@@ -72,7 +72,7 @@ const BookmarkTags = ({ bookmark }: Props) => {
     <div onClick={() => setEditable(true)} ref={tagListRef} className="flex flex-wrap gap-2 mb-2 text-xs">
       { !bookmark.tags.length && !editable && <p className="py-1 border-b border-transparent text-zinc-500">add tags...</p> }
       { newTags.map((tag, index) => (
-        <span key={tag} className={`px-2 py-[2px] h-6 flex items-center truncate border-b border-transparent rounded-[4px] bg-zinc-700/50 text-zinc-400 cursor-default ${editable ? "gap-1" : "gap-0"}`}>
+        <span key={tag} className={`px-2 py-[2px] h-6 flex items-center truncate border-b border-transparent rounded-md bg-zinc-700/50 text-zinc-400 cursor-default ${editable ? "gap-1" : "gap-0"}`}>
           { tag } 
           <Xmark onClick={() => deleteTag(index)} className={`cursor-pointer transition-all hover:text-zinc-200 ${editable ? "opacity-100 w-4" : "opacity-0 w-0"}`} />
         </span>
