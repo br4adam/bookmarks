@@ -22,7 +22,7 @@ const CardSpotlight = ({ className = "", style = {}, children }: Props) => {
   const handleMouseEnter = () => setOpacity(1)
   const handleMouseLeave = () => setOpacity(0)
 
-  const baseClasses = "rounded-lg relative p-3 flex flex-col gap-3 bg-zinc-900 border border-zinc-700 bg-cover"
+  const baseClasses = "rounded-xl relative p-3 flex flex-col gap-3 bg-zinc-900 border border-zinc-700 bg-cover"
 
   return (
     <div className={twMerge(baseClasses, className)} style={style} ref={cardRef} onMouseMove={handleMouseMove} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>

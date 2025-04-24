@@ -22,7 +22,7 @@ const Bookmark = ({ bookmark }: Props) => {
 
   return (
     <CardSpotlight className="p-0">
-      <div className="z-10 relative aspect-[1.91/1] bg-zinc-800 rounded-t-[7px] overflow-hidden">
+      <div className="z-10 relative aspect-[1.91/1] bg-zinc-800 rounded-t-[11px] overflow-hidden">
         <img className="object-cover size-full m-auto" src={bookmark.image ? bookmark.image : fallbackImage} alt={bookmark.title} loading="lazy" onError={addImageFallback} />
         { bookmark.pinned && <PinBadge /> }
       </div>
