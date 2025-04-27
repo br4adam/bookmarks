@@ -60,7 +60,7 @@ type StatProps = {
 }
 
 const Stat = ({ data, description }: StatProps) => {
-  const count = useCountUp(data, 3000);
+  const count = useCountUp(data, 3000)
 
   return (
     <div className="flex flex-col w-1/3">

@@ -1,4 +1,3 @@
-import { SyntheticEvent } from "react"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { Pin } from "iconoir-react"
 import fallbackImage from "../assets/fallback.png"
@@ -6,6 +5,7 @@ import BookmarkTags from "./BookmarkTags"
 import BookmarkOptions from "./BookmarkOptions"
 import Skeleton from "./Skeleton"
 import CardSpotlight from "./CardSpotlight"
+import useProgressiveImage from "../hooks/useProgressiveImage"
 
 type Props = {
   bookmark: Bookmark
@@ -14,21 +14,22 @@ type Props = {
 const Bookmark = ({ bookmark }: Props) => {
   const loading = useBookmarkStore(state => state.loading)
 
-  const addImageFallback = (event: SyntheticEvent<HTMLImageElement, Event>) => {
-    event.currentTarget.src = "./fallback.png"
-  }
+  const { imageSrc, isLoading: bookmarkImageIsLoading, imageRef } = useProgressiveImage({ src: bookmark.image, fallbackSrc: fallbackImage })
+  const { imageSrc: faviconSrc, isLoading: bookmarkFaviconIsLoading, imageRef: faviconRef } = useProgressiveImage({ src: `https://icon.horse/icon/${bookmark.domain}`, fallbackSrc: fallbackImage })
 
   if (loading) return <Skeleton />
 
   return (
     <CardSpotlight className="p-0">
-      <div className="z-10 relative aspect-[1.91/1] bg-zinc-800 rounded-t-[11px] overflow-hidden">
-        <img className="object-cover size-full m-auto" src={bookmark.image ? bookmark.image : fallbackImage} alt={bookmark.title} loading="lazy" onError={addImageFallback} />
+      <div ref={imageRef as React.RefObject<HTMLDivElement>} className="z-10 relative aspect-[1.91/1] bg-zinc-800 rounded-t-[11px] overflow-hidden">
+        <img className={`object-cover size-full m-auto ease-out duration-300 ${bookmarkImageIsLoading ? 'opacity-0' : 'opacity-100'}`} src={imageSrc} alt={bookmark.title} />
         { bookmark.pinned && <PinBadge /> }
       </div>
       <div className="px-3 pb-3">
         <div className="flex items-center gap-2">
-          <img src={`https://icon.horse/icon/${bookmark.domain}`} alt={`${bookmark.title} icon`} className="size-4" onError={addImageFallback} />
+          <div ref={faviconRef as React.RefObject<HTMLDivElement>} className="size-4 shrink-0">
+            <img className={`size-4 duration-300 rounded-sm ${bookmarkFaviconIsLoading ? 'opacity-0' : 'opacity-100'}`} src={faviconSrc} alt={bookmark.title} />
+          </div>
           <p className="font-medium truncate">{bookmark.title}</p>
         <BookmarkOptions bookmark={bookmark} />
         </div>
