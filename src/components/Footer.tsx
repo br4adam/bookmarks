@@ -1,7 +1,7 @@
 import { useState, useEffect, Fragment } from "react"
 import { Dialog, Transition } from "@headlessui/react"
 import { useModalStore } from "../stores/ModalStore"
-import { Xmark } from "iconoir-react"
+import { Xmark, Page, Bug } from "iconoir-react"
 import ReactMarkdown from "react-markdown"
 import PrivacyFile from "../assets/privacy.md"
 
@@ -23,9 +23,15 @@ const Footer = () => {
     <footer className="flex flex-col sm:items-center justify-start text-sm mb-12 mt-auto w-full px-4 max-w-6xl gap-4 mx-auto sm:flex-row md:w-10/12 md:justify-end [&>*]:w-fit">
       <a href="https://kmarks.boo" className="font-bold">kmarks.boo</a>
       <span className="text-zinc-700 hidden sm:block">|</span>
-      <button className="cursor-pointer" onClick={() => openPrivacyPolicy()}>Privacy Policy</button>
+      <button onClick={() => openPrivacyPolicy()} className="flex items-center gap-2 cursor-pointer">
+        <Page className="size-4"/>
+        Privacy Policy
+      </button>
       <span className="text-zinc-700 hidden sm:block">|</span>
-      <a href="https://github.com/br4adam/bookmarks/issues/new" target="_blank">Report a bug</a>
+      <a href="https://github.com/br4adam/bookmarks/issues/new" target="_blank" className="flex items-center gap-2">
+        <Bug className="size-4"/>
+        Report a bug
+      </a>
       { isPrivacyPolicyOpen && <PrivacyPolicy isPrivacyPolicyOpen={isPrivacyPolicyOpen} closePrivacyPolicy={closePrivacyPolicy} /> }
     </footer>
   )
