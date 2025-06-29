@@ -25,7 +25,6 @@ const App = () => {
       <main className="flex flex-col items-center md:w-5/6 w-full px-4 md:px-0 mb-24 max-w-6xl gap-6 md:gap-8 mx-auto flex-grow bg-[length:1200px_800px] bg-top bg-no-repeat" style={{ backgroundImage: `url(${grid})`}}>
         { session ? <Bookmarks /> : <Showcase /> }
         <Toaster richColors closeButton theme="dark" visibleToasts={3} gap={8} className="![--width:calc(100%-24px)] sm:![--width:390px] transition-[bottom] duration-300 !z-40" position="bottom-center" offset={{ bottom: isAnyModalOpen ? "16px" : "102px" }} mobileOffset={{ bottom: isAnyModalOpen ? "16px" : "102px" }} />
-        { session && <div className="fixed bottom-0 left-0 right-0 h-14 bg-gradient-to-t from-zinc-950 to-transparent pointer-events-none z-20" /> }
       </main>
       { !session && <Footer /> }
     </div>

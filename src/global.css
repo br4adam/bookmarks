@@ -4,7 +4,7 @@
 
 @layer utilities {
   .animate-fade-in {
-    animation: fade-in 0.3s ease-out;
+    animation: fade-in 0.6s ease-out;
   }
 
   .no-scrollbar::-webkit-scrollbar {
@@ -62,7 +62,7 @@
   position: fixed;
   inset: 0;
   background-color: #00000050;
-  backdrop-filter: brightness(50%);
+	backdrop-filter: brightness(50%);
   -webkit-backdrop-filter: brightness(50%);
   z-index: 40;
 }
@@ -86,7 +86,7 @@
 
 [cmdk-list] {
   height: var(--cmdk-list-height) + 8px;
-  max-height: 430px;
+  max-height: 400px;
   overflow: auto;
   overscroll-behavior: contain;
   scroll-padding-block-start: 8px;
@@ -98,20 +98,19 @@
 [cmdk-item] {
   content-visibility: auto;
   cursor: pointer;
-  height: 40px;
   border-radius: 8px;
   font-size: 14px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0 16px;
+  gap: 16px;
+  padding: 8px;
   user-select: none;
   will-change: background, color;
   transition: all 0.2s ease;
 }
 
 [cmdk-item][data-selected="true"] {
-  background: #3f3f4680;
+  background: #3f3f4650;
 }
 
 [cmdk-item][data-disabled="true"] {

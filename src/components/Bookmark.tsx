@@ -44,7 +44,7 @@ const Bookmark = ({ bookmark }: Props) => {
 const PinBadge = () => {
   return (
     <div className="absolute top-2 right-2 size-6 flex items-center justify-center rounded-full bg-zinc-800">
-      <Pin width={16} />
+      <Pin className="size-4" />
     </div>
   )
 }

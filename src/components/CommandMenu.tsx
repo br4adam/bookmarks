@@ -3,6 +3,7 @@ import { Command } from "cmdk"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useModalStore } from "../stores/ModalStore"
 import Button from "./Button"
+import { Search } from "iconoir-react"
 
 const CommandMenu = () => {
   const [ open, setOpen ] = useState<boolean>(false)
@@ -31,7 +32,11 @@ const CommandMenu = () => {
 
   return (
     <>
-      <Button onClick={() => openCommandMenu()} className="ml-auto" disabled={open}>⌘K</Button>
+      <Button onClick={() => openCommandMenu()} className="ml-auto gap-1 md:pr-2" disabled={open}>
+        <Search className="size-4"/>
+        Search 
+        <span className="text-xs text-zinc-500 border border-zinc-700 rounded px-1 ml-4 hidden md:block">⌘K</span>
+      </Button>
       <Command.Dialog open={open} onOpenChange={(isOpen) => {setOpen(isOpen); setModalOpen(isOpen)}} label="Command Menu">
         <Command.Input placeholder="Search by title, url or tag" />
         <Command.List>
@@ -40,9 +45,11 @@ const CommandMenu = () => {
           <Command.Empty>No results found.</Command.Empty>
           { bookmarks.map(bookmark => (
             <Command.Item key={bookmark.id} value={`${bookmark.title} ${bookmark.url} ${bookmark.tags.join(" ")}`} onSelect={() => window.open(bookmark.url, "_blank")}>
-              <img src={`https://icon.horse/icon/${bookmark.domain}`} alt={`${bookmark.title} icon`} className="size-4" onError={addImageFallback} />
-              <span className="truncate">{bookmark.title}</span>
-              <span className="text-xs truncate text-zinc-500">{bookmark.url}</span>
+              <img src={`https://icon.horse/icon/${bookmark.domain}`} alt={`${bookmark.title} icon`} className="size-9" onError={addImageFallback} />
+              <div className="flex flex-col max-w-[calc(100%-64px)]">
+                <p className="truncate">{bookmark.title}</p>
+                <span className="text-xs text-zinc-500 truncate">{bookmark.url}</span>
+              </div>
             </Command.Item>
           ))}
         </Command.List>
