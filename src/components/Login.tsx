@@ -45,7 +45,7 @@ const Login = ({ children, className }: Props) => {
           <div className="flex items-center justify-center min-h-full p-4">
             <Transition.Child as={Fragment} enter="ease-out duration-200" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
               <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform rounded-xl bg-zinc-200 selection:bg-zinc-500/20">
-                <Dialog.Title as="h3" className="text-lg font-semibold text-zinc-950">Welcome back</Dialog.Title>
+                <Dialog.Title as="h3" className="text-lg font-semibold text-zinc-950">Welcome</Dialog.Title>
                 <p className="mt-2 text-sm text-zinc-500">Sign in via Magic Link with your email or continue with your GitHub account.</p>
                 <div className="flex flex-col items-center gap-2 mt-4 text-zinc-950">
                   <form className="flex flex-col items-center w-full gap-2" onSubmit={handleLogin}>
