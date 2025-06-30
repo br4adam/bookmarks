@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import { Bookmark, FilterList, Search } from "iconoir-react"
+import { Bookmark, Sparks, Search } from "iconoir-react"
 
 const Stepper = () => {
   return (
@@ -10,9 +10,9 @@ const Stepper = () => {
         <h2 className="max-w-md text-4xl font-bold text-center text-transparent md:max-w-xl md:text-5xl from-zinc-400 via-zinc-200 to-zinc-400 bg-gradient-to-r bg-clip-text">Manage your bookmarks with just 3 easy steps</h2>
       </div>
         <ul className="grid w-full grid-cols-1 gap-8 sm:grid-cols-3">
-          <ListItem icon={<Bookmark width={18} />} title="Add websites" description="Just paste or type the URL of the website you want to save, and your bookmark will be instantly stored." />
-          <ListItem icon={<FilterList width={18} />} title="Tag bookmarks" description="Generate smart tags with AI, making it a breeze to find and access your most treasured pages." />
-          <ListItem icon={<Search width={18} />} title="Filter and search" description="Easily filter your bookmarks by tags or experience lightning-fast searching with the command menu." withDivider={false}  />
+          <ListItem icon={<Bookmark className="size-5" />} title="Add websites" description="Just paste or type the URL of the website you want to save, and your bookmark will be instantly stored." />
+          <ListItem icon={<Sparks className="size-5" />} title="Tag bookmarks" description="Generate smart tags with AI, making it a breeze to find and access your most treasured pages." />
+          <ListItem icon={<Search className="size-5" />} title="Filter and search" description="Easily filter your bookmarks by tags or experience lightning-fast searching with the command menu." withDivider={false}  />
         </ul>
       </div>
     </section>
