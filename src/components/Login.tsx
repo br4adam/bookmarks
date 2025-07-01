@@ -12,7 +12,7 @@ type Props = {
 }
 
 const Login = ({ children, className }: Props) => {
-  const { session, loading, loginWithGithub, loginWithOtp, logout } = useAuthStore(state => ({ session: state.session, loading: state.loading, loginWithGithub: state.loginWithGithub, loginWithOtp: state.loginWithOtp, logout: state.logout }))
+  const { loading, loginWithGithub, loginWithOtp } = useAuthStore(state => ({ loading: state.loading, loginWithGithub: state.loginWithGithub, loginWithOtp: state.loginWithOtp }))
   const [ isModalOpen, setIsModalOpen ] = useState<boolean>(false)
   const [ email, setEmail ] = useState<string>("")
   const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i
@@ -28,8 +28,6 @@ const Login = ({ children, className }: Props) => {
     setEmail("")
     closeModal()
   }
-
-  if (session) return <Button onClick={logout} loading={loading}>Logout</Button>
 
   return (
     <>

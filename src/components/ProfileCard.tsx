@@ -18,7 +18,8 @@ const ProfileCard = ({ isProfileCardOpen, closeProfileCard, session }: Props) =>
 
   if (!session) return null
 
-  const name = session.user?.email
+  const name = session.user?.user_metadata.name || session.user?.email
+  const profilePicture = session.user?.user_metadata.avatar_url || logo
   const registrationDate = session.user.created_at
   const daysSinceFirstLogin = dayjs().diff(registrationDate, "days")
   const totalBookmarksCount = bookmarks.length
@@ -36,7 +37,7 @@ const ProfileCard = ({ isProfileCardOpen, closeProfileCard, session }: Props) =>
                 <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden flex flex-col gap-4 justify-center items-center transition-all transform rounded-xl border border-zinc-800 bg-zinc-950 text-zinc-200 selection:bg-zinc-500/20">
                   <div className="absolute size-full bg-[radial-gradient(#71717a,transparent_1px)] [background-size:12px_12px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000000_70%,transparent_100%)] pointer-events-none"></div>
                   <button className="absolute top-2 right-2 text-zinc-600 hover:text-zinc-200 outline-none duration-200" onClick={closeProfileCard}><Xmark /></button>
-                  <img src={logo} className="size-24 z-10 my-8 select-none" alt="Bookmarks logo" />
+                  <img src={profilePicture} className="size-24 rounded-full z-10 my-8 select-none" alt="Profile picture" />
                   <span className="border border-zinc-600 rounded-full px-3 py-1 text-sm">kmarks.boo</span>
                   <Dialog.Title as="h3" className="text-lg font-semibold w-full truncate">{name}</Dialog.Title>
                   <p className="text-sm text-balance text-zinc-500">Thank you for choosing kmarks.boo to be part of your online journey. Happy bookmarking!</p>

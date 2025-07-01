@@ -35,7 +35,7 @@ const CommandMenu = () => {
       <Button onClick={() => openCommandMenu()} className="ml-auto gap-1 md:pr-2" disabled={open}>
         <Search className="size-4"/>
         Search 
-        <span className="text-xs text-zinc-500 border border-zinc-700 rounded px-1 ml-4 hidden md:block">⌘K</span>
+        <span className="text-xs text-zinc-500 border border-zinc-700 rounded px-1 ml-12 hidden md:block">⌘K</span>
       </Button>
       <Command.Dialog open={open} onOpenChange={(isOpen) => {setOpen(isOpen); setModalOpen(isOpen)}} label="Command Menu">
         <Command.Input placeholder="Search by title, url or tag" />
