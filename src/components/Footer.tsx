@@ -1,7 +1,7 @@
-import { useState, useEffect, Fragment } from "react"
-import { Dialog, Transition } from "@headlessui/react"
+import { useState, useEffect } from "react"
 import { useModalStore } from "../stores/ModalStore"
-import { Xmark, Page, Bug } from "iconoir-react"
+import { Page, Bug, Xmark } from "iconoir-react"
+import Modal from "./Modal"
 import ReactMarkdown from "react-markdown"
 import PrivacyFile from "../assets/privacy.md"
 
@@ -50,26 +50,12 @@ const PrivacyPolicy = ({ isPrivacyPolicyOpen, closePrivacyPolicy }: PrivacyPolic
   })
 
   return (
-    <Transition appear show={isPrivacyPolicyOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-30 antialiased" onClose={closePrivacyPolicy}>
-        <Transition.Child as={Fragment} enter="ease-out duration-200" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
-          <div className="fixed inset-0 bg-zinc-950 bg-opacity-50 backdrop-brightness-50" />
-        </Transition.Child>
-          <div className="fixed inset-0">
-            <div className="flex items-center justify-center min-h-full p-4 text-center">
-              <Transition.Child as={Fragment} enter="ease-out duration-200" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
-                <Dialog.Panel className="w-full max-w-3xl p-6 overflow-hidden flex flex-col gap-4 justify-center items-center transition-all transform rounded-xl border border-zinc-800 bg-zinc-950 text-zinc-200 selection:bg-zinc-500/20">
-                  <button className="absolute top-2 right-2 text-zinc-600 hover:text-zinc-200 outline-none" onClick={closePrivacyPolicy}><Xmark /></button>
-                  <Dialog.Title as="h3" className="text-lg font-semibold w-full truncate">Privacy Policy</Dialog.Title>
-                  <div className="max-h-[65dvh] overflow-auto text-left flex flex-col gap-4">
-                    <ReactMarkdown children={privacyPolicyText} />
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-      </Dialog>
-    </Transition>
+    <Modal isOpen={isPrivacyPolicyOpen} closeModal={closePrivacyPolicy} title="Privacy Policy" className="border border-zinc-800 bg-zinc-950 text-zinc-200">
+      <button className="absolute top-2 right-2 text-zinc-600 hover:text-zinc-200 outline-none duration-200" onClick={closePrivacyPolicy}><Xmark /></button>
+      <div className="max-h-[65dvh] overflow-auto text-left flex flex-col gap-4 text-sm mt-4">
+        <ReactMarkdown children={privacyPolicyText} />
+      </div>
+    </Modal>
   )
 }
 
