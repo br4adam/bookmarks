@@ -3,8 +3,10 @@ import { useModalStore } from "../stores/ModalStore"
 import { Page, Bug, Xmark } from "iconoir-react"
 import Modal from "./Modal"
 import ReactMarkdown from "react-markdown"
+import { useAuthStore } from "../stores/AuthStore"
 
 const Footer = () => {
+  const { session } = useAuthStore(state => ({ session: state.session }))
   const setModalOpen = useModalStore(state => state.setModalOpen)
   const [ isPrivacyPolicyOpen, setIsPrivacyPolicyOpen ] = useState<boolean>(false)
 
@@ -17,6 +19,8 @@ const Footer = () => {
     setIsPrivacyPolicyOpen(false)
     setModalOpen(false)
   }
+
+  if (session) return null
 
   return (
     <footer className="flex flex-col sm:items-center justify-start text-sm mb-12 mt-auto w-full px-4 max-w-6xl gap-4 mx-auto sm:flex-row md:w-10/12 md:justify-end [&>*]:w-fit">
