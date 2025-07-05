@@ -8,6 +8,7 @@ import { Toaster } from "sonner"
 import { useAuthStore } from "./stores/AuthStore"
 import { useModalStore } from "./stores/ModalStore"
 import grid from "./assets/grid.svg"
+import { Analytics } from '@vercel/analytics/react';
 
 const App = () => {
   const { session, setSession } = useAuthStore(state => ({ session: state.session, setSession: state.setSession }))
@@ -26,7 +27,8 @@ const App = () => {
         { session ? <Bookmarks /> : <Showcase /> }
         <Toaster richColors closeButton theme="dark" visibleToasts={3} gap={8} className="![--width:calc(100%-24px)] sm:![--width:390px] transition-[bottom] duration-300 !z-40" position="bottom-center" offset={{ bottom: isAnyModalOpen ? "16px" : "102px" }} mobileOffset={{ bottom: isAnyModalOpen ? "16px" : "102px" }} />
       </main>
-      { !session && <Footer /> }
+      <Analytics />
+      <Footer />
     </div>
   )
 }
