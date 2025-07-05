@@ -20,7 +20,7 @@ const App = () => {
   }, [])
 
   return (
-    <div className="relative flex flex-col min-h-screen text-zinc-200 bg-zinc-950 selection:bg-zinc-500/20 antialiased">
+    <div className="relative flex flex-col min-h-screen text-zinc-100 bg-zinc-950 selection:bg-zinc-500/20 antialiased">
       <Header />
       <main className="flex flex-col items-center md:w-5/6 w-full px-4 md:px-0 mb-24 max-w-6xl gap-6 md:gap-8 mx-auto flex-grow bg-[length:1200px_800px] bg-top bg-no-repeat" style={{ backgroundImage: `url(${grid})`}}>
         { session ? <Bookmarks /> : <Showcase /> }

@@ -74,14 +74,14 @@ const BookmarkTags = ({ bookmark }: Props) => {
       { newTags.map((tag, index) => (
         <span key={tag} className={`px-2 py-[2px] h-6 flex items-center truncate border-b border-transparent rounded-md bg-zinc-700/50 text-zinc-400 cursor-default ${editable ? "gap-1" : "gap-0"}`}>
           { tag } 
-          <Xmark onClick={() => deleteTag(index)} className={`cursor-pointer transition-all hover:text-zinc-200 ${editable ? "opacity-100 w-4" : "opacity-0 w-0"}`} />
+          <Xmark onClick={() => deleteTag(index)} className={`cursor-pointer transition-all hover:text-zinc-100 ${editable ? "opacity-100 w-4" : "opacity-0 w-0"}`} />
         </span>
       ))}
       { editable && 
         <form onSubmit={updateTags} className="flex gap-1 m-0 p-0 w-fit">
           <input type="text" value={inputValue} onKeyDown={onKeyDown} onKeyUp={onKeyUp} onChange={(e) => setInputValue(e.target.value)} ref={inputRef} autoFocus className="max-w-full py-1 bg-transparent focus:outline-none" style={{ width: `${inputValue.length + 1}ch` }}/>
           <button type="submit" title="Save tags">
-            <Check className="cursor-pointer text-zinc-400 hover:text-zinc-200" width={16} />
+            <Check className="cursor-pointer text-zinc-400 hover:text-zinc-100" width={16} />
           </button>
         </form>
       }

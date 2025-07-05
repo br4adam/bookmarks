@@ -22,8 +22,8 @@ const CommandMenu = () => {
     return () => document.removeEventListener("keydown", down)
   }, [])
 
-  const addImageFallback = (event: SyntheticEvent<HTMLImageElement, Event>) => {
-    event.currentTarget.src = "./fallback.png"
+  const addFallbackIcon = (event: SyntheticEvent<HTMLImageElement, Event>) => {
+    event.currentTarget.src = "./fallback-icon.png"
   }
 
   const openCommandMenu = () => {
@@ -51,7 +51,7 @@ const CommandMenu = () => {
           </Command.Empty>
           { bookmarks.map(bookmark => (
             <Command.Item key={bookmark.id} value={`${bookmark.title} ${bookmark.url} ${bookmark.tags.join(" ")}`} onSelect={() => window.open(bookmark.url, "_blank")}>
-              <img src={`https://icon.horse/icon/${bookmark.domain}`} alt={`${bookmark.title} icon`} className="size-9" onError={addImageFallback} />
+              <img src={`https://icon.horse/icon/${bookmark.domain}`} alt={`${bookmark.title} icon`} className="size-9" onError={addFallbackIcon} />
               <div className="flex flex-col max-w-[calc(100%-64px)]">
                 <p className="truncate">{bookmark.title}</p>
                 <span className="text-xs text-zinc-500 truncate">{bookmark.url}</span>
