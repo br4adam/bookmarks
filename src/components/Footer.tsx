@@ -3,7 +3,6 @@ import { useModalStore } from "../stores/ModalStore"
 import { Page, Bug, Xmark } from "iconoir-react"
 import Modal from "./Modal"
 import ReactMarkdown from "react-markdown"
-import PrivacyFile from "../assets/privacy.md"
 
 const Footer = () => {
   const setModalOpen = useModalStore(state => state.setModalOpen)
@@ -44,9 +43,11 @@ type PrivacyPolicyProps = {
 
 const PrivacyPolicy = ({ isPrivacyPolicyOpen, closePrivacyPolicy }: PrivacyPolicyProps) => {
   const [ privacyPolicyText, setPrivacyPolicyText ] = useState("")
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+  const privacyPolicyUrl = `${supabaseUrl}/storage/v1/object/public/bookmarks/privacy-policy.md`
 
   useEffect(() => {
-    fetch(PrivacyFile).then(res => res.text()).then(text => setPrivacyPolicyText(text))
+    fetch(privacyPolicyUrl).then(res => res.text()).then(text => setPrivacyPolicyText(text))
   })
 
   return (
