@@ -58,7 +58,7 @@ const Header = () => {
                 <img className="size-7 rounded-full" src={session.user.user_metadata.avatar_url || defaultProfilePicture} alt="Profile picture" />
               </Menu.Button>
               <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-100" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
-                <Menu.Items className="absolute z-50 p-[1px] right-0 w-48 mt-2 origin-top-right bg-zinc-200 rounded-md text-sm shadow-xl focus:outline-non will-change-transform">
+                <Menu.Items className="absolute z-50 p-[1px] right-0 w-48 mt-2 origin-top-right bg-zinc-100 rounded-md text-sm shadow-xl focus:outline-non will-change-transform">
                   <MenuItem onClick={openProfileCard}>
                     <User width={16} /> Profile
                   </MenuItem>
@@ -93,7 +93,7 @@ const MenuItem = ({ onClick, children }: MenuItemProps) => {
   return (
     <Menu.Item>
       {({ active }) => (
-        <button onClick={onClick} className={`${active ? "bg-zinc-950 text-zinc-200" : "text-zinc-950"} flex gap-2 w-full items-center rounded-[5px] p-2`}>
+        <button onClick={onClick} className={`${active ? "bg-zinc-950 text-zinc-100" : "text-zinc-950"} flex gap-2 w-full items-center rounded-[5px] p-2`}>
           {children}
         </button>
       )}

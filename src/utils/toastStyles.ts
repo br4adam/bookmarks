@@ -1,7 +1,7 @@
 export const defaultToastStyle = {
   classNames: {
-    toast: "!bg-zinc-950 !text-zinc-200 !border-zinc-700 !rounded-xl",
-    closeButton: "!bg-zinc-950 !text-zinc-200 !border-zinc-700"
+    toast: "!bg-zinc-950 !text-zinc-100 !border-zinc-700 !rounded-xl",
+    closeButton: "!bg-zinc-950 !text-zinc-100 !border-zinc-700"
   }
 }
 

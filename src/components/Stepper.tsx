@@ -7,7 +7,7 @@ const Stepper = () => {
       <div className="mb-24">
       <div className="flex flex-col items-center gap-4 my-24">
         <span className="text-xs font-semibold tracking-widest uppercase text-zinc-500">How it works</span>
-        <h2 className="max-w-md text-4xl font-bold text-center text-transparent md:max-w-xl md:text-5xl from-zinc-400 via-zinc-200 to-zinc-400 bg-gradient-to-r bg-clip-text">Manage your bookmarks with just 3 easy steps</h2>
+        <h2 className="max-w-md text-4xl font-bold text-center text-transparent md:max-w-xl md:text-5xl from-zinc-400 via-zinc-100 to-zinc-400 bg-gradient-to-r bg-clip-text">Manage your bookmarks with just 3 easy steps</h2>
       </div>
         <ul className="grid w-full grid-cols-1 gap-8 sm:grid-cols-3">
           <ListItem icon={<Bookmark className="size-5" />} title="Add websites" description="Just paste or type the URL of the website you want to save, and your bookmark will be instantly stored." />
@@ -30,11 +30,11 @@ const ListItem = ({ icon, title, description, withDivider = true }: ListItemProp
   return (
     <li className="relative flex sm:flex-col sm:items-center sm:text-center group">
       { withDivider && <span className="absolute left-5 top-12 h-[calc(100%-24px)] w-px sm:h-px sm:top-5 sm:left-[calc(50%+30px)] sm:w-[calc(100%-30px)] bg-zinc-700" aria-hidden="true"></span> }
-      <div className="flex items-center justify-center size-10 duration-200 border rounded-lg aspect-square bg-zinc-950 border-zinc-700 text-zinc-200 group-hover:scale-110 will-change-transform">
+      <div className="flex items-center justify-center size-10 duration-200 border rounded-lg aspect-square bg-zinc-950 border-zinc-700 text-zinc-100 group-hover:scale-110 will-change-transform">
         {icon}
       </div>
       <div className="flex flex-col gap-2 mt-1 ml-6 sm:ml-0 sm:mt-6">
-        <p className="text-lg font-medium text-zinc-200">{title}</p>
+        <p className="text-lg font-medium text-zinc-100">{title}</p>
         <p className="text-zinc-500 text-pretty sm:max-w-xs">{description}</p>
       </div>
     </li>

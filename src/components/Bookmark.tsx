@@ -15,8 +15,8 @@ const Bookmark = ({ bookmark }: Props) => {
   const loading = useBookmarkStore(state => state.loading)
   const { ref, isVisible } = useIntersectionObserver()
 
-  const addImageFallback = (event: SyntheticEvent<HTMLImageElement, Event>) => {
-    event.currentTarget.src = "./fallback.png"
+  const addFallbackImage = (event: SyntheticEvent<HTMLImageElement, Event>, type: 'cover' | 'icon') => {
+    event.currentTarget.src = type === 'cover' ? "./fallback-cover.png" : "./fallback-icon.png"
   }
 
   if (loading) return <Skeleton />
@@ -24,12 +24,12 @@ const Bookmark = ({ bookmark }: Props) => {
   return (
     <CardSpotlight className="p-0">
       <div ref={ref} className="z-10 relative aspect-[1.91/1] bg-zinc-800 rounded-t-[11px] overflow-hidden">
-        { isVisible && <img className="object-cover size-full m-auto animate-fade-in" src={bookmark.image} alt={bookmark.title} loading="lazy" onError={addImageFallback} /> }
+        { isVisible && <img className="object-cover size-full m-auto animate-fade-in" src={bookmark.image} alt={bookmark.title} loading="lazy" onError={(e) => addFallbackImage(e, 'cover')} /> }
         { bookmark.pinned && <PinBadge /> }
       </div>
       <div className="px-3 pb-3">
         <div className="flex items-center gap-2">
-          { isVisible && <img src={`https://icon.horse/icon/${bookmark.domain}`} alt={`${bookmark.title} icon`} className="size-4 shrink-0 rounded-sm" onError={addImageFallback} /> }
+          { isVisible && <img src={`https://icon.horse/icon/${bookmark.domain}`} alt={`${bookmark.title} icon`} className="size-4 shrink-0 rounded-sm" onError={(e) => addFallbackImage(e, 'icon')} /> }
           <p className="font-medium truncate">{bookmark.title}</p>
           <BookmarkOptions bookmark={bookmark} />
         </div>

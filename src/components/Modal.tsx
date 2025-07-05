@@ -11,7 +11,7 @@ type Props = {
 }
 
 const Modal = ({ className = "", isOpen, closeModal, title, children }: Props) => {
-  const baseClasses = "w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform rounded-xl bg-zinc-200 text-zinc-950 selection:bg-zinc-500/20"
+  const baseClasses = "w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform rounded-xl bg-zinc-100 text-zinc-950 selection:bg-zinc-500/20"
 
   return (
     <Transition appear show={isOpen} as={Fragment}>

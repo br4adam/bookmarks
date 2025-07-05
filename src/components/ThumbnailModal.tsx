@@ -36,7 +36,7 @@ const ThumbnailModal = ({ isThumbnailModalOpen, closeThumbnailModal, bookmark }:
       <p className="mt-2 text-sm text-zinc-500">{`You are going to change the thumbnail of '${bookmark.title}' bookmark. Just paste the image URL and save the changes.`}</p>
       <form onSubmit={changeThumbnail}>
         <input className="w-full text-sm py-2 px-3 mt-4 bg-transparent border rounded-md border-zinc-700 focus:border-zinc-500 focus:outline-none caret-zinc-950 text-zinc-950" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} type="text" placeholder="https://" />
-        <div className="flex gap-2 mt-4 text-zinc-200">
+        <div className="flex gap-2 mt-4 text-zinc-100">
           <Button type="submit" className="bg-zinc-950 hover:bg-zinc-900">Save changes</Button>
           <Button onClick={closeThumbnailModal} className="bg-transparent text-zinc-950 hover:bg-zinc-300">Cancel</Button>
         </div>

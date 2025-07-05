@@ -39,14 +39,14 @@ const Login = ({ children, className }: Props) => {
         <div className="flex flex-col items-center gap-2 mt-4 text-zinc-950">
           <form className="flex flex-col items-center w-full gap-2" onSubmit={handleLogin}>
             <input className="w-full text-sm px-3 py-2 mt-1 bg-transparent border rounded-md border-zinc-700 focus:border-zinc-500 focus:outline-none" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" name="email" autoComplete="on" autoFocus />
-            <Button type="submit" className="justify-center w-full bg-zinc-950 text-zinc-200 hover:bg-zinc-900"><Sparks width={18} strokeWidth={1.75} />Send Magic Link</Button>
+            <Button type="submit" className="justify-center w-full bg-zinc-950 text-zinc-100 hover:bg-zinc-900"><Sparks width={18} strokeWidth={1.75} />Send Magic Link</Button>
           </form>
           <div className="flex items-center w-full tex">
             <span className="flex-grow h-[1px] bg-zinc-500" aria-hidden="true"></span>
             <span className="mx-2 my-1 text-sm text-zinc-500">OR</span>
             <span className="flex-grow h-[1px] bg-zinc-500" aria-hidden="true"></span>
           </div>
-          <Button onClick={loginWithGithub} className="justify-center w-full bg-zinc-950 text-zinc-200 hover:bg-zinc-900"><Github width={18} strokeWidth={1.75} />Continue with GitHub</Button>
+          <Button onClick={loginWithGithub} className="justify-center w-full bg-zinc-950 text-zinc-100 hover:bg-zinc-900"><Github width={18} strokeWidth={1.75} />Continue with GitHub</Button>
         </div>
       </Modal>
     </>
