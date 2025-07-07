@@ -7,6 +7,7 @@ import { useAuthStore } from "../stores/AuthStore"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useModalStore } from "../stores/ModalStore"
 import useScrollProgess from "../hooks/useScrollProgess"
+import useScrollDirection from "../hooks/useScrollDirection"
 import logo from "../assets/logo.png"
 import defaultProfilePicture from "../assets/profilepic.png"
 import ProfileCard from "./ProfileCard"
@@ -18,6 +19,7 @@ const Header = () => {
   const completion = useScrollProgess()
   const setModalOpen = useModalStore(state => state.setModalOpen)
   const [ isProfileCardOpen, setIsProfileCardOpen ] = useState<boolean>(false)
+  const scrollDirection = useScrollDirection('up', 54)
 
   const openProfileCard = () => {
     setIsProfileCardOpen(true)
@@ -41,10 +43,12 @@ const Header = () => {
     URL.revokeObjectURL(url)
   }
 
+  const shouldTransform = scrollDirection === 'down' && session
+
   const clampedCompletion = Math.min(completion, 100)
 
   return (
-    <header className="sticky top-0 z-30 w-full py-2 border-b bg-zinc-950 border-zinc-700">
+    <header className={`sticky top-0 z-30 w-full py-2 border-b bg-zinc-950 border-zinc-700 transition-transform duration-700 ease-in-out ${ shouldTransform ? '-translate-y-[54px] pointer-events-none' : 'translate-y-0' }`}>
       <div className="flex items-center w-full px-4 max-w-6xl gap-2 mx-auto md:w-10/12 md:px-0">
         <img className="size-6 rounded-full" src={logo} alt="Bookmarks logo" />
         <p className="font-bold">Bookmarks</p>
