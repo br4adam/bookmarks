@@ -47,7 +47,7 @@
   top: 100px;
   left: 50%;
   transform: translate(-50%);
-  width: 92%;
+  width: calc(100% - 32px);
   max-width: 680px;
   background-color: #09090b;
   color: #e4e4e7;
