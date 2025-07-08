@@ -3,7 +3,7 @@ import { Bookmark, Sparks, Search } from "iconoir-react"
 
 const Stepper = () => {
   return (
-    <section className="w-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] sm:bg-[length:800px_400px] bg-[length:400px_200px] bg-no-repeat bg-top from-zinc-400/10 to-60% to-transparent">
+    <section className="w-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] md:bg-[length:800px_400px] bg-[length:300px_200px] bg-no-repeat bg-top from-zinc-400/10 to-60% to-transparent">
       <div className="mb-24">
       <div className="flex flex-col items-center gap-4 my-24">
         <span className="text-xs font-semibold tracking-widest uppercase text-zinc-500">How it works</span>
