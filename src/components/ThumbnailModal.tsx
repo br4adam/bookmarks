@@ -1,11 +1,10 @@
 import { FormEvent, useState } from "react"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
-import { toast } from "sonner"
+import { showErrorToast, showSuccessToast } from "../utils/showToast"
 import isValidUrl from "../utils/isValidUrl"
 import Button from "./Button"
 import Modal from "./Modal"
-import { successToastStyle, errorToastStyle } from "../utils/toastStyles"
 
 type Props = {
   isThumbnailModalOpen: boolean
@@ -22,10 +21,10 @@ const ThumbnailModal = ({ isThumbnailModalOpen, closeThumbnailModal, bookmark }:
   const changeThumbnail = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!userId) return
-    if (!isValidUrl(imageUrl)) return toast.error("Please insert a valid image URL!", errorToastStyle)
+    if (!isValidUrl(imageUrl)) return showErrorToast("Please insert a valid image URL!")
     const response = await updateBookmark(bookmark.id, { ...bookmark, image: imageUrl })
-    if (!response.success) return toast.error(response.data, errorToastStyle)
-    toast.success("Thumbnail changed successfully!", successToastStyle)
+    if (!response.success) return showErrorToast(response.data)
+    showSuccessToast("Thumbnail changed successfully!")
     getBookmarks(userId)
     setImageUrl("")
     closeThumbnailModal()

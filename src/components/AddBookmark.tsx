@@ -4,8 +4,7 @@ import { useAuthStore } from "../stores/AuthStore"
 import { useModalStore } from "../stores/ModalStore"
 import Button from "./Button"
 import { PasteClipboard, ClipboardCheck, ArrowUpRight, DataTransferDown, DataTransferUp, CalendarRotate } from "iconoir-react"
-import { toast } from "sonner"
-import { defaultToastStyle, successToastStyle, errorToastStyle } from "../utils/toastStyles"
+import { showSuccessToast, showErrorToast, showInfoToast, showLoadingToast } from "../utils/showToast"
 
 const AddBookmark = () => {
   const { fetch: getBookmarks, add: createBookmark, bookmarks, loading, setSelectedTag, order, setOrder, timePeriod, setTimePeriod } = useBookmarkStore(state => ({ fetch: state.fetch, add: state.add, bookmarks: state.bookmarks, loading: state.loading, setSelectedTag: state.setSelectedTag, order: state.order, setOrder: state.setOrder, timePeriod: state.timePeriod, setTimePeriod: state.setTimePeriod }))
@@ -20,21 +19,21 @@ const AddBookmark = () => {
     e.preventDefault()
     if (inputRef.current) inputRef.current.blur()
     const isBookmarkExist = bookmarks.some(bookmark => bookmark.url === url)
-    if (isBookmarkExist) return toast.message("This website is already in your collection.", { action: {label: "Save", onClick: () => handleCreate()}, description: "Are you sure you want to save it again?", duration: 10000, ...defaultToastStyle })
+    if (isBookmarkExist) return showInfoToast("This website is already in your collection.", { action: {label: "Save", onClick: () => handleCreate()}, description: "Are you sure you want to save it again?", duration: 10000, icon: null })
     handleCreate()
   }
 
   const handleCreate = async () => {
-    const toastId = toast.loading("Loading...", { closeButton: false, ...defaultToastStyle })
+    const toastId = showLoadingToast("Loading...")
     if (!userId) return
     const trimmedUrl = url.trim()
     const encodedUrl = encodeURI(trimmedUrl)
     const response = await createBookmark(encodedUrl, userId)
     if (!response.success) {
       inputRef.current?.focus()
-      return toast.error(response.data, { id: toastId, closeButton: true, ...errorToastStyle })
+      return showErrorToast(response.data, { id: toastId })
     }
-    toast.success("Bookmark added successfully!", { id: toastId, closeButton: true, ...successToastStyle })
+    showSuccessToast("Bookmark added successfully!", { id: toastId })
     getBookmarks(userId)
     window.scrollTo({ top: 0, behavior: "smooth" })
     setUrl("")

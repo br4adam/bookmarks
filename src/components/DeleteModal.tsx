@@ -1,9 +1,8 @@
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
-import { toast } from "sonner"
+import { showErrorToast, showSuccessToast } from "../utils/showToast"
 import Button from "./Button"
 import Modal from "./Modal"
-import { errorToastStyle, successToastStyle } from "../utils/toastStyles"
 
 type Props = {
   isDeleteModalOpen: boolean
@@ -19,8 +18,8 @@ const DeleteModal = ({ isDeleteModalOpen, closeDeleteModal, bookmark }: Props) =
   const handleDelete = async (bookmarkId: number) => {
     if (!userId) return
     const response = await deleteBookmark(bookmarkId)
-    if (!response.success) return toast.error(response.data, errorToastStyle)
-    toast.success("Bookmark deleted successfully!", successToastStyle)
+    if (!response.success) return showErrorToast(response.data)
+    showSuccessToast("Bookmark deleted successfully!")
     closeDeleteModal()
   }
 
