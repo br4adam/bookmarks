@@ -3,8 +3,7 @@ import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
 import { Check, Xmark } from "iconoir-react"
 import useClickOutside from "../hooks/useClickOutside"
-import { toast } from "sonner"
-import { errorToastStyle } from "../utils/toastStyles"
+import { showErrorToast } from "../utils/showToast"
 
 type Props = {
   bookmark: Bookmark
@@ -28,7 +27,7 @@ const BookmarkTags = ({ bookmark }: Props) => {
     setEditable(false)
     setInputValue("")
     const response = await updateBookmark(bookmark.id, { ...bookmark, tags: newTags })
-    if (!response.success) return toast.error(response.data, errorToastStyle)
+    if (!response.success) return showErrorToast(response.data)
   }
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

@@ -1,8 +1,6 @@
 import { Fragment, useState, ReactNode } from "react"
 import { Menu, Transition } from "@headlessui/react"
 import { BinMinusIn, Copy, Pin, PinSlash, MediaImage, RefreshDouble, Check, Sparks } from "iconoir-react"
-import { toast } from "sonner"
-import { defaultToastStyle, successToastStyle, errorToastStyle } from "../utils/toastStyles"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
 import { useModalStore } from "../stores/ModalStore"
@@ -13,6 +11,7 @@ import getAvailableTags from "../utils/getAvailableTags"
 import useClipboard from "../hooks/useClipboard"
 import DeleteModal from "./DeleteModal"
 import ThumbnailModal from "./ThumbnailModal"
+import { showSuccessToast, showErrorToast, showInfoToast, showLoadingToast } from "../utils/showToast"
 
 type Props = {
   bookmark: Bookmark
@@ -30,40 +29,40 @@ const BookmarkOptions = ({ bookmark }: Props) => {
   const pinBookmark = async () => {
     if (!userId) return
     const response = await updateBookmark(bookmark.id, { ...bookmark, pinned: !bookmark.pinned })
-    if (!response.success) return toast.error(response.data, errorToastStyle)
-    if (response.data[0].pinned) toast("Bookmark pinned to the top!", defaultToastStyle)
-    else toast("Bookmark unpinned!", defaultToastStyle)
+    if (!response.success) return showErrorToast(response.data)
+    if (response.data[0].pinned) showInfoToast("Bookmark pinned to the top!")
+    else showInfoToast("Bookmark unpinned!")
     getBookmarks(userId)
   }
 
   const copyUrl = (url: string) => {
     copyToClipboard(url)
-    if (error) return toast.error(error.message, errorToastStyle)
-    toast("URL copied to clipboard!", defaultToastStyle)
+    if (error) return showErrorToast(error.message)
+    showInfoToast("URL copied to clipboard!")
   }
 
   const refreshMetadata = async (url: string) => {
-    const toastId = toast.loading("Searching for new metadata...", { closeButton: false, ...defaultToastStyle })
+    const toastId = showLoadingToast("Searching for new metadata...")
     const newMetadata = await getMetadata(url)
-    if (!newMetadata || !userId) return toast.error("Failed to retrieve new metadata.", { id: toastId, closeButton: true, ...errorToastStyle })
+    if (!newMetadata || !userId) return showErrorToast("Failed to retrieve new metadata.", { id: toastId })
     const { title, domain, description, images } = newMetadata
-    if (bookmark.title === title && bookmark.description === description && bookmark.image === images[0]) return toast.info("No new metadata found.", { id: toastId, closeButton: true, ...defaultToastStyle })
+    if (bookmark.title === title && bookmark.description === description && bookmark.image === images[0]) return showInfoToast("No new metadata found.", { id: toastId })
     const response = await updateBookmark(bookmark.id, { ...bookmark, title: title || domain, description, image: newMetadata.images[0] })
-    if (!response.success) return toast.error(response.data, { id: toastId, closeButton: true, ...errorToastStyle })
-    toast.success("Bookmark refreshed successfully!", { id: toastId, closeButton: true, ...successToastStyle })
+    if (!response.success) return showErrorToast(response.data, { id: toastId })
+    showSuccessToast("Bookmark refreshed successfully!", { id: toastId })
     getBookmarks(userId)
   }
 
   const generateBookmarkTags = async (bookmark: Bookmark, session: Session) => {
     if (!userId) return
-    const toastId = toast.loading("Crafting the perfect tags for you...", { closeButton: false, ...defaultToastStyle })
+    const toastId = showLoadingToast("Crafting the perfect tags for you...")
 		const availableTags = getAvailableTags(bookmarks)
     const newTags = await generateTags(`${bookmark.url} ${bookmark.title} ${bookmark.description}`, availableTags, session)
-    if (!newTags) return toast.error("Failed to generate tags. Please try again later.", { id: toastId, closeButton: true, ...errorToastStyle })
+    if (!newTags) return showErrorToast("Failed to generate tags. Please try again later.", { id: toastId })
     const updatedBookmark = { ...bookmark, tags: newTags }
     const response = await updateBookmark(bookmark.id, updatedBookmark)
-    if (!response.success) return toast.error(response.data, { id: toastId, closeButton: true, ...errorToastStyle })
-    toast.success("Tags generated successfully!", { id: toastId, closeButton: true, ...successToastStyle })
+    if (!response.success) return showErrorToast(response.data, { id: toastId })
+    showSuccessToast("Tags generated successfully!", { id: toastId })
   }
 
   const openThumbnailModal = () => {

@@ -1,12 +1,12 @@
 import { create } from "zustand"
 import supabase from "../utils/supabase"
-import { Session } from "@supabase/supabase-js"
+import { Session, Provider } from "@supabase/supabase-js"
 
 type AuthState = {
   session: Session | null
   setSession: (session: Session | null) => void
   loading: boolean
-  loginWithGithub: () => Promise<void>
+  loginWithSocial: (provider: Provider) => Promise<void>
   loginWithOtp: (email: string) => Promise<void>
   logout: () => Promise<void>
 }
@@ -15,11 +15,11 @@ export const useAuthStore = create<AuthState>(set => ({
   session: null,
   setSession: (session) => set({ session }),
   loading: false,
-  loginWithGithub: async () => {
+  loginWithSocial: async (provider: Provider) => {
     try {
       set({ loading: true })
       const { error } = await supabase.auth.signInWithOAuth({ 
-        provider: "github", 
+        provider: provider,
         options: { redirectTo: window.location.origin }
       })
       if (error) throw error
