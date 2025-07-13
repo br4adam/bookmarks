@@ -11,7 +11,7 @@ const Features = () => {
     <section className="flex flex-col items-center w-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] sm:bg-[length:800px_400px] bg-[length:400px_200px] bg-no-repeat bg-top from-zinc-400/10 to-60% to-transparent">
       <div className="flex flex-col items-center gap-4 my-24">
         <span className="text-xs font-semibold tracking-widest uppercase text-zinc-500">How it looks</span>
-        <h2 className="max-w-md text-4xl font-bold text-center text-transparent md:max-w-xl md:text-5xl from-zinc-400 via-zinc-100 to-zinc-400 bg-gradient-to-r bg-clip-text">Bring harmony to your virtual library</h2>
+        <h2 className="max-w-md text-4xl font-semibold text-center text-transparent md:max-w-xl md:text-5xl from-zinc-400 via-zinc-100 to-zinc-400 bg-gradient-to-r bg-clip-text">Bring harmony to your virtual library</h2>
       </div>
       <div className="flex flex-col w-full gap-4 select-none sm:flex-row">
         <div className="flex flex-col gap-4 sm:w-2/3">
@@ -29,7 +29,7 @@ const Features = () => {
             </CardSpotlight>
           </div>
         </div>
-        <CardSpotlight className="sm:w-1/3 aspect-square bg-bottom sm:aspect-auto" style={{ backgroundImage: `url(${bg02})`}}>
+        <CardSpotlight className="bg-bottom sm:w-1/3 aspect-square sm:aspect-auto" style={{ backgroundImage: `url(${bg02})`}}>
           <Title>Superfast search</Title>
         </CardSpotlight>
       </div>

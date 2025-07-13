@@ -56,7 +56,7 @@ const BookmarkOptions = ({ bookmark }: Props) => {
   const generateBookmarkTags = async (bookmark: Bookmark, session: Session) => {
     if (!userId) return
     const toastId = showLoadingToast("Crafting the perfect tags for you...")
-		const availableTags = getAvailableTags(bookmarks)
+    const availableTags = getAvailableTags(bookmarks)
     const newTags = await generateTags(`${bookmark.url} ${bookmark.title} ${bookmark.description}`, availableTags, session)
     if (!newTags) return showErrorToast("Failed to generate tags. Please try again later.", { id: toastId })
     const updatedBookmark = { ...bookmark, tags: newTags }

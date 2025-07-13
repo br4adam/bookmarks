@@ -49,17 +49,17 @@ const Header = () => {
 
   return (
     <header className={`sticky top-0 z-30 w-full py-2 border-b bg-zinc-950 border-zinc-700 transition-transform duration-300 ease-in-out ${ shouldTransform ? '-translate-y-[54px] pointer-events-none' : 'translate-y-0' }`}>
-      <div className="flex items-center w-full px-4 max-w-6xl gap-2 mx-auto md:w-10/12 md:px-0">
-        <img className="size-6 rounded-full" src={logo} alt="Bookmarks logo" />
-        <p className="font-bold">Bookmarks</p>
-        <nav className="ml-auto flex gap-4 items-center">
+      <div className="flex items-center w-full max-w-6xl gap-2 px-4 mx-auto md:w-10/12 md:px-0">
+        <img className="rounded-full size-6" src={logo} alt="Bookmarks logo" />
+        <p className="font-semibold">Bookmarks</p>
+        <nav className="flex items-center gap-4 ml-auto">
         { !session && <Login>Login</Login> }
         { session && (
           <>
             <CommandMenu />
             <Menu as="div" className="relative size-7">
               <Menu.Button>
-                <img className="size-7 rounded-full" src={session.user.user_metadata.avatar_url || defaultProfilePicture} alt="Profile picture" />
+                <img className="rounded-full size-7" src={session.user.user_metadata.avatar_url || defaultProfilePicture} alt="Profile picture" />
               </Menu.Button>
               <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-100" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
                 <Menu.Items className="absolute z-50 p-[1px] right-0 w-48 mt-2 origin-top-right bg-zinc-100 rounded-md text-sm shadow-xl focus:outline-non will-change-transform">
