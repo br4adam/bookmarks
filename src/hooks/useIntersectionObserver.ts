@@ -10,7 +10,7 @@ const useIntersectionObserver = (options = {}) => {
       setIsVisible(entry.isIntersecting)
     }, {
       root: null,
-      rootMargin: '800px',
+      rootMargin: '400px',
       threshold: 0.1,
       ...options
     })

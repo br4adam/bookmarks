@@ -1,5 +1,5 @@
-import { Fragment, useState, ReactNode } from "react"
-import { Menu, Transition } from "@headlessui/react"
+import { useState, ReactNode } from "react"
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { BinMinusIn, Copy, Pin, PinSlash, MediaImage, RefreshDouble, Check, Sparks } from "iconoir-react"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
@@ -56,7 +56,7 @@ const BookmarkOptions = ({ bookmark }: Props) => {
   const generateBookmarkTags = async (bookmark: Bookmark, session: Session) => {
     if (!userId) return
     const toastId = showLoadingToast("Crafting the perfect tags for you...")
-		const availableTags = getAvailableTags(bookmarks)
+    const availableTags = getAvailableTags(bookmarks)
     const newTags = await generateTags(`${bookmark.url} ${bookmark.title} ${bookmark.description}`, availableTags, session)
     if (!newTags) return showErrorToast("Failed to generate tags. Please try again later.", { id: toastId })
     const updatedBookmark = { ...bookmark, tags: newTags }
@@ -88,31 +88,29 @@ const BookmarkOptions = ({ bookmark }: Props) => {
   return (
     <>
       <Menu as="div" className="relative ml-auto">
-        <Menu.Button className="px-3 py-1 text-sm font-medium transition-all duration-200 border rounded-md outline-none border-zinc-700 hover:border-zinc-500 focus:border-zinc-500">
+        <MenuButton className="flex items-center gap-1 px-3 py-1 text-sm font-medium transition-all duration-200 border rounded-md outline-none border-zinc-700 hover:border-zinc-500 focus:border-zinc-500">
           Options
-        </Menu.Button>
-        <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-100" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
-          <Menu.Items className="absolute z-50 p-[1px] right-0 w-44 mt-2 origin-top-right bg-zinc-100 rounded-md text-sm shadow-xl focus:outline-non will-change-transform">
-            <MenuItem onClick={() => copyUrl(bookmark.url)}>
-              { copied ? <Check width={16} /> : <Copy width={16} /> } Copy URL
-            </MenuItem>
-            <MenuItem onClick={pinBookmark}>
+        </MenuButton>
+        <MenuItems anchor="bottom end" transition modal={false} className="w-44 origin-top-right rounded-md bg-zinc-100 z-50 p-[1px] shadow-xl transition ease-out duration-100 [--anchor-gap:8px] focus:outline-none data-closed:scale-95 data-closed:opacity-0 antialiased">
+          <DropdownMenuItem onClick={() => copyUrl(bookmark.url)}>
+            { copied ? <Check width={16} /> : <Copy width={16} /> } Copy link
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={pinBookmark}>
             { bookmark.pinned ? <PinSlash width={16} /> : <Pin width={16} /> } { bookmark.pinned ? "Unpin" : "Pin to top" }
-            </MenuItem>
-            <MenuItem onClick={() => refreshMetadata(bookmark.url)}>
-              <RefreshDouble width={16} />Refresh metadata
-            </MenuItem>
-            <MenuItem onClick={() => session && generateBookmarkTags(bookmark, session)} isColorful>
-              <Sparks width={16} />Generate tags
-            </MenuItem>
-            <MenuItem onClick={() => openThumbnailModal()}>
-              <MediaImage width={16} />Change thumbnail
-            </MenuItem>
-            <MenuItem onClick={() => openDeleteModal()}>
-              <BinMinusIn width={16} className="text-red-600" /><span className="text-red-600">Delete</span>
-            </MenuItem>
-          </Menu.Items>
-        </Transition>
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => refreshMetadata(bookmark.url)}>
+            <RefreshDouble width={16} />Refresh metadata
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => session && generateBookmarkTags(bookmark, session)} isColorful>
+            <Sparks width={16} />Generate tags
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => openThumbnailModal()}>
+            <MediaImage width={16} />Change thumbnail
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => openDeleteModal()}>
+            <BinMinusIn width={16} className="text-red-600" /><span className="text-red-600">Delete</span>
+          </DropdownMenuItem>
+        </MenuItems>
       </Menu>
       { isDeleteModalOpen && <DeleteModal isDeleteModalOpen={isDeleteModalOpen} closeDeleteModal={closeDeleteModal} bookmark={bookmark} /> }
       { isThumbnailModalOpen && <ThumbnailModal isThumbnailModalOpen={isThumbnailModalOpen} closeThumbnailModal={closeThumbnailModal} bookmark={bookmark} /> }
@@ -120,23 +118,22 @@ const BookmarkOptions = ({ bookmark }: Props) => {
   )
 }
 
-type MenuItemProps = {
+type DropdownMenuItemProps = {
   onClick: React.MouseEventHandler<HTMLButtonElement>
   children: ReactNode
   isColorful?: boolean
 }
 
-const MenuItem = ({ onClick, children, isColorful }: MenuItemProps) => {
-  const colorfulBg = "bg-gradient-to-r from-indigo-800 via-indigo-600 to-purple-500"
+const DropdownMenuItem = ({ onClick, children, isColorful }: DropdownMenuItemProps) => {
+  const colorfulFocusClasses = "data-[focus]:bg-gradient-to-r data-[focus]:from-indigo-800 data-[focus]:via-indigo-600 data-[focus]:to-purple-500 data-[focus]:text-zinc-100"
+  const focusClasses = "data-[focus]:bg-zinc-950 data-[focus]:text-zinc-100"
 
   return (
-    <Menu.Item>
-      {({ active }) => (
-        <button onClick={onClick} className={`${active ? (isColorful ? colorfulBg : "bg-zinc-950 text-zinc-100") : "text-zinc-950"} flex gap-2 w-full items-center rounded-[5px] p-2`}>
-          {children}
-        </button>
-      )}
-    </Menu.Item>
+    <MenuItem>
+      <button onClick={onClick} className={`${isColorful ? colorfulFocusClasses : focusClasses} text-zinc-950 flex gap-2 w-full text-sm items-center rounded-[5px] p-2`}>
+        {children}
+      </button>
+    </MenuItem>
   )
 }
 
