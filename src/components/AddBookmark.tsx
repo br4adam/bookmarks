@@ -24,7 +24,7 @@ const AddBookmark = () => {
   }
 
   const handleCreate = async () => {
-    const toastId = showLoadingToast("Loading...")
+    const toastId = showLoadingToast("Collecting data...")
     if (!userId) return
     const trimmedUrl = url.trim()
     const encodedUrl = encodeURI(trimmedUrl)

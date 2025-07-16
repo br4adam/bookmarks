@@ -11,7 +11,7 @@ const Showcase = () => {
   return (
     <div className="flex flex-col items-center w-full">
       <Headline />
-      <Login className="group">Get Started Now <ArrowRight width={16} className="group-hover:translate-x-1 duration-500 will-change-transform" /></Login>
+      <Login className="group bg-zinc-950">Get Started Now <ArrowRight width={16} className="group-hover:translate-x-1 duration-500 will-change-transform" /></Login>
       <CardSpotlight className="w-full mt-12 aspect-[160/99] hidden md:flex" style={{ backgroundImage: `url(${browserDesktop})`}} />
       <img src={browserMobile} className="w-full max-w-[376px] mt-12 md:hidden" />
       <Stepper />

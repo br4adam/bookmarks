@@ -27,7 +27,7 @@ const DeleteModal = ({ isDeleteModalOpen, closeDeleteModal, bookmark }: Props) =
     <Modal isOpen={isDeleteModalOpen} closeModal={closeDeleteModal} title="Delete bookmark">
       <p className="mt-2 text-sm text-zinc-500">{`You are going to delete '${bookmark.title}' bookmark. Are you sure?`}</p>
       <div className="flex gap-2 mt-4 text-zinc-100">
-        <Button onClick={() => handleDelete(bookmark.id)} className="bg-zinc-950 hover:bg-zinc-900">Yes, delete!</Button>
+        <Button onClick={() => handleDelete(bookmark.id)} className="bg-zinc-950 hover:bg-zinc-900" data-autofocus>Yes, delete!</Button>
         <Button onClick={closeDeleteModal} className="bg-transparent text-zinc-950 hover:bg-zinc-300">No, keep it!</Button>
       </div>
     </Modal>
