@@ -27,7 +27,7 @@ const ProfileCard = ({ isProfileCardOpen, closeProfileCard, session }: Props) =>
   return (
     <Modal isOpen={isProfileCardOpen} closeModal={closeProfileCard} className="flex flex-col gap-4 justify-center items-center border border-zinc-800 bg-zinc-950 text-zinc-100 text-center">
       <div className="absolute size-full bg-[radial-gradient(#71717a,transparent_1px)] [background-size:12px_12px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000000_70%,transparent_100%)] pointer-events-none"></div>
-      <button className="absolute top-2 right-2 text-zinc-600 hover:text-zinc-100 outline-none duration-200" onClick={closeProfileCard}><Xmark /></button>
+      <button className="absolute top-2 right-2 text-zinc-600 hover:text-zinc-100 outline-none duration-200" onClick={closeProfileCard} data-autofocus><Xmark /></button>
       <img src={profilePicture} className="size-24 rounded-full z-10 my-8 select-none" alt="Profile picture" />
       <span className="border border-zinc-600 rounded-full px-3 py-1 text-sm">kmarks.boo</span>
       <h3 className="text-lg font-semibold w-full truncate">{name}</h3>
