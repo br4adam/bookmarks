@@ -61,7 +61,7 @@ const Header = () => {
               <MenuButton>
                 <img className="size-7" src={session.user.user_metadata.avatar_url || defaultProfilePicture} alt="Profile picture" />
               </MenuButton>
-              <MenuItems anchor="bottom end" transition modal={false} className="w-48 origin-top-right rounded-md bg-zinc-100 z-50 p-[1px] shadow-xl transition ease-out duration-100 [--anchor-gap:14px] focus:outline-none data-closed:scale-95 data-closed:opacity-0 antialiased">
+              <MenuItems anchor="bottom end" transition modal={false} className="w-48 origin-top-right rounded-md bg-zinc-100 z-50 p-[1px] shadow-xl transition ease-out duration-200 [--anchor-gap:14px] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0 antialiased">
                 <DropdownMenuItem onClick={openProfileCard}>
                   <User width={16} /> Profile
                 </DropdownMenuItem>
