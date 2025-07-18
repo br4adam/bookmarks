@@ -91,7 +91,7 @@ const BookmarkOptions = ({ bookmark }: Props) => {
         <MenuButton className="flex items-center gap-1 px-3 py-1 text-sm font-medium transition-all duration-200 border rounded-md outline-none border-zinc-700 hover:border-zinc-500 focus:border-zinc-500">
           Options
         </MenuButton>
-        <MenuItems anchor="bottom end" transition modal={false} className="w-44 origin-top-right rounded-md bg-zinc-100 z-50 p-[1px] shadow-xl transition ease-out duration-100 [--anchor-gap:8px] focus:outline-none data-closed:scale-95 data-closed:opacity-0 antialiased">
+        <MenuItems anchor="bottom end" transition modal={false} className="w-44 origin-top-right rounded-md bg-zinc-100 z-50 p-[1px] shadow-xl transition ease-out duration-200 [--anchor-gap:8px] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0 antialiased">
           <DropdownMenuItem onClick={() => copyUrl(bookmark.url)}>
             { copied ? <Check width={16} /> : <Copy width={16} /> } Copy link
           </DropdownMenuItem>

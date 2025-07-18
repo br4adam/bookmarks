@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react"
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { User, LogOut, LightBulb, Download } from "iconoir-react"
+import { User, LogOut, LightBulb, Download, HelpCircle } from "iconoir-react"
 import Login from "./Login"
 import CommandMenu from "./CommandMenu"
 import { useAuthStore } from "../stores/AuthStore"
@@ -61,15 +61,18 @@ const Header = () => {
               <MenuButton>
                 <img className="size-7" src={session.user.user_metadata.avatar_url || defaultProfilePicture} alt="Profile picture" />
               </MenuButton>
-              <MenuItems anchor="bottom end" transition modal={false} className="w-48 origin-top-right rounded-md bg-zinc-100 z-50 p-[1px] shadow-xl transition ease-out duration-100 [--anchor-gap:14px] focus:outline-none data-closed:scale-95 data-closed:opacity-0 antialiased">
+              <MenuItems anchor="bottom end" transition modal={false} className="w-48 origin-top-right rounded-md bg-zinc-100 z-50 p-[1px] shadow-xl transition ease-out duration-200 [--anchor-gap:14px] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0 antialiased">
                 <DropdownMenuItem onClick={openProfileCard}>
-                  <User width={16} /> Profile
+                  <User width={16} /> Your profile
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={downloadBookmarks}>
                   <Download width={16} /> Download bookmarks
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => window.open("https://github.com/br4adam/bookmarks/issues/new", "_blank")}>
+                <DropdownMenuItem href="https://github.com/br4adam/bookmarks/issues/new" target="_blank">
                   <LightBulb width={16} /> Request a feature
+                </DropdownMenuItem>
+                <DropdownMenuItem href="mailto:hello@kmarks.boo">
+                  <HelpCircle width={16} /> Get help
                 </DropdownMenuItem>
                 <DropdownMenuItem onClick={logout}>
                   <LogOut width={16} /> Logout
@@ -87,16 +90,20 @@ const Header = () => {
 }
 
 type DropdownMenuItemProps = {
-  onClick: React.MouseEventHandler<HTMLButtonElement>
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
+  href?: string
+  target?: string
   children: ReactNode
 }
 
-const DropdownMenuItem = ({ onClick, children }: DropdownMenuItemProps) => {
+const DropdownMenuItem = ({ onClick, href, target, children }: DropdownMenuItemProps & { href?: string }) => {
+  const className = "data-[focus]:bg-zinc-950 data-[focus]:text-zinc-100 text-zinc-950 flex gap-2 w-full text-sm items-center rounded-[5px] p-2";
+  
   return (
     <MenuItem>
-      <button onClick={onClick} className="data-[focus]:bg-zinc-950 data-[focus]:text-zinc-100 text-zinc-950 flex gap-2 w-full text-sm items-center rounded-[5px] p-2">
-        {children}
-      </button>
+      { href 
+        ? (<a href={href} target={target} className={className}>{children}</a>)
+        : (<button onClick={onClick} className={className}>{children}</button>)}
     </MenuItem>
   )
 }
