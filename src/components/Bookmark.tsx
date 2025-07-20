@@ -33,7 +33,7 @@ const Bookmark = ({ bookmark }: Props) => {
           <p className="font-medium truncate">{bookmark.title}</p>
           <BookmarkOptions bookmark={bookmark} />
         </div>
-        <a href={bookmark.url} target="_blank" className="inline-block max-w-[75%] mb-2 text-sm truncate outline-none text-zinc-500">{bookmark.url}</a>
+        <a href={bookmark.url} target="_blank" className="inline-block max-w-[75%] mb-2 text-sm truncate outline-none focus:text-zinc-400 text-zinc-500">{bookmark.url}</a>
         <BookmarkTags bookmark={bookmark} />
         <p className="text-sm">{bookmark.description}</p>
       </div>

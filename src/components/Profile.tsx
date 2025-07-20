@@ -2,33 +2,33 @@ import { Session } from "@supabase/supabase-js"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import dayjs from "dayjs"
 import useCountUp from "../hooks/useCountUp"
-import logo from "../assets/logo.png"
 import { Xmark } from "iconoir-react"
 import Modal from "./Modal"
+import Avatar from "./Avatar"
 
 type Props = {
-  isProfileCardOpen: boolean
-  closeProfileCard: () => void
+  isProfileOpen: boolean
+  closeProfile: () => void
   session: Session | null
 }
 
-const ProfileCard = ({ isProfileCardOpen, closeProfileCard, session }: Props) => {
+const Profile = ({ isProfileOpen, closeProfile, session }: Props) => {
   const bookmarks = useBookmarkStore(state => state.bookmarks)
 
   if (!session) return null
 
   const name = session.user?.user_metadata.name || session.user?.email
-  const profilePicture = session.user?.user_metadata.avatar_url || logo
+  const imageUrl = session.user.user_metadata.avatar_url
   const registrationDate = session.user.created_at
   const daysSinceFirstLogin = dayjs().diff(registrationDate, "days")
   const totalBookmarksCount = bookmarks.length
   const totalTagsCount = bookmarks.reduce((total, bookmark) => total + bookmark.tags.length, 0)
 
   return (
-    <Modal isOpen={isProfileCardOpen} closeModal={closeProfileCard} className="flex flex-col gap-4 justify-center relative items-center border border-zinc-800 bg-zinc-950 text-zinc-100 text-center">
+    <Modal isOpen={isProfileOpen} closeModal={closeProfile} className="flex flex-col gap-4 justify-center relative items-center border border-zinc-800 bg-zinc-950 text-zinc-100 text-center">
       <div className="absolute size-full bg-[radial-gradient(#71717a,transparent_1px)] [background-size:12px_12px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000000_70%,transparent_100%)] pointer-events-none"></div>
-      <button className="absolute top-2 right-2 text-zinc-600 hover:text-zinc-100 outline-none duration-200" onClick={closeProfileCard} data-autofocus><Xmark /></button>
-      <img src={profilePicture} className="size-24 rounded-full z-10 my-8 select-none" alt="Profile picture" />
+      <button className="absolute top-2 right-2 text-zinc-600 hover:text-zinc-100 outline-none duration-200" onClick={closeProfile} data-autofocus><Xmark /></button>
+      <Avatar imageUrl={imageUrl} email={session.user.email || ''} className="size-24 rounded-full z-10 my-8 select-none" />
       <span className="border border-zinc-600 rounded-full px-3 py-1 text-sm">kmarks.boo</span>
       <h3 className="text-lg font-semibold w-full truncate">{name}</h3>
       <p className="text-sm text-balance text-zinc-500">Thank you for choosing kmarks.boo to be part of your online journey. Happy bookmarking!</p>
@@ -57,4 +57,4 @@ const Stat = ({ data, description }: StatProps) => {
   )
 }
 
-export default ProfileCard
+export default Profile

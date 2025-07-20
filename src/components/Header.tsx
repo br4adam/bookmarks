@@ -9,8 +9,8 @@ import { useModalStore } from "../stores/ModalStore"
 import useScrollProgess from "../hooks/useScrollProgess"
 import useScrollDirection from "../hooks/useScrollDirection"
 import logo from "../assets/logo.png"
-import defaultProfilePicture from "../assets/profilepic.png"
-import ProfileCard from "./ProfileCard"
+import Profile from "./Profile"
+import Avatar from "./Avatar"
 import dayjs from "dayjs"
 
 const Header = () => {
@@ -18,16 +18,16 @@ const Header = () => {
   const { bookmarks } = useBookmarkStore(state => ({ bookmarks: state.bookmarks }))
   const completion = useScrollProgess()
   const setModalOpen = useModalStore(state => state.setModalOpen)
-  const [ isProfileCardOpen, setIsProfileCardOpen ] = useState<boolean>(false)
+  const [ isProfileOpen, setIsProfileOpen ] = useState<boolean>(false)
   const scrollDirection = useScrollDirection('up', 54)
 
-  const openProfileCard = () => {
-    setIsProfileCardOpen(true)
+  const openProfile = () => {
+    setIsProfileOpen(true)
     setModalOpen(true)
   }
 
-  const closeProfileCard = () => {
-    setIsProfileCardOpen(false)
+  const closeProfile = () => {
+    setIsProfileOpen(false)
     setModalOpen(false)
   }
 
@@ -48,43 +48,43 @@ const Header = () => {
   const clampedCompletion = Math.min(completion, 100)
 
   return (
-    <header className={`sticky top-0 z-30 w-full py-2 border-b bg-zinc-950 border-zinc-700 transition-transform duration-300 ease-in-out ${ shouldTransform ? '-translate-y-[54px] pointer-events-none' : 'translate-y-0' }`}>
+    <header className={`sticky top-0 z-30 w-full py-2 border-b bg-zinc-950 border-zinc-700 transition-transform duration-300 ease-in-out ${shouldTransform ? '-translate-y-[54px] pointer-events-none' : 'translate-y-0'}`}>
       <div className="flex items-center w-full max-w-6xl gap-2 px-4 mx-auto md:w-10/12 md:px-0">
         <img className="rounded-full size-6" src={logo} alt="Bookmarks logo" />
         <p className="font-semibold">Bookmarks</p>
         <nav className="flex items-center gap-4 ml-auto">
-        { !session && <Login>Login</Login> }
-        { session && (
-          <>
-            <CommandMenu />
-            <Menu as="div" className="relative overflow-hidden rounded-full size-7">
-              <MenuButton>
-                <img className="size-7" src={session.user.user_metadata.avatar_url || defaultProfilePicture} alt="Profile picture" />
-              </MenuButton>
-              <MenuItems anchor="bottom end" transition modal={false} className="w-48 origin-top-right rounded-md bg-zinc-100 z-50 p-[1px] shadow-xl transition ease-out duration-200 [--anchor-gap:14px] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0 antialiased">
-                <DropdownMenuItem onClick={openProfileCard}>
-                  <User width={16} /> Your profile
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={downloadBookmarks}>
-                  <Download width={16} /> Download bookmarks
-                </DropdownMenuItem>
-                <DropdownMenuItem href="https://github.com/br4adam/bookmarks/issues/new" target="_blank">
-                  <LightBulb width={16} /> Request a feature
-                </DropdownMenuItem>
-                <DropdownMenuItem href="mailto:hello@kmarks.boo">
-                  <HelpCircle width={16} /> Get help
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={logout}>
-                  <LogOut width={16} /> Logout
-                </DropdownMenuItem>
-              </MenuItems>
-            </Menu>
-          </>
-        )}
+          {!session && <Login>Login</Login>}
+          {session && (
+            <>
+              <CommandMenu />
+              <Menu as="div" className="relative overflow-hidden rounded-full size-7">
+                <MenuButton className="outline-none">
+                  <Avatar imageUrl={session.user.user_metadata.avatar_url} email={session.user.email || ''} className="size-7" />
+                </MenuButton>
+                <MenuItems anchor="bottom end" transition modal={false} className="w-48 origin-top-right rounded-md bg-zinc-100 z-50 p-[1px] shadow-xl transition ease-out duration-200 [--anchor-gap:14px] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0 antialiased">
+                  <DropdownMenuItem onClick={openProfile}>
+                    <User width={16} /> Your profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={downloadBookmarks}>
+                    <Download width={16} /> Download bookmarks
+                  </DropdownMenuItem>
+                  <DropdownMenuItem href="https://github.com/br4adam/bookmarks/issues/new" target="_blank">
+                    <LightBulb width={16} /> Request a feature
+                  </DropdownMenuItem>
+                  <DropdownMenuItem href="mailto:hello@kmarks.boo">
+                    <HelpCircle width={16} /> Get help
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={logout}>
+                    <LogOut width={16} /> Logout
+                  </DropdownMenuItem>
+                </MenuItems>
+              </Menu>
+            </>
+          )}
         </nav>
       </div>
-      { session && <span className="absolute bottom-[-1px] w-full h-[1px] bg-zinc-400 duration-300" style={{ transform: `translateX(${clampedCompletion - 100}%)`}}></span> }
-      { isProfileCardOpen && <ProfileCard isProfileCardOpen={isProfileCardOpen} closeProfileCard={closeProfileCard} session={session} /> }
+      {session && <span className="absolute bottom-[-1px] w-full h-[1px] bg-zinc-400 duration-300" style={{ transform: `translateX(${clampedCompletion - 100}%)` }}></span>}
+      {isProfileOpen && <Profile isProfileOpen={isProfileOpen} closeProfile={closeProfile} session={session} />}
     </header>
   )
 }
@@ -98,10 +98,10 @@ type DropdownMenuItemProps = {
 
 const DropdownMenuItem = ({ onClick, href, target, children }: DropdownMenuItemProps & { href?: string }) => {
   const className = "data-[focus]:bg-zinc-950 data-[focus]:text-zinc-100 text-zinc-950 flex gap-2 w-full text-sm items-center rounded-[5px] p-2";
-  
+
   return (
     <MenuItem>
-      { href 
+      {href
         ? (<a href={href} target={target} className={className}>{children}</a>)
         : (<button onClick={onClick} className={className}>{children}</button>)}
     </MenuItem>
