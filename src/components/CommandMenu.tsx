@@ -43,7 +43,7 @@ const CommandMenu = () => {
         <Command.Input placeholder="Search by title, url or tag" value={search} onValueChange={setSearch} />
         <Command.List>
           { loading && <Command.Loading>Loading...</Command.Loading> }
-          { !bookmarks.length && <Command.Item data-disabled={true}>You have no saved bookmarks.</Command.Item> }
+          { !loading && !bookmarks.length && <Command.Item data-disabled={true}>You have no saved bookmarks.</Command.Item> }
           <Command.Empty>
             <p className="mb-4">No bookmarks found</p>
             <p className="text-zinc-500 text-center text-balance mb-4">There are no results matching the keyword. Try a different term or clear the search to see all your bookmarks.</p>

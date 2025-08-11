@@ -1,6 +1,6 @@
 import { useState, ReactNode } from "react"
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { BinMinusIn, Copy, Pin, PinSlash, MediaImage, RefreshDouble, Check, Sparks } from "iconoir-react"
+import { BinMinusIn, Copy, Pin, PinSlash, Edit, RefreshDouble, Check, Sparks } from "iconoir-react"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
 import { useModalStore } from "../stores/ModalStore"
@@ -10,7 +10,7 @@ import generateTags from "../utils/generateTags"
 import getAvailableTags from "../utils/getAvailableTags"
 import useClipboard from "../hooks/useClipboard"
 import DeleteModal from "./DeleteModal"
-import ThumbnailModal from "./ThumbnailModal"
+import EditBookmarkModal from "./EditBookmarkModal"
 import { showSuccessToast, showErrorToast, showInfoToast, showLoadingToast } from "../utils/showToast"
 
 type Props = {
@@ -24,7 +24,7 @@ const BookmarkOptions = ({ bookmark }: Props) => {
   const session = useAuthStore(state => state.session)
   const userId = session?.user.id
   const [ isDeleteModalOpen, setIsDeleteModalOpen ] = useState<boolean>(false)
-  const [ isThumbnailModalOpen, setIsThumbnailModalOpen ] = useState<boolean>(false)
+  const [ isEditBookmarkModalOpen, setIsEditBookmarkModalOpen ] = useState<boolean>(false)
 
   const pinBookmark = async () => {
     if (!userId) return
@@ -65,13 +65,13 @@ const BookmarkOptions = ({ bookmark }: Props) => {
     showSuccessToast("Tags generated successfully!", { id: toastId })
   }
 
-  const openThumbnailModal = () => {
-    setIsThumbnailModalOpen(true)
+  const openEditBoomarkModal = () => {
+    setIsEditBookmarkModalOpen(true)
     setModalOpen(true)
   }
 
-  const closeThumbnailModal = () => {
-    setIsThumbnailModalOpen(false)
+  const closeEditBookmarklModal = () => {
+    setIsEditBookmarkModalOpen(false)
     setModalOpen(false)
   }
 
@@ -101,11 +101,11 @@ const BookmarkOptions = ({ bookmark }: Props) => {
           <DropdownMenuItem onClick={() => refreshMetadata(bookmark.url)}>
             <RefreshDouble width={16} />Refresh metadata
           </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => openEditBoomarkModal()}>
+            <Edit width={16} />Edit metadata
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => session && generateBookmarkTags(bookmark, session)} isColorful>
             <Sparks width={16} />Generate tags
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => openThumbnailModal()}>
-            <MediaImage width={16} />Change thumbnail
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => openDeleteModal()}>
             <BinMinusIn width={16} className="text-red-600" /><span className="text-red-600">Delete</span>
@@ -113,7 +113,7 @@ const BookmarkOptions = ({ bookmark }: Props) => {
         </MenuItems>
       </Menu>
       { isDeleteModalOpen && <DeleteModal isDeleteModalOpen={isDeleteModalOpen} closeDeleteModal={closeDeleteModal} bookmark={bookmark} /> }
-      { isThumbnailModalOpen && <ThumbnailModal isThumbnailModalOpen={isThumbnailModalOpen} closeThumbnailModal={closeThumbnailModal} bookmark={bookmark} /> }
+      { isEditBookmarkModalOpen && <EditBookmarkModal isEditBookmarkModalOpen={isEditBookmarkModalOpen} closeEditBookmarklModal={closeEditBookmarklModal} bookmark={bookmark} /> }
     </>
   )
 }
