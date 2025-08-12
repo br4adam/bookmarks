@@ -62,7 +62,7 @@ const AddBookmark = () => {
       <form className="flex justify-center w-full gap-1" onSubmit={checkBookmarkExists}>
         <input ref={inputRef} className="w-full text-sm py-2 px-1 bg-transparent placeholder:text-zinc-400 focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Paste a link..." />
         <Button className={inputButtonStyle} onClick={handlePaste} disabled={loading} type="button" title="Paste a link">
-          { isPasteSuccess ? ( <ClipboardCheck className="w-4 h-4" /> ) : ( <PasteClipboard className="w-4 h-4" /> ) }
+          { isPasteSuccess ? ( <ClipboardCheck className="w-4 h-4" /> ) : ( <PasteClipboard className="w-4 h-4 hidden sm:block" /> ) }
         </Button>
         <Button type="submit" className={inputButtonStyle} disabled={loading} title="Add bookmark">
           <ArrowUpRight className="w-4 h-4" />
