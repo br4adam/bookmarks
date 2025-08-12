@@ -48,8 +48,9 @@ const EditBookmarkModal = ({ isEditBookmarkModalOpen, closeEditBookmarklModal, b
       <p className="mt-2 mb-4 text-sm text-zinc-500">Customize your bookmark's title, description and thumbnail to make it easier to find and recognize.</p>
       <form onSubmit={updateBookmarkData} className="flex flex-col gap-4">
         <div className="flex flex-col gap-0.5">
-          <label className="text-xs font-medium text-zinc-700">Title</label>
+          <label className="text-sm font-medium" htmlFor="title">Title</label>
           <input
+            id="title"
             className="w-full text-sm py-2 px-3 bg-transparent border rounded-md border-zinc-700 focus:border-zinc-500 focus:outline-none caret-zinc-950 text-zinc-950"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -60,8 +61,9 @@ const EditBookmarkModal = ({ isEditBookmarkModalOpen, closeEditBookmarklModal, b
           />
         </div>
         <div className="flex flex-col gap-0.5">
-          <label className="text-xs font-medium text-zinc-700">Description</label>
+          <label className="text-sm font-medium" htmlFor="description">Description</label>
           <textarea
+            id="description"
             className="w-full text-sm py-2 px-3 bg-transparent border rounded-md border-zinc-700 focus:border-zinc-500 focus:outline-none caret-zinc-950 text-zinc-950 resize-none"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -71,8 +73,9 @@ const EditBookmarkModal = ({ isEditBookmarkModalOpen, closeEditBookmarklModal, b
           />
         </div>
         <div className="flex flex-col gap-0.5">
-          <label className="text-xs font-medium text-zinc-700">Thumbnail URL</label>
+          <label className="text-sm font-medium" htmlFor="thumbnail">Thumbnail URL</label>
           <input
+            id="thumbnail"
             className="w-full text-sm py-2 px-3 bg-transparent border rounded-md border-zinc-700 focus:border-zinc-500 focus:outline-none caret-zinc-950 text-zinc-950"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
