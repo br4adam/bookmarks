@@ -60,7 +60,7 @@ const AddBookmark = () => {
   return (
     <div className={`fixed transition-all duration-300 left-0 right-0 p-2 z-50 border border-zinc-700 w-[calc(100%-24px)] sm:w-[390px] mx-auto bg-zinc-950 rounded-xl flex flex-col gap-2 ${ isAnyModalOpen ? "-bottom-20" : "bottom-4" }`}>
       <form className="flex justify-center w-full gap-1" onSubmit={checkBookmarkExists}>
-        <input ref={inputRef} className="w-full text-sm py-2 px-1 bg-transparent placeholder:text-zinc-400 focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Paste a link..." />
+        <input ref={inputRef} className="w-full text-sm py-2 px-1 bg-transparent placeholder:text-zinc-400 focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Type or paste a link here" />
         <Button className={inputButtonStyle} onClick={handlePaste} disabled={loading} type="button" title="Paste a link">
           { isPasteSuccess ? ( <ClipboardCheck className="w-4 h-4" /> ) : ( <PasteClipboard className="w-4 h-4 hidden sm:block" /> ) }
         </Button>
