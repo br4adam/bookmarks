@@ -2,9 +2,10 @@ import { FormEvent, useState, useRef } from "react"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
 import { useModalStore } from "../stores/ModalStore"
-import Button from "./Button"
 import { PasteClipboard, ClipboardCheck, ArrowUpRight, DataTransferDown, DataTransferUp, CalendarRotate } from "iconoir-react"
+import { Calligraph } from "calligraph";
 import { showSuccessToast, showErrorToast, showInfoToast, showLoadingToast } from "../utils/showToast"
+import Button from "./Button"
 
 const AddBookmark = () => {
   const { fetch: getBookmarks, add: createBookmark, bookmarks, loading, setSelectedTag, order, setOrder, timePeriod, setTimePeriod } = useBookmarkStore(state => ({ fetch: state.fetch, add: state.add, bookmarks: state.bookmarks, loading: state.loading, setSelectedTag: state.setSelectedTag, order: state.order, setOrder: state.setOrder, timePeriod: state.timePeriod, setTimePeriod: state.setTimePeriod }))
@@ -71,12 +72,12 @@ const AddBookmark = () => {
       <div className="flex items-center gap-2 pl-1">
         <button onClick={() => setOrder(order === "asc" ? "desc" : "asc")} className={filterButtonStyle} disabled={loading}>
           { order === "asc" ? <DataTransferDown className="w-3 h-3" /> : <DataTransferUp className="w-3 h-3" /> }
-          { order === "asc" ? "Oldest first" : "Newest first" }
+          <Calligraph variant="text" className="user-select-none">{order === "asc" ? "Oldest first" : "Newest first"}</Calligraph>
         </button>
         <span className="text-xs text-zinc-700">|</span>
         <button onClick={changeTimePeriod} className={filterButtonStyle} disabled={loading}>
           <CalendarRotate className="w-3 h-3" />
-          { timePeriod === "all" ? "All time" : timePeriod === "month" ? "Last month" : "Last week" }
+          <Calligraph variant="text" className="user-select-none">{timePeriod === "all" ? "All time" : timePeriod === "month" ? "Last month" : "Last week"}</Calligraph>
         </button>
       </div>
     </div>
