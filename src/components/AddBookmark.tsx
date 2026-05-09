@@ -2,9 +2,10 @@ import { FormEvent, useState, useRef } from "react"
 import { useBookmarkStore } from "../stores/BookmarkStore"
 import { useAuthStore } from "../stores/AuthStore"
 import { useModalStore } from "../stores/ModalStore"
-import Button from "./Button"
 import { PasteClipboard, ClipboardCheck, ArrowUpRight, DataTransferDown, DataTransferUp, CalendarRotate } from "iconoir-react"
+import { Calligraph } from "calligraph";
 import { showSuccessToast, showErrorToast, showInfoToast, showLoadingToast } from "../utils/showToast"
+import Button from "./Button"
 
 const AddBookmark = () => {
   const { fetch: getBookmarks, add: createBookmark, bookmarks, loading, setSelectedTag, order, setOrder, timePeriod, setTimePeriod } = useBookmarkStore(state => ({ fetch: state.fetch, add: state.add, bookmarks: state.bookmarks, loading: state.loading, setSelectedTag: state.setSelectedTag, order: state.order, setOrder: state.setOrder, timePeriod: state.timePeriod, setTimePeriod: state.setTimePeriod }))
@@ -60,7 +61,7 @@ const AddBookmark = () => {
   return (
     <div className={`fixed transition-all duration-300 left-0 right-0 p-2 z-50 border border-zinc-700 w-[calc(100%-24px)] sm:w-[390px] mx-auto bg-zinc-950 rounded-xl flex flex-col gap-2 ${ isAnyModalOpen ? "-bottom-20" : "bottom-4" }`}>
       <form className="flex justify-center w-full gap-1" onSubmit={checkBookmarkExists}>
-        <input ref={inputRef} className="w-full text-sm py-2 px-1 bg-transparent placeholder:text-zinc-400 focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Paste a link..." />
+        <input ref={inputRef} className="w-full text-sm py-2 px-1 bg-transparent placeholder:text-zinc-400 focus:outline-none" type="text" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="Type or paste a link here" />
         <Button className={inputButtonStyle} onClick={handlePaste} disabled={loading} type="button" title="Paste a link">
           { isPasteSuccess ? ( <ClipboardCheck className="w-4 h-4" /> ) : ( <PasteClipboard className="w-4 h-4 hidden sm:block" /> ) }
         </Button>
@@ -71,12 +72,12 @@ const AddBookmark = () => {
       <div className="flex items-center gap-2 pl-1">
         <button onClick={() => setOrder(order === "asc" ? "desc" : "asc")} className={filterButtonStyle} disabled={loading}>
           { order === "asc" ? <DataTransferDown className="w-3 h-3" /> : <DataTransferUp className="w-3 h-3" /> }
-          { order === "asc" ? "Oldest first" : "Newest first" }
+          <Calligraph variant="text" className="user-select-none">{order === "asc" ? "Oldest first" : "Newest first"}</Calligraph>
         </button>
         <span className="text-xs text-zinc-700">|</span>
         <button onClick={changeTimePeriod} className={filterButtonStyle} disabled={loading}>
           <CalendarRotate className="w-3 h-3" />
-          { timePeriod === "all" ? "All time" : timePeriod === "month" ? "Last month" : "Last week" }
+          <Calligraph variant="text" className="user-select-none">{timePeriod === "all" ? "All time" : timePeriod === "month" ? "Last month" : "Last week"}</Calligraph>
         </button>
       </div>
     </div>
